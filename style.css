@@ -635,6 +635,44 @@ body::before {
   z-index: -1;
 }
 
+.light-mode {
+  background: #f5f5f5;
+  color: #111;
+}
+
+.light-mode .navbar {
+  background: rgba(255,255,255,0.6);
+}
+
+.testimonial-wrapper {
+  position: relative;
+  overflow: hidden;
+  max-width: 600px;
+  margin: auto;
+}
+
+.testimonial {
+  opacity: 0;
+  transition: 0.6s ease;
+  position: absolute;
+  width: 100%;
+}
+
+.testimonial.active {
+  opacity: 1;
+  position: relative;
+}
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 0%;
+  background: linear-gradient(90deg, #6a5cff, #8f44fd);
+  z-index: 9999;
+}
+
 .testimonial-card {
   background: rgba(255,255,255,0.05);
   padding: 30px;
