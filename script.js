@@ -48,11 +48,24 @@ const observer = new IntersectionObserver(entries => {
     }
   });
 }, {
-  threshold: 0.2
+  threshold: 0.15
+});
+
+const animatedElements = document.querySelectorAll(".animate");
+
+animatedElements.forEach(el => {
+  observer.observe(el);
+
+  // If already visible on load
+  if (el.getBoundingClientRect().top < window.innerHeight) {
+    el.classList.add("show");
+  }
 });
 
 document.querySelectorAll(".animate").forEach(el => {
-  observer.observe(el);
+  if (el.getBoundingClientRect().top < window.innerHeight) {
+    el.classList.add("show");
+  }
 });
 
 // Dark Mode
