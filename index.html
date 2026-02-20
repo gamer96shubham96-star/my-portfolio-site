@@ -7,8 +7,15 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
+<div id="projectModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2 id="modalTitle"></h2>
+    <p>This project includes full documentation, clean code, and support.</p>
+    <a href="#" class="btn">Buy Now</a>
+  </div>
+</div>
 <body>
-
 <header>
   <h1 class="logo">Shubham96</h1>
   <nav>
@@ -21,45 +28,49 @@
 <section id="projects" class="projects">
   <h2>My Projects</h2>
 
+  <!-- Filter Buttons -->
+  <div class="filter-buttons">
+    <button onclick="filterProjects('all')">All</button>
+    <button onclick="filterProjects('minecraft')">Minecraft</button>
+    <button onclick="filterProjects('discord')">Discord</button>
+  </div>
+
   <div class="projects-grid">
 
-    <!-- Project 1 -->
-    <div class="project-card">
-      <span class="price free">FREE</span>
+    <!-- Minecraft Project -->
+    <div class="project-card reveal minecraft">
+      <img src="images/datapacks.jpg" alt="Minecraft Datapacks">
+      <span class="price paid">₹199</span>
       <h3>Minecraft Economy Plugin</h3>
-      <p>Advanced economy system with GUI & MySQL support.</p>
+      <p>Advanced economy system with GUI & MySQL.</p>
       <div class="buttons">
-        <a href="#" class="btn small">Download</a>
-        <a href="#" class="btn-buy small">Buy ₹199</a>
+        <button onclick="openModal('Economy Plugin')"
+          class="btn small">Details</button>
+        <button onclick="increaseDownload('eco')"
+          class="btn-buy small">Download</button>
       </div>
+      <p class="downloads">Downloads: <span id="eco-count">0</span></p>
     </div>
 
-    <!-- Project 2 -->
-    <div class="project-card">
-      <span class="price paid">₹299</span>
-      <h3>Advanced Discord Moderation Bot</h3>
-      <p>Slash commands, logging system & anti-raid protection.</p>
-      <div class="buttons">
-        <a href="#" class="btn small">Download</a>
-        <a href="#" class="btn-buy small">Buy ₹299</a>
-      </div>
-    </div>
-
-    <!-- Project 3 -->
-    <div class="project-card">
+    <!-- Discord Project -->
+    <div class="project-card reveal discord">
+      <img src="images/discordbot.jpg" alt="Discord Bot">
       <span class="price free">FREE</span>
-      <h3>Minecraft Rank System</h3>
-      <p>Custom ranks, prefixes & permission integration.</p>
+      <h3>Discord Moderation Bot</h3>
+      <p>Slash commands & anti-raid protection.</p>
       <div class="buttons">
-        <a href="#" class="btn small">Download</a>
-        <a href="#" class="btn-buy small">Buy ₹149</a>
+        <button onclick="openModal('Discord Bot')"
+          class="btn small">Details</button>
+        <button onclick="increaseDownload('bot')"
+          class="btn-buy small">Download</button>
       </div>
+      <p class="downloads">Downloads: <span id="bot-count">0</span></p>
     </div>
 
   </div>
 </section>
 <footer>
-  <p>© 2026 YourName Dev. All rights reserved.</p>
+<p>© 2026 Shubham96. All rights reserved.</p>
 </footer>
 
 <script src="script.js"></script>
