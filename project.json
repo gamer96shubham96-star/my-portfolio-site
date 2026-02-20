@@ -1,0 +1,33 @@
+[
+  {
+    "title": "Advanced Datapack",
+    "description": "Optimized survival datapack with custom mechanics.",
+    "price": 29,
+    "image": "images/datapack.jpg"
+  },
+  {
+    "title": "Discord Moderation Bot",
+    "description": "Auto moderation + logging + ticket system.",
+    "price": 19,
+    "image": "images/discordbot.jpg"
+  }
+]
+
+export default function handler(req, res) {
+  res.status(200).json([
+    {
+      id: 1,
+      title: "Advanced Datapack",
+      description: "Optimized survival datapack with custom mechanics.",
+      price: 29,
+      image: "/images/datapack.jpg"
+    },
+    {
+      id: 2,
+      title: "Discord Moderation Bot",
+      description: "Auto moderation + ticket system.",
+      price: 19,
+      image: "/images/discordbot.jpg"
+    }
+  ]);
+}
