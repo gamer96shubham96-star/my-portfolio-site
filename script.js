@@ -1,25 +1,19 @@
-// Category Filter
-function filterProjects(category) {
-  const cards = document.querySelectorAll('.project-card');
-
-  cards.forEach(card => {
-    if (category === 'all') {
-      card.style.display = 'block';
-    } else {
-      card.style.display =
-        card.classList.contains(category) ? 'block' : 'none';
-    }
-  });
-}
-
 // Modal
 function openModal(title) {
-  document.getElementById("modalTitle").innerText = title;
-  document.getElementById("projectModal").style.display = "flex";
+  const modalTitle = document.getElementById("modalTitle");
+  const modal = document.getElementById("projectModal");
+
+  if (modalTitle && modal) {
+    modalTitle.innerText = title;
+    modal.style.display = "flex";
+  }
 }
 
 function closeModal() {
-  document.getElementById("projectModal").style.display = "none";
+  const modal = document.getElementById("projectModal");
+  if (modal) {
+    modal.style.display = "none";
+  }
 }
 
 // Download Counter
@@ -27,29 +21,37 @@ function increaseDownload(id) {
   let count = localStorage.getItem(id) || 0;
   count++;
   localStorage.setItem(id, count);
-  document.getElementById(id + "-count").innerText = count;
+
+  const element = document.getElementById(id + "-count");
+  if (element) {
+    element.innerText = count;
+  }
 }
 
-// Load counts on page load
+// Load counts safely
 window.onload = function () {
   ['eco', 'bot'].forEach(id => {
-    document.getElementById(id + "-count").innerText =
-      localStorage.getItem(id) || 0;
+    const element = document.getElementById(id + "-count");
+    if (element) {
+      element.innerText = localStorage.getItem(id) || 0;
+    }
   });
 };
 
-// Reveal Animation
-window.addEventListener('scroll', function () {
-  document.querySelectorAll('.reveal').forEach(el => {
-    const position = el.getBoundingClientRect().top;
-    const windowHeight = window.innerHeight;
-    if (position < windowHeight - 50) {
-      el.classList.add('active');
+// Modern Scroll Animation
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
     }
   });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.fade-up').forEach(el => {
+  observer.observe(el);
 });
 
-// Dark/Light Toggle
+// Dark Mode
 function toggleTheme() {
   document.body.classList.toggle("light-mode");
 }
