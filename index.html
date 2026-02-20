@@ -35,45 +35,42 @@
   </div>
 </header>
 <section id="projects" class="projects">
-  <h2>My Projects</h2>
+  <h2 class="section-title">Featured Projects</h2>
 
-  <!-- Filter Buttons -->
-  <div class="filter-buttons">
-    <button onclick="filterProjects('all')">All</button>
-    <button onclick="filterProjects('minecraft')">Minecraft</button>
-    <button onclick="filterProjects('discord')">Discord</button>
-  </div>
+  <div class="products">
 
-  <div class="projects-grid">
-
-    <!-- Minecraft Project -->
-    <div class="project-card reveal minecraft">
-      <img src="images/datapacks.jpg" alt="Minecraft Datapacks">
-      <span class="price paid">₹199</span>
-      <h3>Minecraft Economy Plugin</h3>
-      <p>Advanced economy system with GUI & MySQL.</p>
-      <div class="buttons">
-        <button onclick="openModal('Economy Plugin')"
-          class="btn small">Details</button>
-        <button onclick="increaseDownload('eco')"
-          class="btn-buy small">Download</button>
+    <!-- PRODUCT 1 -->
+    <div class="product-card">
+      <div class="image-container">
+        <img src="images/datapacks.jpg" alt="Datapack">
       </div>
-      <p class="downloads">Downloads: <span id="eco-count">0</span></p>
+
+      <div class="product-info">
+        <h3>Minecraft Datapack Bundle</h3>
+        <p>High performance datapacks for survival & SMP servers.</p>
+
+        <div class="product-bottom">
+          <a href="#" class="buy-btn">Buy Now</a>
+          <span class="price-tag">₹199</span>
+        </div>
+      </div>
     </div>
 
-    <!-- Discord Project -->
-    <div class="project-card reveal discord">
-      <img src="images/discordbot.jpg" alt="Discord Bot">
-      <span class="price free">FREE</span>
-      <h3>Discord Moderation Bot</h3>
-      <p>Slash commands & anti-raid protection.</p>
-      <div class="buttons">
-        <button onclick="openModal('Discord Bot')"
-          class="btn small">Details</button>
-        <button onclick="increaseDownload('bot')"
-          class="btn-buy small">Download</button>
+    <!-- PRODUCT 2 -->
+    <div class="product-card">
+      <div class="image-container">
+        <img src="images/discordbot.jpg" alt="Discord Bot">
       </div>
-      <p class="downloads">Downloads: <span id="bot-count">0</span></p>
+
+      <div class="product-info">
+        <h3>Advanced Discord Bot</h3>
+        <p>Moderation, logging, slash commands & dashboard.</p>
+
+        <div class="product-bottom">
+          <a href="#" class="buy-btn">Buy Now</a>
+          <span class="price-tag free">FREE</span>
+        </div>
+      </div>
     </div>
 
   </div>
