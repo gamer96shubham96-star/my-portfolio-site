@@ -38,6 +38,14 @@ window.onload = function () {
   });
 };
 
+function openDatapack() {
+  document.getElementById("datapackModal").classList.add("active");
+}
+
+function closeDatapack() {
+  document.getElementById("datapackModal").classList.remove("active");
+}
+
 // Modern Scroll Animation
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {

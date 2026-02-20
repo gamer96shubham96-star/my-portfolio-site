@@ -127,7 +127,7 @@
   <div class="products">
 
     <!-- PRODUCT 1 -->
-    <div class="product-card animate">
+    <div class="product-card animate" onclick="openDatapack()">
       <div class="image-container">
         <img src="images/datapacks.jpg" alt="Datapack">
       </div>
@@ -175,5 +175,46 @@
 </footer>
 
 <script src="script.js"></script>
+
+<div id="datapackModal" class="project-modal">
+  <div class="project-content">
+
+    <span class="close-btn" onclick="closeDatapack()">&times;</span>
+
+    <div class="project-grid">
+
+      <!-- LEFT SIDE (IMAGE / GIF) -->
+      <div class="project-preview">
+        <img src="images/datapack-preview.gif" alt="Datapack Preview">
+      </div>
+
+      <!-- RIGHT SIDE (INFO) -->
+      <div class="project-details">
+        <h2>Minecraft Datapack Bundle</h2>
+        <p class="project-desc">
+          Premium optimized datapacks built for survival & SMP servers.
+          Lightweight, scalable and performance-focused.
+        </p>
+
+        <ul class="feature-list">
+          <li>✔ Custom mobs & abilities</li>
+          <li>✔ Performance optimized</li>
+          <li>✔ Fully configurable</li>
+          <li>✔ Detailed documentation</li>
+        </ul>
+
+        <div class="project-meta">
+          <span>Version: 1.20+</span>
+          <span>Support: Discord</span>
+        </div>
+
+        <button class="buy-now-btn">Buy Now – ₹29</button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
 </body>
 </html>
