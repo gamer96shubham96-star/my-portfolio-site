@@ -257,6 +257,74 @@ nav a:hover {
   background: white;
 }
 
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 8%;
+  backdrop-filter: blur(10px);
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.nav-links a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: #00f5ff;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.discord-btn {
+  background: #5865F2;
+  padding: 8px 18px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.discord-btn:hover {
+  transform: scale(1.05);
+}
+
+.cta-btn {
+  background: #00f5ff;
+  padding: 8px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.cta-btn:hover {
+  background: white;
+}
+
+.theme-toggle {
+  background: transparent;
+  border: 1px solid #00f5ff;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
 footer {
   text-align: center;
   padding: 20px;
