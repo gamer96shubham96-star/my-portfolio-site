@@ -2,34 +2,83 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>All Projects</title>
+  <title>All Projects | Shubham96</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="navbar">
   <div class="logo">Shubham96</div>
-  <a href="index.html" class="view-more-btn">← Back</a>
+
+  <nav class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="#all-projects">Projects</a>
+  </nav>
 </header>
 
-<section class="products">
-  
-  <!-- Duplicate as many as you want -->
-  <div class="product-card fade-up">
-    <div class="image-container">
-      <img src="images/datapacks.jpg">
-    </div>
-    <div class="product-info">
-      <h3>Another Plugin</h3>
-      <p>Description here.</p>
-      <div class="product-bottom">
-        <a href="#" class="buy-btn">Buy</a>
-        <span class="price-tag">₹299</span>
+<section id="all-projects" class="projects">
+  <h2 class="section-title">All Projects</h2>
+
+  <div class="products">
+
+    <!-- PROJECT 1 -->
+    <div class="product-card fade-up">
+      <div class="image-container">
+        <img src="images/datapacks.jpg" alt="Datapack">
+      </div>
+
+      <div class="product-info">
+        <h3>Minecraft Datapack Bundle</h3>
+        <p>High performance datapacks for survival & SMP servers.</p>
+
+        <div class="product-bottom">
+          <a href="#" class="buy-btn">Buy Now</a>
+          <span class="price-tag">₹29</span>
+        </div>
       </div>
     </div>
-  </div>
 
+    <!-- PROJECT 2 -->
+    <div class="product-card fade-up">
+      <div class="image-container">
+        <img src="images/discordbot.jpg" alt="Discord Bot">
+      </div>
+
+      <div class="product-info">
+        <h3>Advanced Discord Bot</h3>
+        <p>Moderation, logging, slash commands & dashboard.</p>
+
+        <div class="product-bottom">
+          <a href="#" class="buy-btn">Buy Now</a>
+          <span class="price-tag">₹19</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 3 -->
+    <div class="product-card fade-up">
+      <div class="image-container">
+        <img src="images/datapacks.jpg" alt="Plugin">
+      </div>
+
+      <div class="product-info">
+        <h3>Custom Economy Plugin</h3>
+        <p>Modern economy system for Minecraft servers.</p>
+
+        <div class="product-bottom">
+          <a href="#" class="buy-btn">Buy Now</a>
+          <span class="price-tag">₹49</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </section>
+
+<footer>
+  <p>© 2026 Shubham96. All rights reserved.</p>
+</footer>
 
 <script src="script.js"></script>
 </body>
