@@ -7,14 +7,6 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
-<div id="projectModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <h2 id="modalTitle"></h2>
-    <p>This project includes full documentation, clean code, and support.</p>
-    <a href="#" class="btn">Buy Now</a>
-  </div>
-</div>
 <body>
 <header class="navbar">
   <div class="logo">Shubham96</div>
@@ -25,6 +17,15 @@
     <a href="#about">About</a>
     <a href="#donate">Support</a>
   </nav>
+
+<div id="projectModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2 id="modalTitle"></h2>
+    <p>This project includes full documentation, clean code, and support.</p>
+    <a href="#" class="btn">Buy Now</a>
+  </div>
+</div>
 
   <div class="nav-actions">
     <a href="https://discord.com" target="_blank" class="discord-btn">
@@ -140,7 +141,7 @@
     </div>
 
     <!-- PRODUCT 2 -->
-    <div class="product-card">
+    <div class="product-card fade-up">
       <div class="image-container">
         <img src="images/discordbot.jpg" alt="Discord Bot">
       </div>
@@ -151,17 +152,20 @@
 
         <div class="product-bottom">
           <a href="#" class="buy-btn">Buy Now</a>
-          <span class="price-tag free">₹19</span>
-        <div class="more-projects">
-         <a href="projects.html" class="view-more-btn">
-         View More Projects →
-         </a>
-          
+          <span class="price-tag">₹19</span>
         </div>
       </div>
     </div>
 
   </div>
+
+  <!-- VIEW MORE BUTTON (OUTSIDE CARDS) -->
+  <div class="more-projects">
+    <a href="projects.html" class="view-more-btn">
+      View More Projects →
+    </a>
+  </div>
+
 </section>
 <footer>
 <p>© 2026 Shubham96. All rights reserved.</p>
