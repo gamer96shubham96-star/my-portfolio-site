@@ -125,17 +125,18 @@ nav a:hover {
 }
 
 .project-card {
-  background: rgba(255,255,255,0.06);
-  padding: 30px;
-  border-radius: 20px;
   position: relative;
-  transition: 0.4s ease;
-  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.05);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .project-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 255, 255, 0.25);
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
 }
 
 .project-card h3 {
@@ -475,6 +476,41 @@ body::before {
   margin-bottom: 20px;
 }
 
+/* ======================
+   MODAL
+====================== */
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(10px);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: #0f172a;
+  padding: 40px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 800px;
+  animation: fadeIn 0.4s ease;
+}
+
+.close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 .buy-now-btn {
   background: linear-gradient(90deg, #6a5cff, #8f44fd);
   border: none;
@@ -756,6 +792,100 @@ body::before {
   opacity: 0;
   transform: translateY(80px) scale(0.95);
   transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ======================
+   SAAS HERO BACKGROUND
+====================== */
+
+.hero {
+  position: relative;
+  padding: 180px 8%;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(90deg, #6366f1, #22d3ee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Badge */
+.badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.08);
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+}
+
+/* Floating Orbs */
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.6;
+  animation: float 18s infinite alternate ease-in-out;
+}
+
+.orb1 {
+  width: 400px;
+  height: 400px;
+  background: #6366f1;
+  top: -100px;
+  left: -100px;
+}
+
+.orb2 {
+  width: 300px;
+  height: 300px;
+  background: #22d3ee;
+  bottom: -100px;
+  right: -100px;
+  animation-delay: 5s;
+}
+
+.orb3 {
+  width: 250px;
+  height: 250px;
+  background: #9333ea;
+  top: 40%;
+  left: 60%;
+  animation-delay: 10s;
+}
+
+@keyframes float {
+  from { transform: translateY(0px) translateX(0px); }
+  to { transform: translateY(-60px) translateX(40px); }
+}
+
+/* Animated Grid */
+
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: moveGrid 20s linear infinite;
+}
+
+@keyframes moveGrid {
+  from { background-position: 0 0; }
+  to { background-position: 60px 60px; }
 }
 
 .animate.show {

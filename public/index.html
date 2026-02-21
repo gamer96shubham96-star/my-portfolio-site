@@ -38,23 +38,33 @@
     <a href="#projects" class="cta-btn">Explore</a>
   </div>
 </header>
-<section class="hero animate">
-  <div class="hero-content">
-    <h1>Build Better Minecraft & Discord Experiences</h1>
+<section class="hero">
+  <div class="hero-background">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+    <div class="grid-bg"></div>
+  </div>
+
+  <div class="hero-content reveal">
+    <span class="badge">🚀 Next-Gen Systems</span>
+
+    <h1>
+      Build Powerful <span class="gradient-text">Minecraft & Discord</span><br>
+      Infrastructure
+    </h1>
+
     <p>
-      Premium quality plugins, bots, and tools built for performance,
-      scalability, and modern servers.
+      Production-ready systems designed for scalability, automation
+      and elite community performance.
     </p>
 
     <div class="hero-buttons">
-      <a href="#projects" class="primary-btn">Explore Projects</a>
-      <a href="https://discord.com" target="_blank" class="secondary-btn">
-        Join Community
-      </a>
+      <a href="#projects" class="btn-primary">Explore Projects</a>
+      <a href="#features" class="btn-outline">View Architecture</a>
     </div>
   </div>
-</section>
-<section class="stats animate">
+</section><section class="stats animate">
   <div class="stat-box">
     <h2 class="counter" data-target="1500">0</h2>
     <p>Downloads</p>
@@ -223,6 +233,18 @@
 
     </div>
 
+  </div>
+</div>
+
+<div class="modal" id="projectModal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2 id="modalTitle"></h2>
+    <p id="modalDesc"></p>
+
+    <video controls width="100%" id="modalVideo">
+      <source src="/background.mp4" type="video/mp4">
+    </video>
   </div>
 </div>
 

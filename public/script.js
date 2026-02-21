@@ -123,6 +123,27 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+/* ======================
+   PROJECT MODAL
+====================== */
+
+const modal = document.getElementById("projectModal");
+const closeBtn = document.querySelector(".close");
+
+document.querySelectorAll(".project-card").forEach(card => {
+  card.addEventListener("click", () => {
+    modal.style.display = "flex";
+    document.getElementById("modalTitle").innerText =
+      card.querySelector("h3").innerText;
+    document.getElementById("modalDesc").innerText =
+      card.querySelector("p").innerText;
+  });
+});
+
+closeBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
 // =============================
 // SCROLL REVEAL ANIMATION
 // =============================
