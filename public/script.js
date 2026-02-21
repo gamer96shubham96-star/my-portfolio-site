@@ -144,6 +144,61 @@ closeBtn.addEventListener("click", () => {
   modal.style.display = "none";
 });
 
+const glow = document.querySelector(".cursor-glow");
+
+document.addEventListener("mousemove", e => {
+  glow.style.left = e.clientX + "px";
+  glow.style.top = e.clientY + "px";
+});
+
+document.querySelectorAll(".product-card").forEach(card => {
+  card.addEventListener("mousemove", e => {
+    const rect = card.getBoundingClientRect();
+    card.style.setProperty("--x", e.clientX - rect.left + "px");
+    card.style.setProperty("--y", e.clientY - rect.top + "px");
+  });
+});
+
+window.addEventListener("scroll", () => {
+  const scrolled = window.scrollY;
+
+  document.querySelectorAll(".orb").forEach((orb, i) => {
+    orb.style.transform = `translateY(${scrolled * (0.1 + i * 0.05)}px)`;
+  });
+});
+
+document.querySelectorAll(".product-card").forEach(card => {
+  card.addEventListener("mousemove", e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const rotateX = ((y / rect.height) - 0.5) * 15;
+    const rotateY = ((x / rect.width) - 0.5) * -15;
+
+    card.style.transform =
+      `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+  });
+
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "rotateX(0) rotateY(0) scale(1)";
+  });
+});
+
+document.querySelectorAll(".btn-primary, .cta-btn, .buy-btn").forEach(btn => {
+  btn.addEventListener("mousemove", e => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+  });
+
+  btn.addEventListener("mouseleave", () => {
+    btn.style.transform = "translate(0,0)";
+  });
+});
+
 // =============================
 // SCROLL REVEAL ANIMATION
 // =============================

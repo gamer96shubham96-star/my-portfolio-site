@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
+<div class="cursor-glow"></div>
 <div class="scroll-progress"></div>
 <video autoplay muted loop playsinline class="video-bg">
   <source src="background.mp4" type="video/mp4">
@@ -62,6 +63,24 @@
     <div class="hero-buttons">
       <a href="#projects" class="btn-primary">Explore Projects</a>
       <a href="#features" class="btn-outline">View Architecture</a>
+    </div>
+  </div>
+</section>
+<section class="dashboard-preview">
+  <h2>Live System Preview</h2>
+
+  <div class="dashboard-card">
+    <div class="dashboard-top">
+      <span class="dot red"></span>
+      <span class="dot yellow"></span>
+      <span class="dot green"></span>
+    </div>
+
+    <div class="dashboard-content">
+      <div class="bar"></div>
+      <div class="bar short"></div>
+      <div class="bar"></div>
+      <div class="bar tiny"></div>
     </div>
   </div>
 </section><section class="stats animate">
@@ -236,7 +255,7 @@
   </div>
 </div>
 
-<div class="modal" id="projectModal">
+<div class="modal" id="project-Modal">
   <div class="modal-content">
     <span class="close">&times;</span>
     <h2 id="modalTitle"></h2>
