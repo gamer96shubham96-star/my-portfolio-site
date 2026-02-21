@@ -440,12 +440,12 @@ nav a:hover {
 
 .video-bg {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -2;
+  z-index: -3;
+  pointer-events: none;
 }
 
 /* Dark overlay for readability */
@@ -465,7 +465,7 @@ body::before {
   pointer-events: none;
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  z-index: 9999;
+  z-index: 0;
 }
 
 /* MODAL BACKGROUND */
@@ -635,8 +635,8 @@ body::before {
 }
 
 .hero {
-  text-align: center;
-  padding: 120px 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .hero h1 {
@@ -878,7 +878,7 @@ body::before {
   position: absolute;
   inset: 0;
   z-index: -1;
-  overflow: hidden;
+  pointer-events: none;
 }
 
 /* Gradient Text */
