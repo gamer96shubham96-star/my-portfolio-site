@@ -217,3 +217,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
   animatedElements.forEach(el => revealObserver.observe(el));
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const elements = document.querySelectorAll(
+    ".feature-card, .project-card, .hero-content, .hero-visual"
+  );
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      }
+    });
+  }, { threshold: 0.15 });
+
+  elements.forEach(el => observer.observe(el));
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const counters = document.querySelectorAll(".counter");
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+
+      const counter = entry.target;
+      const target = +counter.dataset.target;
+      let count = 0;
+      const increment = target / 100;
+
+      const update = () => {
+        count += increment;
+        if (count < target) {
+          counter.innerText = Math.floor(count);
+          requestAnimationFrame(update);
+        } else {
+          counter.innerText = target;
+        }
+      };
+
+window.addEventListener("scroll", () => {
+  document.querySelector(".navbar")
+    ?.classList.toggle("scrolled", window.scrollY > 50);
+});
+
+      update();
+      observer.unobserve(counter);
+    });
+  }, { threshold: 0.6 });
+
+  counters.forEach(counter => observer.observe(counter));
+});
