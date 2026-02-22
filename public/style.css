@@ -672,6 +672,68 @@ body:hover .cursor-dot, body:hover .cursor-outline {
   animation: badgeFloat 3s ease-in-out infinite;
 }
 
+.card-image {
+  height: 180px;
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform 0.6s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(255,255,255,0.25);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+
+.project-card {
+  position: relative;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  padding: 20px;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.card-content h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 15px 0 8px;
+}
+
+.card-content p {
+  font-size: 0.95rem;
+  opacity: 0.75;
+  line-height: 1.6;
+}
+
+.project-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 24px;
+  background: linear-gradient(45deg, #6a5cff, #00e0ff, #6a5cff);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.4s ease;
+}
+
+.project-card:hover::before {
+  opacity: 0.2;
+}
+
+.projects {
+  padding: 120px 5%;
+}
+
 @keyframes badgeFloat {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY
