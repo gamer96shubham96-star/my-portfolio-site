@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rachna Hub | Premium Minecraft Assets</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- GSAP for God-Level Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">RACHNA <span class="highlight">HUB</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#features">Features</a></li>
+        </ul>
+        <button class="cart-btn">Cart (<span id="cart-count">0</span>)</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Elevate Your <br> <span class="text-gradient">Minecraft World</span></h1>
+            <p class="hero-sub">Premium Datapacks, Plugins, and Discord Bot Codes.</p>
+            <div class="hero-btns">
+                <a href="#products" class="btn-primary">Explore Store</a>
+                <a href="#features" class="btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Products Section -->
+    <section id="products">
+        <div class="section-header">
+            <h2>Our Creations</h2>
+            <p>Instant Digital Delivery</p>
+        </div>
+
+        <div class="product-grid">
+            <!-- Product 1: Datapack -->
+            <div class="product-card" data-id="1" data-name="Ultimate Trees Datapack" data-price="5.00" data-file="trees_datapack.zip">
+                <div class="card-glow"></div>
+                <div class="product-icon">🌲</div>
+                <h3>Ultimate Trees</h3>
+                <p class="category">Datapack</p>
+                <p class="desc">Adds 10+ new magical trees to your world.</p>
+                <div class="card-footer">
+                    <span class="price">$5.00</span>
+                    <button class="buy-btn">Purchase</button>
+                </div>
+            </div>
+
+            <!-- Product 2: Plugin -->
+            <div class="product-card" data-id="2" data-name="Anti-Grief Core" data-price="10.00" data-file="antigrief_plugin.jar">
+                <div class="card-glow"></div>
+                <div class="product-icon">🛡️</div>
+                <h3>Anti-Grief Core</h3>
+                <p class="category">Plugin (Spigot/Paper)</p>
+                <p class="desc">Advanced protection for your server claims.</p>
+                <div class="card-footer">
+                    <span class="price">$10.00</span>
+                    <button class="buy-btn">Purchase</button>
+                </div>
+            </div>
+
+            <!-- Product 3: Discord Bot -->
+            <div class="product-card" data-id="3" data-name="Minecraft Discord Bot" data-price="15.00" data-file="discord_bot_source.js">
+                <div class="card-glow"></div>
+                <div class="product-icon">🤖</div>
+                <h3>Rich Presence Bot</h3>
+                <p class="category">Source Code</p>
+                <p class="desc">Full JS source code for a Minecraft Discord bot.</p>
+                <div class="card-footer">
+                    <span class="price">$15.00</span>
+                    <button class="buy-btn">Purchase</button>
+                </div>
+            </div>
+            
+            <!-- Product 4: Resourcepack -->
+            <div class="product-card" data-id="4" data-name="HD Faithful Textures" data-price="8.00" data-file="faithful_32x.zip">
+                <div class="card-glow"></div>
+                <div class="product-icon">🎨</div>
+                <h3>Faithful 32x</h3>
+                <p class="category">Resource Pack</p>
+                <p class="desc">Clean, crisp textures for high-res displays.</p>
+                <div class="card-footer">
+                    <span class="price">$8.00</span>
+                    <button class="buy-btn">Purchase</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Modal -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modal-title">Checkout</h2>
+            <div class="payment-simulation">
+                <div class="spinner"></div>
+                <p id="payment-status">Processing Payment...</p>
+            </div>
+            <div class="success-content" style="display: none;">
+                <div class="check-icon">✓</div>
+                <h3>Payment Successful!</h3>
+                <p>Thank you for supporting Rachna Hub.</p>
+                <a id="download-link" href="#" download class="btn-download">Download File</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Rachna Hub. All rights reserved.</p
