@@ -716,29 +716,70 @@ function initCounterAnimation() {
 /* ============================================
    9. SMOOTH SCROLL
    ============================================ */
-function initSmoothScroll() {
-    const links = document.querySelectorAll('a[href^="#"]');
-    
-    links.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            const targetId = link.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                const offsetTop = targetElement.offsetTop - 100;
-                
-                gsap.to(window, {
-                    scrollTo: offsetTop,
-                    duration: 1.5,
-                    ease: 'power3.inOut'
-                });
+function initScrollAnimations() {
+    if (typeof gsap === 'undefined') return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Section fade-in
+    gsap.utils.toArray('section').forEach(section => {
+        gsap.from(section, {
+            opacity: 0,
+            y: 80,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: section,
+                start: "top 85%",
+                toggleActions: "play reverse play reverse"
             }
         });
     });
+
+    // Product cards stagger animation
+    gsap.from(".product-card", {
+        opacity: 0,
+        y: 60,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+            trigger: ".products-grid",
+            start: "top 80%",
+            toggleActions: "play reverse play reverse"
+        }
+    });
+
+    // Feature cards stagger
+    gsap.from(".feature-card", {
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+            trigger: ".features-grid",
+            start: "top 80%",
+            toggleActions: "play reverse play reverse"
+        }
+    });
 }
 
+
+function initHeroAnimations() {
+    gsap.timeline()
+        .from(".hero-badge", { opacity: 0, y: 30, duration: 0.6 })
+        .from(".hero-title .word", {
+            opacity: 0,
+            y: 50,
+            stagger: 0.1,
+            duration: 0.8,
+            ease: "power3.out"
+        }, "-=0.3")
+        .from(".hero-description", { opacity: 0, y: 30, duration: 0.6 }, "-=0.5")
+        .from(".hero-cta-group", { opacity: 0, y: 30, duration: 0.6 }, "-=0.4")
+        .from(".hero-stats", { opacity: 0, duration: 0.6 }, "-=0.4");
+}
 /* ============================================
    10. PARALLAX EFFECTS
    ============================================ */
@@ -776,51 +817,43 @@ function initParallaxEffects() {
    11. NAVBAR SCROLL EFFECT
    ============================================ */
 function initNavbarScroll() {
-    const navbar = document.querySelector('.navbar');
-    if (!navbar) return;
-    
-    let lastScroll = 0;
-    
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        
-        // Add/remove background on scroll
-        if (currentScroll > 50) {
-            navbar.style.background = 'rgba(10, 10, 11, 0.95)';
-            navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.3)';
+    const navbar = document.querySelector(".navbar");
+
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add("scrolled");
         } else {
-            navbar.style.background = 'rgba(10, 10, 11, 0.8)';
-            navbar.style.boxShadow = 'none';
+            navbar.classList.remove("scrolled");
         }
-        
-        lastScroll = currentScroll;
     });
 }
 
 /* ============================================
    12. HOVER EFFECTS
    ============================================ */
-function initHoverEffects() {
-    // Button hover effects
-    const buttons = document.querySelectorAll('.btn-main, .btn-secondary, .nav-cta');
-    
-    buttons.forEach(btn => {
-        btn.addEventListener('mouseenter', () => {
-            gsap.to(btn, {
-                scale: 1.05,
-                duration: 0.2,
-                ease: 'power2.out'
+function initProductCards() {
+    const cards = document.querySelectorAll(".product-card");
+
+    cards.forEach(card => {
+        card.addEventListener("mouseenter", () => {
+            gsap.to(card, {
+                y: -10,
+                scale: 1.02,
+                boxShadow: "0 20px 60px rgba(0,0,0,0.3)",
+                duration: 0.3
             });
         });
-        
-        btn.addEventListener('mouseleave', () => {
-            gsap.to(btn, {
+
+        card.addEventListener("mouseleave", () => {
+            gsap.to(card, {
+                y: 0,
                 scale: 1,
-                duration: 0.2,
-                ease: 'power2.out'
+                boxShadow: "none",
+                duration: 0.3
             });
         });
     });
+}
     
     // Filter button hover effects
     const filterBtns = document.querySelectorAll('.filter-btn');

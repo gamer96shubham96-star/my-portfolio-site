@@ -564,6 +564,26 @@ img {
     animation: fadeInUp 0.8s ease 0.3s forwards;
 }
 
+.navbar.scrolled {
+    background: rgba(10, 10, 11, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.product-card {
+    background: #121214;
+    border-radius: 16px;
+    padding: 30px;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    border-color: rgba(0,255,136,0.3);
+}
+
 .badge-dot {
     width: 8px;
     height: 8px;
