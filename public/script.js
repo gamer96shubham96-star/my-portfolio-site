@@ -73,15 +73,6 @@ window.addEventListener("scroll", () => {
   });
 });
 
-
-window.addEventListener("load", () => {
-  const loader = document.querySelector(".loader");
-  setTimeout(() => {
-    loader.classList.add("hidden");
-  }, 2000);
-});
-
-
 // ========================================
 // COUNTER ANIMATION
 // ========================================
@@ -126,17 +117,16 @@ document.addEventListener("DOMContentLoaded", () => {
     ".feature-card, .project-card, .hero-content, .hero-visual"
   );
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-      }
-    });
-  }, { threshold: 0.2 });
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.transitionDelay = entry.target.dataset.delay || "0ms";
+      entry.target.classList.add("show");
+    }
+  });
+}, { threshold: 0.2 });
 
-  elements.forEach(el => observer.observe(el));
-});
-
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
 // ========================================
 // PROJECT MODAL
@@ -167,54 +157,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target === modal) {
       modal.style.display = "none";
     }
-  });
-});
-
-
-// ========================================
-// 3D CARD HOVER EFFECT
-// ========================================
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".project-card").forEach(card => {
-
-    card.addEventListener("mousemove", (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      const rotateX = ((y / rect.height) - 0.5) * 12;
-      const rotateY = ((x / rect.width) - 0.5) * -12;
-
-      card.style.transform =
-        `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
-    });
-
-    card.addEventListener("mouseleave", () => {
-      card.style.transform = "rotateX(0) rotateY(0) scale(1)";
-    });
-
-  });
-});
-
-
-// ========================================
-// BUTTON FLOAT EFFECT
-// ========================================
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".buy-btn, .explore-btn").forEach(btn => {
-
-    btn.addEventListener("mousemove", (e) => {
-      const rect = btn.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-
-      btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
-    });
-
-    btn.addEventListener("mouseleave", () => {
-      btn.style.transform = "translate(0,0)";
-    });
-
   });
 });
 

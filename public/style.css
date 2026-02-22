@@ -21,6 +21,9 @@
   --primary: #00f5ff;
   --secondary: #7a5cff;
   --accent: #9333ea;
+  --neon-blue: #00f5ff;
+  --neon-purple: #7a5cff;
+  --success: #22c55e;
 
   /* Gradients */
   --gradient-primary: linear-gradient(135deg,#00f5ff,#7a5cff);
@@ -697,20 +700,14 @@ body:hover .cursor-dot, body:hover .cursor-outline {
   transition: 0.6s ease;
 }
 
-.project-card:hover {
-  transform: translateY(-10px);
-  border-color: var(--neon-blue);
-  box-shadow: 0 0 25px rgba(0,240,255,0.3);
-}
-
 .project-card {
-  background: var(--bg-card);
-  backdrop-filter: blur(15px);
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(20px);
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 20px;
-  overflow: hidden;
-  transition: 0.4s ease;
-  position: relative;
+  border-radius: 24px;
+  padding: 20px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transform-style: preserve-3d;
 }
 
 .card-content h3 {
@@ -741,16 +738,14 @@ body:hover .cursor-dot, body:hover .cursor-outline {
 }
 
 .buy-btn {
-  padding: 10px 22px;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
+  padding: 12px 28px;
+  border-radius: 999px;
   font-weight: 600;
-  background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+  background: linear-gradient(135deg,#00f5ff,#7a5cff);
   color: #000;
-  transition: 0.4s ease;
   position: relative;
   overflow: hidden;
+  transition: all 0.4s ease;
 }
 
 body::before {
@@ -764,9 +759,35 @@ body::before {
   z-index: -1;
 }
 
-.buy-btn:hover {
-  box-shadow: 0 0 20px var(--neon-blue);
-  transform: scale(1.05);
+.buy-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,#7a5cff,#00f5ff);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.title-gradient {
+  background: linear-gradient(90deg,#00f5ff,#7a5cff,#00f5ff);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 4s linear infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+.buy-btn:hover::before {
+  opacity: 1;
+}
+
+.buy-btn span {
+  position: relative;
+  z-index: 1;
 }
 
 .tags span {
