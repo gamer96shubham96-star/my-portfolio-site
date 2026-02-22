@@ -532,7 +532,7 @@ function setupDownload(filename, productName) {
     const downloadBtn = document.getElementById('download-link');
 
     if (downloadBtn) {
-        downloadBtn.href = `downloads/${filename}`;
+        downloadBtn.href = `/downloads/${filename}`;
         downloadBtn.setAttribute('download', filename);
 
         downloadBtn.onclick = () => {
@@ -540,7 +540,6 @@ function setupDownload(filename, productName) {
         };
     }
 }
-
 
 
 function updateCartCount() {
