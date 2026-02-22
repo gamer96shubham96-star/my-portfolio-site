@@ -1,27 +1,3 @@
-<think>
-The user wants me to create a more animated and professional index.html with full code. They want:
-1. More animations
-2. More professional look
-3. Full code without cutting off
-4. Engaging and powerful design
-
-I'll create a comprehensive index.html that includes:
-- Hero section with animated text
-- Features section
-- Products section with filtering
-- Testimonials section
-- FAQ section
-- Contact section
-- Footer
-- All with professional animations and styling
-
-Let me create a complete, polished index.html file.
-
-</think># Complete Professional Rachna Hub Website
-
-Here's the full, complete index.html with more animations and professional design:
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,6 +12,8 @@ Here's the full, complete index.html with more animations and professional desig
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+    <!-- GSAP ScrollTo Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
 </head>
 <body>
 
@@ -68,8 +46,8 @@ Here's the full, complete index.html with more animations and professional desig
         </div>
         <div class="nav-menu">
             <a href="#home" class="nav-link" data-text="Home"><span class="original-text">Home</span></a>
-            <a href="#products" class="nav-link" data-text="Products"><span class="original-text">Products</span></a>
             <a href="#features" class="nav-link" data-text="Features"><span class="original-text">Features</span></a>
+            <a href="#products" class="nav-link" data-text="Products"><span class="original-text">Products</span></a>
             <a href="#testimonials" class="nav-link" data-text="Reviews"><span class="original-text">Reviews</span></a>
             <a href="#faq" class="nav-link" data-text="FAQ"><span class="original-text">FAQ</span></a>
             <a href="#contact" class="nav-link" data-text="Contact"><span class="original-text">Contact</span></a>
@@ -98,9 +76,7 @@ Here's the full, complete index.html with more animations and professional desig
             <div class="gradient-orb orb-1"></div>
             <div class="gradient-orb orb-2"></div>
             <div class="gradient-orb orb-3"></div>
-            <div class="gradient-orb orb-4"></div>
             <div class="grid-overlay"></div>
-            <div class="particles" id="particles"></div>
         </div>
         
         <div class="hero-content">
@@ -111,15 +87,15 @@ Here's the full, complete index.html with more animations and professional desig
             
             <h1 class="hero-title">
                 <div class="title-line line-1">
-                    <span class="word-wrapper"><span class="word" data-delay="0">Craft</span></span>
-                    <span class="word-wrapper"><span class="word" data-delay="0.1">Your</span></span>
+                    <span class="word-wrapper"><span class="word">Craft</span></span>
+                    <span class="word-wrapper"><span class="word">Your</span></span>
                 </div>
                 <div class="title-line line-2">
-                    <span class="word-wrapper"><span class="word highlight" data-delay="0.2">Ultimate</span></span>
+                    <span class="word-wrapper"><span class="word highlight">Ultimate</span></span>
                 </div>
                 <div class="title-line line-3">
-                    <span class="word-wrapper"><span class="word" data-delay="0.3">Minecraft</span></span>
-                    <span class="word-wrapper"><span class="word" data-delay="0.4">Experience</span></span>
+                    <span class="word-wrapper"><span class="word">Minecraft</span></span>
+                    <span class="word-wrapper"><span class="word">Experience</span></span>
                 </div>
             </h1>
             
@@ -160,8 +136,8 @@ Here's the full, complete index.html with more animations and professional desig
                 </div>
                 <div class="stat-divider"></div>
                 <div class="stat-item">
-                    <span class="stat-number" data-count="24">0</span>
-                    <span class="stat-label">/7 Support</span>
+                    <span class="stat-number" data-count="24">                    <span class0</span>
+="stat-label">/7 Support</span>
                 </div>
             </div>
         </div>
@@ -171,10 +147,6 @@ Here's the full, complete index.html with more animations and professional desig
                 <div class="wheel"></div>
             </div>
             <span>Scroll to explore</span>
-        </div>
-        
-        <div class="hero-scroll-indicator">
-            <div class="scroll-line"></div>
         </div>
     </section>
 
@@ -195,7 +167,7 @@ Here's the full, complete index.html with more animations and professional desig
         </div>
 
         <div class="features-grid">
-            <div class="feature-card" data-aos="fade-up" data-delay="0">
+            <div class="feature-card">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
@@ -205,7 +177,7 @@ Here's the full, complete index.html with more animations and professional desig
                 <p>Optimized code ensures zero lag and maximum performance for your server.</p>
             </div>
 
-            <div class="feature-card" data-aos="fade-up" data-delay="1">
+            <div class="feature-card">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
@@ -216,7 +188,7 @@ Here's the full, complete index.html with more animations and professional desig
                 <p>All products are thoroughly tested and verified for security and compatibility.</p>
             </div>
 
-            <div class="feature-card" data-aos="fade-up" data-delay="2">
+            <div class="feature-card">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="10"></circle>
@@ -227,7 +199,7 @@ Here's the full, complete index.html with more animations and professional desig
                 <p>Get immediate access to your purchases with our automated delivery system.</p>
             </div>
 
-            <div class="feature-card" data-aos="fade-up" data-delay="3">
+            <div class="feature-card">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
@@ -237,7 +209,7 @@ Here's the full, complete index.html with more animations and professional desig
                 <p>Our dedicated team is always ready to help you with any questions.</p>
             </div>
 
-            <div class="feature-card" data-aos="fade-up" data-delay="4">
+            <div class="feature-card">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
@@ -247,7 +219,7 @@ Here's the full, complete index.html with more animations and professional desig
                 <p>All products receive free updates and improvements over time.</p>
             </div>
 
-            <div class="feature-card" data-aos="fade-up" data-delay="5">
+            <div class="feature-card">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="12" y1="1" x2="12" y2="23"></line>
@@ -335,22 +307,21 @@ Here's the full, complete index.html with more animations and professional desig
                         <p class="product-category">Plugin (Spigot/Paper)</p>
                         <p class="product-description">Advanced claim system with rollback, trust management, and region flags.</p>
                     </div>
-<div class="card-footer">
-    <div class="price-wrapper">
-        <span class="currency">$</span>
-        <span class="price">7.00</span>
-    </div>
-    <button class="buy-btn">
-        <span class="btn-text">Purchase</span>
-        <span class="btn-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <path d="M16 10a4 4 0 0 1-8 0"></path>
-            </svg>
-        </span>
-    </button>
-</div>
+                    <div class="card-footer">
+                        <div class="price-wrapper">
+                            <span class="currency">$</span>
+                            <span class="price">10.00</span>
+                        </div>
+                        <button class="buy-btn">
+                            <span class="btn-text">Purchase</span>
+                            <span class="btn-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -361,21 +332,19 @@ Here's the full, complete index.html with more animations and professional desig
                 <div class="card-content">
                     <div class="card-header">
                         <div class="product-icon-wrapper">
-                            <div class="product-icon">
-            <span class="category-badge">Plugin</span>
-        </div>
-
-        <div class="card-body">
-            <h3 class="product-title">StatsTracker Pro</h3>
-            <p class="product-description">
-                Advanced player statistics tracking with leaderboards and GUI support.
-            </p>
-        </div>
-
-        <div class="card-footer">
-            <div class="price-wrapper">
-                <span class="currency">$</span>
-                <span class="price">4.99</span>
+                            <div class="product-icon">🤖</div>
+                        </div>
+                        <div class="product-badge new">New</div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="product-title">Rich Presence Bot</h3>
+                        <p class="product-category">Source Code</p>
+                        <p class="product-description">Full JavaScript source code. Live player count, server status, and custom activities.</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="price-wrapper">
+                            <span class="currency">$</span>
+                            <span class="price">15.00</span>
             </div>
             <button class="buy-btn">
                 <span class="btn-text">Purchase</span>
