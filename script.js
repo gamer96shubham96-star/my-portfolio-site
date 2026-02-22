@@ -904,6 +904,181 @@ function initTextAnimations() {
             }
         );
     });
+
+// Smooth scroll for nav links
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+
+        if (target) {
+            gsap.to(window, {
+                duration: 1,
+                scrollTo: {
+                    y: target,
+                    offsetY: 80
+                },
+                ease: "power3.inOut"
+            });
+        }
+    });
+});
+
+
+// Get Started button scroll
+const getStartedBtn = document.querySelector('.nav-cta');
+
+if (getStartedBtn) {
+    getStartedBtn.addEventListener('click', () => {
+        const products = document.querySelector('#products');
+
+        gsap.to(window, {
+            duration: 1,
+            scrollTo: {
+                y: products,
+                offsetY: 80
+            },
+            ease: "power3.inOut"
+        });
+    });
+}
+
+
+// Hero CTA buttons
+document.querySelectorAll('.btn-main, .btn-secondary').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+
+        if (target) {
+            gsap.to(window, {
+                duration: 1,
+                scrollTo: {
+                    y: target,
+                    offsetY: 80
+                },
+                ease: "power3.inOut"
+            });
+        }
+    });
+});
+
+
+// Product filtering
+const filterButtons = document.querySelectorAll('.filter-btn');
+const productCards = document.querySelectorAll('.product-card');
+
+filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        const filter = button.getAttribute('data-filter');
+
+        productCards.forEach(card => {
+            const category = card.getAttribute('data-category');
+
+            if (filter === "all" || category === filter) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    });
+});
+
+
+// Purchase button logic
+const buyButtons = document.querySelectorAll('.buy-btn');
+const modal = document.getElementById('paymentModal');
+const closeModal = document.querySelector('.close-modal');
+
+buyButtons.forEach(button => {
+    button.addEventListener('click', function () {
+
+        const productCard = this.closest('.product-card');
+        const productName = productCard.getAttribute('data-name');
+        const productFile = productCard.getAttribute('data-file');
+
+        modal.style.display = "flex";
+
+        simulatePayment(productName, productFile);
+    });
+});
+
+// Close modal
+if (closeModal) {
+    closeModal.addEventListener('click', () => {
+        modal.style.display = "none";
+    });
+}
+
+function simulatePayment(productName, productFile) {
+
+    const status = document.getElementById("payment-status");
+    const spinner = document.querySelector(".payment-simulation");
+    const successContent = document.querySelector(".success-content");
+
+    spinner.style.display = "block";
+    successContent.style.display = "none";
+
+    status.textContent = "Processing payment...";
+
+    setTimeout(() => {
+        spinner.style.display = "none";
+        successContent.style.display = "block";
+
+        setupDownload(productFile, productName);
+
+    }, 2000);
+}
+
+
+// FAQ accordion
+document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', function () {
+
+        const item = this.parentElement;
+        const answer = item.querySelector('.faq-answer');
+        const icon = this.querySelector('.faq-icon');
+
+        const isOpen = item.classList.contains('active');
+
+        document.querySelectorAll('.faq-item').forEach(i => {
+            i.classList.remove('active');
+            i.querySelector('.faq-answer').style.maxHeight = null;
+            i.querySelector('.faq-icon').textContent = "+";
+        });
+
+        if (!isOpen) {
+            item.classList.add('active');
+            answer.style.maxHeight = answer.scrollHeight + "px";
+            icon.textContent = "−";
+        }
+    });
+});
+
+
+// Contact form submit
+const contactForm = document.getElementById("contactForm");
+
+if (contactForm) {
+    contactForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        alert("Message sent successfully!");
+        contactForm.reset();
+    });
+}
+
+const cart = document.querySelector('.cart-wrapper');
+
+if (cart) {
+    cart.addEventListener('click', () => {
+        alert("Cart feature coming soon!");
+    });
+}
     
     // Animate section descriptions
     const descriptions = document.querySelectorAll('.section-description');
