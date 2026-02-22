@@ -3,308 +3,209 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rachna Hub | Premium Minecraft & Discord Solutions</title>
-  <meta name="description" content="Production-ready Minecraft and Discord systems designed for scalability, automation and elite community performance.">
+  <title>Rachna Hub | Premium Minecraft & Discord Tools</title>
+  <meta name="description" content="High-quality Minecraft datapacks and Discord bots built for serious server owners. Instant download. Clean code. Optimized performance.">
+
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
-  <!-- Custom Cursor -->
-  <div class="cursor-dot"></div>
-  <div class="cursor-outline"></div>
-  
-  <!-- Scroll Progress Bar -->
-  <div class="scroll-progress"></div>
-  
-  <!-- Loading Screen -->
+
+  <!-- Loader -->
   <div class="loader">
-    <div class="loader-content">
+    <div class="loader-inner">
       <div class="loader-logo">◆</div>
       <div class="loader-text">Rachna Hub</div>
-      <div class="loader-bar">
-        <div class="loader-progress"></div>
-      </div>
     </div>
   </div>
-  
+
   <!-- Background Video -->
   <video autoplay muted loop playsinline class="video-bg">
     <source src="background.mp4" type="video/mp4">
   </video>
-  <div class="video-overlay"></div>
-  
-  <!-- Floating Particles -->
-  <div class="particles" id="particles"></div>
+  <div class="overlay"></div>
 
-  <!-- Navigation -->
+  <!-- Navbar -->
   <header class="navbar">
     <div class="nav-container">
-      <a href="#" class="nav-logo">
+      <div class="logo">
         <span class="logo-icon">◆</span>
         <span class="logo-text">Rachna Hub</span>
-      </a>
-      
-      <nav class="nav-menu">
-        <a href="#home" class="nav-link active"><span class="nav-text">Home</span></a>
-        <a href="#projects" class="nav-link"><span class="nav-text">Projects</span></a>
-        <a href="#features" class="nav-link"><span class="nav-text">Features</span></a>
-        <a href="#faq" class="nav-link"><span class="nav-text">FAQ</span></a>
-      </nav>
-      
-      <div class="nav-actions">
-        <a href="https://discord.gg/yourserver" target="_blank" class="social-btn discord" aria-label="Discord">
-          <i class="fab fa-discord"></i>
-        </a>
-        <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">
-          <i class="fas fa-moon"></i>
-        </button>
-        <a href="#projects" class="explore-btn">
-          <span>Explore</span>
-          <i class="fas fa-arrow-right"></i>
-        </a>
       </div>
-      
-      <button class="mobile-toggle" aria-label="Menu">
-        <span class="hamburger"></span>
-      </button>
+
+      <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#features">Features</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <a href="#projects" class="btn-nav">
+        Explore
+      </a>
     </div>
   </header>
 
-  <!-- Mobile Menu -->
-  <div class="mobile-menu">
-    <nav class="mobile-nav">
-      <a href="#home" class="mobile-link"><i class="fas fa-home"></i><span>Home</span></a>
-      <a href="#projects" class="mobile-link"><i class="fas fa-cube"></i><span>Projects</span></a>
-      <a href="#features" class="mobile-link"><i class="fas fa-star"></i><span>Features</span></a>
-      <a href="#faq" class="mobile-link"><i class="fas fa-question"></i><span>FAQ</span></a>
-    </nav>
-  </div>
-
-  <!-- Hero Section -->
+  <!-- Hero -->
   <section id="home" class="hero">
-    <div class="hero-bg">
-      <div class="orb orb-1"></div>
-      <div class="orb orb-2"></div>
-      <div class="orb orb-3"></div>
-      <div class="orb orb-4"></div>
-      <div class="grid-pattern"></div>
-    </div>
-    
-    <div class="hero-container">
-      <div class="hero-content reveal">
-        <div class="badge-wrapper">
-          <span class="badge-pill">
-            <span class="badge-icon">🚀</span>
-            <span class="badge-text">Next-Gen Systems</span>
-          </span>
-        </div>
-        
-        <h1 class="hero-title">
-          Build Powerful<br>
-          <span class="title-gradient">Minecraft & Discord</span><br>
-          <span class="title-outline">Infrastructure</span>
-        </h1>
-        
-        <p class="hero-description">
-          Production-ready systems designed for scalability, automation
-          and elite community performance.
-        </p>
-        
-        <div class="hero-cta">
-          <a href="#projects" class="btn-main primary">
-            <span class="btn-bg"></span>
-            <span class="btn-content"><i class="fas fa-compass"></i><span>Explore Projects</span></span>
-          </a>
-          <a href="#features" class="btn-main secondary">
-            <span class="btn-bg"></span>
-            <span class="btn-content"><i class="fas fa-cube"></i><span>View Features</span></span>
-          </a>
-        </div>
-        
-        <div class="hero-stats">
-          <div class="stat-item">
-            <span class="stat-number counter" data-target="1500">0</span>
-            <span class="stat-label">Downloads</span>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <span class="stat-number counter" data-target="20">0</span>
-            <span class="stat-label">Projects</span>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <span class="stat-number counter" data-target="500">0</span>
-            <span class="stat-label">Members</span>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <span class="stat-number counter" data-target="4.9">0</span>
-            <span class="stat-label">Rating</span>
-          </div>
-        </div>
+    <div class="hero-content reveal">
+
+      <div class="badge">
+        <span>Premium Digital Systems</span>
       </div>
-      
-      <div class="hero-visual reveal">
-        <div class="dashboard-preview">
-          <div class="preview-header">
-            <div class="preview-dots">
-              <span class="dot red"></span>
-              <span class="dot yellow"></span>
-              <span class="dot green"></span>
-            </div>
-            <span class="preview-title">Live Preview</span>
-          </div>
-          <div class="preview-content">
-            <div class="code-line"><span class="line-num">1</span><span class="line-text"><span class="keyword">const</span> <span class="variable">RachnaHub</span> = <span class="function">require</span>(<span class="string">'@rachna/core'</span>);</span></div>
-            <div class="code-line"><span class="line-num">2</span><span class="line-text"><span class="variable">const</span> <span class="property">bot</span> = <span class="keyword">new</span> <span class="function">Client</span>({</span></div>
-            <div class="code-line indent"><span class="line-num">3</span><span class="line-text"><span class="property">intents</span>: [<span class="string">'GUILDS'</span>, <span class="string">'MESSAGES'</span>]</span></div>
-            <div class="code-line"><span class="line-num">4</span><span class="line-text">});</span></div>
-            <div class="code-line glowing"><span class="line-num">5</span><span class="line-text"><span class="variable">bot</span>.<span class="function">login</span>(<span class="string">'TOKEN'</span>);</span></div>
-          </div>
-        </div>
-        
-        <div class="floating-cards">
-          <div class="float-card card-1"><i class="fas fa-rocket"></i><span>Fast</span></div>
-          <div class="float-card card-2"><i class="fas fa-shield-alt"></i><span>Secure</span></div>
-          <div class="float-card card-3"><i class="fas fa-code"></i><span>Clean</span></div>
-        </div>
+
+      <h1>
+        Professional Tools for<br>
+        <span class="gradient-text">Minecraft & Discord</span>
+      </h1>
+
+      <p class="hero-sub">
+        High-performance datapacks and advanced Discord bots 
+        built with clean architecture and optimized execution.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#projects" class="btn-primary">
+          View Projects
+        </a>
+        <a href="#features" class="btn-secondary">
+          Learn More
+        </a>
       </div>
-    </div>
-    
-    <div class="scroll-indicator">
-      <div class="mouse"><div class="wheel"></div></div>
-      <span>Scroll to explore</span>
+
+      <div class="hero-points">
+        <span>Instant Download</span>
+        <span>Lifetime Updates</span>
+        <span>Clean Code</span>
+      </div>
+
     </div>
   </section>
 
-  <!-- Features Section -->
-  <section id="features" class="features">
-    <div class="section-header reveal">
-      <span class="section-tag">Why Choose Us</span>
-      <h2 class="section-title">Premium Features</h2>
-      <p class="section-subtitle">Built with cutting-edge technology for maximum performance</p>
+  <!-- Projects -->
+  <section id="projects" class="projects">
+
+    <div class="section-head reveal">
+      <h2>Featured Projects</h2>
+      <p>Ready-to-deploy systems available immediately after purchase.</p>
     </div>
-    
-    <div class="features-grid">
-      <div class="feature-card reveal" data-delay="0">
-        <div class="feature-inner">
-          <div class="feature-icon"><div class="icon-bg"></div><i class="fas fa-bolt"></i></div>
-          <h3>High Performance</h3>
-          <p>Optimized for speed and low resource usage. Our systems handle thousands of concurrent operations seamlessly.</p>
-          <div class="feature-link"><span>Learn More</span><i class="fas fa-arrow-right"></i></div>
-        </div>
-        <div class="feature-glow"></div>
-      </div>
-      
-      <div class="feature-card reveal" data-delay="100">
-        <div class="feature-inner">
-          <div class="feature-icon"><div class="icon-bg"></div><i class="fas fa-shield-alt"></i></div>
-          <h3>Secure & Reliable</h3>
-          <p>Clean code structure with strong stability. Enterprise-grade security protocols protect your data.</p>
-          <div class="feature-link"><span>Learn More</span><i class="fas fa-arrow-right"></i></div>
-        </div>
-        <div class="feature-glow"></div>
-      </div>
-      
-      <div class="feature-card reveal" data-delay="200">
-        <div class="feature-inner">
-          <div class="feature-icon"><div class="icon-bg"></div><i class="fas fa-book"></i></div>
-          <h3>Easy Setup</h3>
-          <p>Comprehensive documentation included for quick installation. Get started in minutes, not hours.</p>
-          <div class="feature-link"><span>Learn More</span><i class="fas fa-arrow-right"></i></div>
-        </div>
-        <div class="feature-glow"></div>
-      </div>
-      
-      <div class="feature-card reveal" data-delay="300">
-        <div class="feature-inner">
-          <div class="feature-icon"><div class="icon-bg"></div><i class="fas fa-sync-alt"></i></div>
-          <h3>Auto Updates</h3>
-          <p>Free lifetime updates with new features and bug fixes. Stay current with the latest technology.</p>
-          <div class="feature-link"><span>Learn More</span><i class="fas fa-arrow-right"></i></div>
-        </div>
-        <div class="feature-glow"></div>
-      </div>
-      
-      <div class="feature-card reveal" data-delay="400">
-        <div class="feature-inner">
-          <div class="feature-icon"><div class="icon-bg"></div><i class="fas fa-headset"></i></div>
-          <h3>24/7 Support</h3>
-          <p>Dedicated Discord support from our team. Get help whenever you need it.</p>
-          <div class="feature-link"><span>Learn More</span><i class="fas fa-arrow-right"></i></div>
-        </div>
-        <div class="feature-glow"></div>
-      </div>
-      
-      <div class="feature-card reveal" data-delay="500">
-        <div class="feature-inner">
-          <div class="feature-icon"><div class="icon-bg"></div><i class="fas fa-sliders-h"></i></div>
-          <h3>Fully Customizable</h3>
-          <p>Extensive configuration options to tailor the system to your exact needs.</p>
-          <div class="feature-link"><span>Learn More</span><i class="fas fa-arrow-right"></i></div>
-        </div>
-        <div class="feature-glow"></div>
-      </div>
-    </div>
-  </section>
 
-<!-- Projects Section -->
-<section id="projects" class="projects">
-  <div class="section-header">
-    <span class="section-tag">Featured Work</span>
-    <h2 class="section-title">Our Projects</h2>
-    <p class="section-subtitle">
-      Discover our premium Minecraft and Discord solutions
-    </p>
-  </div>
+    <div class="project-grid">
 
-<!-- Project Modal -->
-<div id="projectModal" class="project-modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2 id="modalTitle"></h2>
-    <p id="modalDesc"></p>
-  </div>
-</div>
-
-  <div class="projects-grid">
-
-    <!-- Minecraft Project -->
-    <div class="project-card" data-category="minecraft">
-      <div class="card-inner">
-        <div class="card-image">
-          <img src="images/datapacks.jpg" alt="Datapack Bundle">
+      <div class="project-card reveal">
+        <div class="project-image">
+          <img src="images/datapacks.jpg" alt="Minecraft Datapack Bundle">
         </div>
-        <div class="card-content">
+        <div class="project-body">
           <h3>Minecraft Datapack Bundle</h3>
-          <p>High performance datapacks for survival & SMP servers.</p>
-          <div class="card-footer">
+          <p>
+            Optimized survival and SMP datapacks designed 
+            for stability and performance.
+          </p>
+          <div class="project-footer">
             <span class="price">₹29</span>
-            <button class="buy-btn">Buy Now</button>
+            <button class="btn-buy">Buy Now</button>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Discord Project -->
-    <div class="project-card" data-category="discord">
-      <div class="card-inner">
-        <div class="card-image">
-          <img src="images/discordbot.jpg" alt="Discord Bot">
+      <div class="project-card reveal">
+        <div class="project-image">
+          <img src="images/discordbot.jpg" alt="Advanced Discord Bot">
         </div>
-        <div class="card-content">
+        <div class="project-body">
           <h3>Advanced Discord Bot</h3>
-          <p>Moderation, automation & advanced server management tools.</p>
-          <div class="card-footer">
+          <p>
+            Moderation, automation, logging and 
+            management tools for growing communities.
+          </p>
+          <div class="project-footer">
             <span class="price">₹49</span>
-            <button class="buy-btn">Buy Now</button>
+            <button class="btn-buy">Buy Now</button>
           </div>
         </div>
       </div>
+
     </div>
 
-  </div>
-</section>
-<script src="script.js"></script>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="features">
+
+    <div class="section-head reveal">
+      <h2>Why Choose Rachna Hub</h2>
+      <p>Built with performance, structure and long-term reliability in mind.</p>
+    </div>
+
+    <div class="features-grid">
+
+      <div class="feature-card reveal">
+        <i class="fas fa-bolt"></i>
+        <h3>High Performance</h3>
+        <p>Optimized execution with minimal resource consumption.</p>
+      </div>
+
+      <div class="feature-card reveal">
+        <i class="fas fa-code"></i>
+        <h3>Clean Architecture</h3>
+        <p>Structured, readable and scalable codebase.</p>
+      </div>
+
+      <div class="feature-card reveal">
+        <i class="fas fa-shield-alt"></i>
+        <h3>Reliable Systems</h3>
+        <p>Tested for stability and long-term usage.</p>
+      </div>
+
+      <div class="feature-card reveal">
+        <i class="fas fa-sync-alt"></i>
+        <h3>Free Updates</h3>
+        <p>Continuous improvements and feature expansions.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CTA -->
+  <section class="cta reveal">
+    <h2>Ready to Upgrade Your Server?</h2>
+    <p>Start using premium tools built for serious communities.</p>
+    <a href="#projects" class="btn-primary">
+      Browse Projects
+    </a>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact" class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-icon">◆</span>
+        <span>Rachna Hub</span>
+      </div>
+
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#features">Features</a>
+      </div>
+
+      <div class="footer-social">
+        <a href="https://discord.gg/yourserver" target="_blank">
+          <i class="fab fa-discord"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © 2026 Rachna Hub. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
 </body>
+</html>
