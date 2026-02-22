@@ -103,9 +103,9 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".project-card").forEach(card => {
     card.addEventListener("click", () => {
       modal.style.display = "flex";
-      document.getElementById("modalTitle").innerText =
+      modal.querySelector("#modalTitle").innerText =
         card.querySelector("h3").innerText;
-      document.getElementById("modalDesc").innerText =
+      modal.querySelector("#modalDesc").innerText =
         card.querySelector("p").innerText;
     });
   });
