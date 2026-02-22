@@ -8,34 +8,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <!-- GSAP Core + ScrollTrigger + TextPlugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
-    <!-- GSAP ScrollTo Plugin -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
 </head>
 <body>
-
-    <!-- Custom Cursor -->
-        <div class="cursor-inner"></div>
-    </div>
-
-    <!-- Noise Overlay -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"><div class="cursor-inner"></div></div>
     <div class="noise-overlay"></div>
-
-    <!-- Loading Screen -->
     <div class="loader">
         <div class="loader-content">
             <div class="loader-logo">RACHNA<span class="accent">.</span>HUB</div>
-            <div class="loader-bar">
-                <div class="loader-progress"></div>
-            </div>
+            <div class="loader-bar"><div class="loader-progress"></div></div>
             <div class="loader-text">Loading Experience...</div>
         </div>
     </div>
-
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-logo">
             <span class="logo-text">RACHNA</span>
@@ -61,14 +47,8 @@
             </div>
             <button class="nav-cta"><span>Get Started</span></button>
         </div>
-        <div class="menu-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+        <div class="menu-toggle"><span></span><span></span><span></span></div>
     </nav>
-
-    <!-- Hero Section -->
     <section id="home" class="hero-section">
         <div class="hero-background">
             <div class="gradient-orb orb-1"></div>
@@ -76,13 +56,11 @@
             <div class="gradient-orb orb-3"></div>
             <div class="grid-overlay"></div>
         </div>
-        
         <div class="hero-content">
             <div class="hero-badge">
                 <span class="badge-dot"></span>
                 <span class="badge-text">Premium Minecraft Assets</span>
             </div>
-            
             <h1 class="hero-title">
                 <div class="title-line line-1">
                     <span class="word-wrapper"><span class="word">Craft</span></span>
@@ -96,12 +74,10 @@
                     <span class="word-wrapper"><span class="word">Experience</span></span>
                 </div>
             </h1>
-            
             <p class="hero-description">
                 <span class="desc-line">Premium datapacks, plugins, and discord bot codes</span>
                 <span class="desc-line">that transform your server into a legend.</span>
             </p>
-            
             <div class="hero-cta-group">
                 <a href="#products" class="btn-main">
                     <span class="btn-text">Explore Products</span>
@@ -112,35 +88,32 @@
                         </svg>
                     </span>
                 </a>
-                <a href="#features" class="btn-secondary">
-                    <span>View Features</span>
-                </a>
+                <a href="#features" class="btn-secondary"><span>View Features</span></a>
             </div>
-            
-<div class="hero-stats">
-    <div class="stat-item">
-        <span class="stat-number" data-count="500">0</span>
-        <span class="stat-label">+ Downloads</span>
-    </div>
-
-    <div class="stat-item">
-        <span class="stat-number" data-count="50">0</span>
-        <span class="stat-label">+ Products</span>
-    </div>
-
-    <div class="stat-item">
-        <span class="stat-number" data-count="99">0</span>
-        <span class="stat-label">% Satisfaction</span>
-    </div>
-
-    <div class="stat-item">
-        <span class="stat-number" data-count="24">0</span>
-        <span class="stat-label">/7 Support</span>
-    </div>
-</div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="500">0</span>
+                    <span class="stat-label">+ Downloads</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="50">0</span>
+                    <span class="stat-label">+ Products</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="99">0</span>
+                    <span class="stat-label">% Satisfaction</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="24">0</span>
+                    <span class="stat-label">/7 Support</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-mouse"></div>
+        </div>
     </section>
-
-    <!-- Features Section -->
     <section id="features" class="features-section">
         <div class="section-header">
             <div class="section-label">
@@ -151,11 +124,8 @@
                 <span class="title-word">Premium</span>
                 <span class="title-word outline">Quality</span>
             </h2>
-            <p class="section-description">
-                Experience the difference with our professional-grade Minecraft assets.
-            </p>
+            <p class="section-description">Experience the difference with our professional-grade Minecraft assets.</p>
         </div>
-
         <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">
@@ -166,7 +136,6 @@
                 <h3>Lightning Fast</h3>
                 <p>Optimized code ensures zero lag and maximum performance for your server.</p>
             </div>
-
             <div class="feature-card">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -177,7 +146,6 @@
                 <h3>Secure & Safe</h3>
                 <p>All products are thoroughly tested and verified for security and compatibility.</p>
             </div>
-
             <div class="feature-card">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -188,7 +156,6 @@
                 <h3>Instant Delivery</h3>
                 <p>Get immediate access to your purchases with our automated delivery system.</p>
             </div>
-
             <div class="feature-card">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -198,7 +165,6 @@
                 <h3>24/7 Support</h3>
                 <p>Our dedicated team is always ready to help you with any questions.</p>
             </div>
-
             <div class="feature-card">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -208,7 +174,6 @@
                 <h3>Regular Updates</h3>
                 <p>All products receive free updates and improvements over time.</p>
             </div>
-
             <div class="feature-card">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -221,8 +186,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Products Section -->
     <section id="products" class="products-section">
         <div class="section-header">
             <div class="section-label">
@@ -233,11 +196,8 @@
                 <span class="title-word">Premium</span>
                 <span class="title-word outline">Assets</span>
             </h2>
-            <p class="section-description">
-                Instant digital delivery. Secure payments. Unlimited possibilities.
-            </p>
+            <p class="section-description">Instant digital delivery. Secure payments. Unlimited possibilities.</p>
         </div>
-
         <div class="products-filter">
             <button class="filter-btn active" data-filter="all"><span>All Products</span></button>
             <button class="filter-btn" data-filter="datapack"><span>Datapacks</span></button>
@@ -245,23 +205,18 @@
             <button class="filter-btn" data-filter="bot"><span>Bot Codes</span></button>
             <button class="filter-btn" data-filter="resource"><span>Resources</span></button>
         </div>
-
         <div class="products-grid">
-            <!-- Product 1 -->
             <div class="product-card" data-category="datapack" data-id="1" data-name="Ultimate Trees Datapack" data-price="5.00" data-file="trees_datapack.zip">
                 <div class="card-glow"></div>
-                <div class="card-border"></div>
                 <div class="card-content">
                     <div class="card-header">
-                        <div class="product-icon-wrapper">
-                            <div class="product-icon">🌲</div>
-                        </div>
+                        <div class="product-icon-wrapper"><div class="product-icon">🌲</div></div>
                         <div class="product-badge">Bestseller</div>
                     </div>
                     <div class="card-body">
                         <h3 class="product-title">Ultimate Trees</h3>
                         <p class="product-category">Datapack</p>
-                        <p class="product-description">Adds 10+ magical tree species with unique leaves, wood, and saplings. Fully customizable.</p>
+                        <p class="product-description">Adds 10+ magical tree species with unique leaves, wood, and saplings.</p>
                     </div>
                     <div class="card-footer">
                         <div class="price-wrapper">
@@ -280,16 +235,11 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Product 2 -->
             <div class="product-card" data-category="plugin" data-id="2" data-name="Anti-Grief Core" data-price="10.00" data-file="antigrief_plugin.jar">
                 <div class="card-glow"></div>
-                <div class="card-border"></div>
                 <div class="card-content">
                     <div class="card-header">
-                        <div class="product-icon-wrapper">
-                            <div class="product-icon">🛡️</div>
-                        </div>
+                        <div class="product-icon-wrapper"><div class="product-icon">🛡️</div></div>
                         <div class="product-badge hot">Hot</div>
                     </div>
                     <div class="card-body">
@@ -314,115 +264,332 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Product 3 -->
             <div class="product-card" data-category="bot" data-id="3" data-name="Minecraft Discord Bot" data-price="15.00" data-file="discord_bot_source.js">
                 <div class="card-glow"></div>
-                <div class="card-border"></div>
                 <div class="card-content">
                     <div class="card-header">
-                        <div class="product-icon-wrapper">
-                            <div class="product-icon">🤖</div>
-                        </div>
+                        <div class="product-icon-wrapper"><div class="product-icon">🤖</div></div>
                         <div class="product-badge new">New</div>
                     </div>
                     <div class="card-body">
                         <h3 class="product-title">Rich Presence Bot</h3>
                         <p class="product-category">Source Code</p>
-                        <p class="product-description">Full JavaScript source code. Live player count, server status, and custom activities.</p>
+                        <p class="product-description">Full JavaScript source code with live player count and server status.</p>
                     </div>
                     <div class="card-footer">
                         <div class="price-wrapper">
                             <span class="currency">$</span>
                             <span class="price">15.00</span>
+                        </div>
+                        <button class="buy-btn">
+                            <span class="btn-text">Purchase</span>
+                            <span class="btn-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <button class="buy-btn">
-                <span class="btn-text">Purchase</span>
-                <span class="btn-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                    </svg>
-                </span>
-            </button>
-        </div>
-    </div>
-</div>
-<!-- PRODUCT 5 -->
-<div class="product-card" data-category="config">
-    <div class="card-content">
-        <div class="card-header">
-            <div class="product-icon">⚔️</div>
-            <span class="category-badge">Config</span>
-        </div>
-
-        <div class="card-body">
-            <h3 class="product-title">PvP Arena Setup</h3>
-            <p class="product-description">
-                Fully configured PvP arena with kits, ranks, and custom scoreboard.
-            </p>
-        </div>
-
-        <div class="card-footer">
-            <div class="price-wrapper">
-                <span class="currency">$</span>
-                <span class="price">6.50</span>
+            <div class="product-card" data-category="datapack" data-id="4" data-name="Epic Mobs Expansion" data-price="8.00" data-file="epic_mobs.zip">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <div class="product-icon-wrapper"><div class="product-icon">👹</div></div>
+                        <div class="product-badge">Popular</div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="product-title">Epic Mobs Expansion</h3>
+                        <p class="product-category">Datapack</p>
+                        <p class="product-description">Adds 20+ new mobs with custom drops, abilities, and boss encounters.</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="price-wrapper">
+                            <span class="currency">$</span>
+                            <span class="price">8.00</span>
+                        </div>
+                        <button class="buy-btn">
+                            <span class="btn-text">Purchase</span>
+                            <span class="btn-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <button class="buy-btn">
-                <span class="btn-text">Purchase</span>
-                <span class="btn-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                    </svg>
-                </span>
-            </button>
-        </div>
-    </div>
-</div>
-
-<!-- PRODUCT 6 -->
-<div class="product-card" data-category="plugin">
-    <div class="card-content">
-        <div class="card-header">
-            <div class="product-icon">💰</div>
-            <span class="category-badge">Plugin</span>
-        </div>
-
-        <div class="card-body">
-            <h3 class="product-title">Ultimate Economy</h3>
-            <p class="product-description">
-                Complete economy system with banks, shops, auctions, and API support.
-            </p>
-        </div>
-
-        <div class="card-footer">
-            <div class="price-wrapper">
-                <span class="currency">$</span>
-                <span class="price">7.00</span>
+            <div class="product-card" data-category="resource" data-id="5" data-name="HD Texture Pack" data-price="3.00" data-file="hd_textures.zip">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <div class="product-icon-wrapper"><div class="product-icon">🎨</div></div>
+                        <div class="product-badge">Trending</div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="product-title">HD Texture Pack</h3>
+                        <p class="product-category">Resource Pack</p>
+                        <p class="product-description">High-resolution textures for blocks, items, and UI. 64x64 resolution.</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="price-wrapper">
+                            <span class="currency">$</span>
+                            <span class="price">3.00</span>
+                        </div>
+                        <button class="buy-btn">
+                            <span class="btn-text">Purchase</span>
+                            <span class="btn-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <button class="buy-btn">
-                <span class="btn-text">Purchase</span>
-                <span class="btn-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+            <div class="product-card" data-category="plugin" data-id="6" data-name="Economy Plus" data-price="7.00" data-file="economy_plus.jar">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <div class="product-icon-wrapper"><div class="product-icon">💰</div></div>
+                        <div class="product-badge hot">Hot</div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="product-title">Economy Plus</h3>
+                        <p class="product-category">Plugin</p>
+                        <p class="product-description">Complete economy system with banks, shops, auctions, and API support.</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="price-wrapper">
+                            <span class="currency">$</span>
+                            <span class="price">7.00</span>
+                        </div>
+                        <button class="buy-btn">
+                            <span class="btn-text">Purchase</span>
+                            <span class="btn-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="testimonials" class="testimonials-section">
+        <div class="section-header">
+            <div class="section-label">
+                <span class="label-line"></span>
+                <span class="label-text">Testimonials</span>
+            </div>
+            <h2 class="section-title">
+                <span class="title-word">Client</span>
+                <span class="title-word outline">Reviews</span>
+            </h2>
+            <p class="section-description">See what our customers have to say about their experience.</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-rating">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                    <span class="star">★</span><span class="star">★</span>
+                </div>
+                <p class="testimonial-text">"Absolutely amazing products! The Ultimate Trees datapack transformed our server completely. Highly recommended!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">JD</div>
+                    <div class="author-info">
+                        <h4>John Doe</h4>
+                        <span>Server Owner</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-rating">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                    <span class="star">★</span><span class="star">★</span>
+                </div>
+                <p class="testimonial-text">"Best investment for our Minecraft server. The Anti-Grief plugin works perfectly and support is exceptional."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MS</div>
+                    <div class="author-info">
+                        <h4>Mike Smith</h4>
+                        <span>Community Manager</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-rating">
+                    <span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                    <span class="star">★</span><span class="star">★</span>
+                </div>
+                <p class="testimonial-text">"The Discord bot source code was well-documented and easy to customize. Perfect for our community!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">AW</div>
+                    <div class="author-info">
+                        <h4>Alex Wilson</h4>
+                        <span>Developer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="faq" class="faq-section">
+        <div class="section-header">
+            <div class="section-label">
+                <span class="label-line"></span>
+                <span class="label-text">FAQ</span>
+            </div>
+            <h2 class="section-title">
+                <span class="title-word">Frequently</span>
+                <span class="title-word outline">Asked</span>
+            </h2>
+            <p class="section-description">Got questions? We've got answers.</p>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>How do I receive my purchased products?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">After completing your purchase, you'll receive an email with download links instantly. You can also access all your purchases from your account dashboard.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Do you offer refunds?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">Yes, we offer a 30-day money-back guarantee on all products. If you're not satisfied, contact our support team for a full refund.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Are the products compatible with my server version?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">All our products are tested and compatible with Minecraft Java Edition 1.16.5 and above. Check individual product pages for specific version compatibility.</div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Do I need technical knowledge to use these products?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">Most products come with detailed installation guides. Basic products can be installed by anyone, while advanced products may require some technical knowledge.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="contact-section">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Get In Touch</h2>
+                <p>Have questions or need support? We're here to help you 24/7.</p>
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <div class="method-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <div class="method-info">
+                            <h4>Email</h4>
+                            <span>support@rachnahub.com</span>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="method-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </div>
+                        <div class="method-info">
+                            <h4>Location</h4>
+                            <span>Worldwide Support</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form-wrapper">
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-input" placeholder="Your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" placeholder="your@email.com" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Subject</label>
+                        <input type="text" class="form-input" placeholder="How can we help?" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Message</label>
+                        <textarea class="form-textarea" placeholder="Your message..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <span>Send Message</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">RACHNA.HUB</div>
+            <p>&copy; 2025 Rachna Hub. All Rights Reserved.</p>
+            <div class="footer-links">
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+                <a href="#">Support</a>
+            </div>
+        </div>
+    </footer>
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal-content">
+            <button class="close-modal">×</button>
+            <div class="modal-header">
+                <h3 id="modal-title">Checkout</h3>
+                <p>Complete your purchase securely</p>
+            </div>
+            <div class="payment-simulation">
+                <div class="spinner"></div>
+                <p class="payment-status" id="payment-status">Initializing payment...</p>
+            </div>
+            <div class="success-content">
+                <div class="check-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12"></polyline>
                     </svg>
-                </span>
-            </button>
+                </div>
+                <h3>Payment Successful!</h3>
+                <p>Your download is ready</p>
+                <a href="#" class="btn-download" id="download-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    <span>Download File</span>
+                </a>
+            </div>
         </div>
     </div>
-</div>
-<footer class="footer">
-    <div class="footer-content">
-        <div class="footer-logo">
-            <span>RACHNA.HUB</span>
-        </div>
-        <p>© 2026 Rachna Hub. All Rights Reserved.</p>
-    </div>
-</footer>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

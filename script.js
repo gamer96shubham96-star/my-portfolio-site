@@ -1,15 +1,11 @@
-/* ============================================
-   RACHNA HUB - PROFESSIONAL JAVASCRIPT
-   God-Level Animations & Functionality
-   ============================================ */
+// ============================================
+// RACHNA HUB - PROFESSIONAL JAVASCRIPT
+// God-Level Animations & Functionality
+// ============================================
 
-// Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // Initialize all modules
-    initCustomCursor();
     initLoadingScreen();
-    initTextAnimations();
+    initCustomCursor();
     initScrollAnimations();
     initProductCards();
     initProductFilters();
@@ -19,30 +15,29 @@ document.addEventListener('DOMContentLoaded', () => {
     initParallaxEffects();
     initNavbarScroll();
     initHoverEffects();
-    
+    initFAQ();
+    initContactForm();
+    initTextAnimations();
 });
 
-/* ============================================
-   1. LOADING SCREEN
-   ============================================ */
+// ============================================
+// 1. LOADING SCREEN
+// ============================================
 function initLoadingScreen() {
     const loader = document.querySelector('.loader');
     if (!loader) return;
     
-    // Hide loader after animations complete
     setTimeout(() => {
         loader.classList.add('hidden');
-        
-        // Trigger hero animations after loader
         setTimeout(() => {
             initHeroAnimations();
         }, 500);
     }, 2500);
 }
 
-/* ============================================
-   2. HERO ANIMATIONS
-   ============================================ */
+// ============================================
+// 2. HERO ANIMATIONS
+// ============================================
 function initHeroAnimations() {
     if (typeof gsap === 'undefined') return;
     
@@ -110,9 +105,9 @@ function initHeroAnimations() {
     });
 }
 
-/* ============================================
-   3. CUSTOM CURSOR SYSTEM
-   ============================================ */
+// ============================================
+// 3. CUSTOM CURSOR SYSTEM
+// ============================================
 function initCustomCursor() {
     const cursor = document.querySelector('.cursor');
     const cursorFollower = document.querySelector('.cursor-follower');
@@ -126,25 +121,19 @@ function initCustomCursor() {
     let followerX = 0;
     let followerY = 0;
     
-    // Track mouse position
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
     });
     
-    // Smooth cursor animation
     function animateCursor() {
-        // Direct cursor follow with slight delay
         cursorX += (mouseX - cursorX) * 0.15;
         cursorY += (mouseY - cursorY) * 0.15;
-        
-        // Delayed follower for trail effect
         followerX += (mouseX - followerX) * 0.08;
         followerY += (mouseY - followerY) * 0.08;
         
         cursor.style.left = cursorX + 'px';
         cursor.style.top = cursorY + 'px';
-        
         cursorFollower.style.left = followerX + 'px';
         cursorFollower.style.top = followerY + 'px';
         
@@ -153,8 +142,7 @@ function initCustomCursor() {
     
     animateCursor();
     
-    // Hover effects on interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, .product-card, .filter-btn, .feature-card');
+    const interactiveElements = document.querySelectorAll('a, button, .product-card, .filter-btn, .feature-card, .faq-question');
     
     interactiveElements.forEach(el => {
         el.addEventListener('mouseenter', () => {
@@ -168,7 +156,6 @@ function initCustomCursor() {
         });
     });
     
-    // Hide cursor when leaving window
     document.addEventListener('mouseleave', () => {
         cursor.style.opacity = '0';
         cursorFollower.style.opacity = '0';
@@ -180,9 +167,9 @@ function initCustomCursor() {
     });
 }
 
-/* ============================================
-   4. SCROLL ANIMATIONS WITH GSAP
-   ============================================ */
+// ============================================
+// 4. SCROLL ANIMATIONS WITH GSAP
+// ============================================
 function initScrollAnimations() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
     
@@ -192,7 +179,6 @@ function initScrollAnimations() {
     const sections = document.querySelectorAll('section');
     
     sections.forEach(section => {
-        // Animate section header
         const header = section.querySelector('.section-header');
         if (header) {
             gsap.fromTo(header,
@@ -234,34 +220,11 @@ function initScrollAnimations() {
         );
     });
     
-    // Animate filter buttons
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    filterBtns.forEach((btn, index) => {
-        gsap.fromTo(btn,
-            { opacity: 0, y: 20 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 0.5,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: '.products-filter',
-                    start: 'top 85%',
-                    toggleActions: 'play none none reverse'
-                }
-            }
-        );
-    });
-    
     // Animate product cards on scroll
     const productCards = document.querySelectorAll('.product-card');
     productCards.forEach((card, index) => {
         gsap.fromTo(card,
-            { 
-                opacity: 0, 
-                y: 60,
-                rotationX: 15
-            },
+            { opacity: 0, y: 60, rotationX: 15 },
             {
                 opacity: 1,
                 y: 0,
@@ -278,20 +241,18 @@ function initScrollAnimations() {
         );
     });
     
-    // Animate stats numbers
-    const statNumbers = document.querySelectorAll('.stat-number');
-    statNumbers.forEach(stat => {
-        const target = parseInt(stat.dataset.count) || 0;
-        
-        gsap.fromTo(stat,
-            { innerText: 0 },
+    // Animate testimonial cards
+    const testimonialCards = document.querySelectorAll('.testimonial-card');
+    testimonialCards.forEach((card, index) => {
+        gsap.fromTo(card,
+            { opacity: 0, y: 50 },
             {
-                innerText: target,
-                duration: 2,
-                ease: 'power2.out',
-                snap: { innerText: 1 },
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: 'power3.out',
                 scrollTrigger: {
-                    trigger: stat,
+                    trigger: card,
                     start: 'top 85%',
                     toggleActions: 'play none none reverse'
                 }
@@ -299,27 +260,33 @@ function initScrollAnimations() {
         );
     });
     
-    // Parallax effect for gradient orbs
-    gsap.to('.gradient-orb', {
-        yPercent: 50,
-        ease: 'none',
-        scrollTrigger: {
-            trigger: '.hero-section',
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true
-        }
+    // Animate FAQ items
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach((item, index) => {
+        gsap.fromTo(item,
+            { opacity: 0, y: 30 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.5,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 90%',
+                    toggleActions: 'play none none reverse'
+                }
+            }
+        );
     });
 }
 
-/* ============================================
-   5. PRODUCT CARD INTERACTIONS
-   ============================================ */
+// ============================================
+// 5. PRODUCT CARD INTERACTIONS
+// ============================================
 function initProductCards() {
     const cards = document.querySelectorAll('.product-card');
     
     cards.forEach(card => {
-        // 3D tilt effect on mousemove
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -340,7 +307,6 @@ function initProductCards() {
                 boxShadow: '0 25px 50px rgba(0, 255, 136, 0.15)'
             });
             
-            // Move glow effect
             const glow = card.querySelector('.card-glow');
             if (glow) {
                 gsap.to(glow, {
@@ -352,7 +318,6 @@ function initProductCards() {
             }
         });
         
-        // Reset on mouseleave
         card.addEventListener('mouseleave', () => {
             gsap.to(card, {
                 rotationX: 0,
@@ -371,7 +336,6 @@ function initProductCards() {
             }
         });
         
-        // Scale effect on click
         card.addEventListener('mousedown', () => {
             gsap.to(card, {
                 scale: 0.97,
@@ -388,33 +352,29 @@ function initProductCards() {
     });
 }
 
-/* ============================================
-   6. PRODUCT FILTERING
-   ============================================ */
+// ============================================
+// 6. PRODUCT FILTERING
+// ============================================
 function initProductFilters() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const productCards = document.querySelectorAll('.product-card');
     
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Update active button
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             
             const filter = btn.dataset.filter;
             
-            // Animate cards
             productCards.forEach((card, index) => {
                 const category = card.dataset.category;
                 const shouldShow = filter === 'all' || category === filter;
                 
                 if (shouldShow) {
-                    // Reset card state
                     card.style.display = 'block';
                     card.style.opacity = '0';
                     card.style.transform = 'translateY(30px) scale(0.95)';
                     
-                    // Animate in
                     gsap.to(card, {
                         opacity: 1,
                         y: 0,
@@ -427,7 +387,6 @@ function initProductFilters() {
                         }
                     });
                 } else {
-                    // Animate out
                     gsap.to(card, {
                         opacity: 0,
                         scale: 0.9,
@@ -444,9 +403,9 @@ function initProductFilters() {
     });
 }
 
-/* ============================================
-   7. PAYMENT MODAL SYSTEM
-   ============================================ */
+// ============================================
+// 7. PAYMENT MODAL SYSTEM
+// ============================================
 function initPaymentModal() {
     const modal = document.getElementById('paymentModal');
     const closeBtn = document.querySelector('.close-modal');
@@ -454,7 +413,6 @@ function initPaymentModal() {
     
     if (!modal) return;
     
-    // Open modal on buy button click
     buyBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -468,19 +426,16 @@ function initPaymentModal() {
         });
     });
     
-    // Close modal
     if (closeBtn) {
         closeBtn.addEventListener('click', closePaymentModal);
     }
     
-    // Close on backdrop click
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {
             closePaymentModal();
         }
     });
     
-    // Close on escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal.classList.contains('active')) {
             closePaymentModal();
@@ -496,14 +451,12 @@ function openPaymentModal(productName, productPrice, productFile) {
     const spinner = document.querySelector('.spinner');
     const paymentStatus = document.getElementById('payment-status');
     
-    // Reset modal state
     modalTitle.textContent = `Checkout: ${productName}`;
     paymentSimulation.style.display = 'flex';
     successContent.classList.remove('visible');
     spinner.style.display = 'block';
     paymentStatus.textContent = 'Initializing payment...';
     
-    // Show modal with animation
     modal.classList.add('active');
     
     gsap.fromTo('.modal-content',
@@ -511,7 +464,6 @@ function openPaymentModal(productName, productPrice, productFile) {
         { scale: 1, opacity: 1, y: 0, duration: 0.4, ease: 'back.out(1.7)' }
     );
     
-    // Simulate payment process
     simulatePaymentProcess(paymentStatus, spinner, paymentSimulation, successContent, productName, productFile);
 }
 
@@ -546,12 +498,10 @@ function simulatePaymentProcess(statusEl, spinnerEl, simulationEl, successEl, pr
         } else {
             clearInterval(interval);
             
-            // Payment successful
             spinnerEl.style.display = 'none';
             simulationEl.style.display = 'none';
             successEl.classList.add('visible');
             
-            // Animate success elements
             gsap.fromTo('.check-icon',
                 { scale: 0, rotation: -180 },
                 { scale: 1, rotation: 0, duration: 0.6, ease: 'elastic.out(1, 0.5)' }
@@ -572,10 +522,7 @@ function simulatePaymentProcess(statusEl, spinnerEl, simulationEl, successEl, pr
                 { y: 0, opacity: 1, duration: 0.5, delay: 0.5 }
             );
             
-            // Setup download
             setupDownload(productFile, productName);
-            
-            // Update cart count
             updateCartCount();
         }
     }, 800);
@@ -593,7 +540,6 @@ function setupDownload(filename, productName) {
 }
 
 function downloadFile(filename, productName) {
-    // Create a demo file content
     const content = `RACHNA HUB - PRODUCT FILE
 =======================
 Product: ${productName}
@@ -609,7 +555,6 @@ Minecraft datapack, plugin, or bot source code.
 Visit https://rachnahub.com for more products!
 `;
     
-    // Create blob and download
     const blob = new Blob([content], { type: 'text/plain' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -621,8 +566,7 @@ Visit https://rachnahub.com for more products!
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
     
-    // Show success message
-    showNotification('Download started! Check your downloads folder.');
+    showNotification('Download started!');
 }
 
 function updateCartCount() {
@@ -632,7 +576,6 @@ function updateCartCount() {
         cartCount.textContent = currentCount + 1;
         cartCount.classList.add('active');
         
-        // Bump animation
         gsap.fromTo(cartCount,
             { scale: 1.5 },
             { scale: 1, duration: 0.3, ease: 'bounce.out' }
@@ -641,7 +584,6 @@ function updateCartCount() {
 }
 
 function showNotification(message) {
-    // Create notification element
     const notification = document.createElement('div');
     notification.style.cssText = `
         position: fixed;
@@ -658,7 +600,6 @@ function showNotification(message) {
     `;
     notification.textContent = message;
     
-    // Add animation keyframes
     const style = document.createElement('style');
     style.textContent = `
         @keyframes slideIn {
@@ -674,7 +615,6 @@ function showNotification(message) {
     
     document.body.appendChild(notification);
     
-    // Remove after 3 seconds
     setTimeout(() => {
         notification.style.animation = 'slideOut 0.3s ease forwards';
         setTimeout(() => {
@@ -683,16 +623,14 @@ function showNotification(message) {
     }, 3000);
 }
 
-/* ============================================
-   8. COUNTER ANIMATION
-   ============================================ */
+// ============================================
+// 8. COUNTER ANIMATION
+// ============================================
 function initCounterAnimation() {
     const counters = document.querySelectorAll('.stat-number');
     
     counters.forEach(counter => {
         const target = parseInt(counter.dataset.count) || 0;
-        const duration = 2;
-        const start = 0;
         
         ScrollTrigger.create({
             trigger: counter,
@@ -701,7 +639,7 @@ function initCounterAnimation() {
             onEnter: () => {
                 gsap.to(counter, {
                     innerText: target,
-                    duration: duration,
+                    duration: 2,
                     ease: 'power2.out',
                     snap: { innerText: 1 },
                     onUpdate: function() {
@@ -713,80 +651,36 @@ function initCounterAnimation() {
     });
 }
 
-/* ============================================
-   9. SMOOTH SCROLL
-   ============================================ */
-function initScrollAnimations() {
-    if (typeof gsap === 'undefined') return;
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Section fade-in
-    gsap.utils.toArray('section').forEach(section => {
-        gsap.from(section, {
-            opacity: 0,
-            y: 80,
-            duration: 1,
-            ease: "power3.out",
-            scrollTrigger: {
-                trigger: section,
-                start: "top 85%",
-                toggleActions: "play reverse play reverse"
+// ============================================
+// 9. SMOOTH SCROLL
+// ============================================
+function initSmoothScroll() {
+    const links = document.querySelectorAll('a[href^="#"]');
+    
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.querySelector(link.getAttribute('href'));
+            
+            if (target) {
+                gsap.to(window, {
+                    duration: 1,
+                    scrollTo: {
+                        y: target.offsetTop - 80
+                    },
+                    ease: 'power3.inOut'
+                });
             }
         });
     });
-
-    // Product cards stagger animation
-    gsap.from(".product-card", {
-        opacity: 0,
-        y: 60,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: {
-            trigger: ".products-grid",
-            start: "top 80%",
-            toggleActions: "play reverse play reverse"
-        }
-    });
-
-    // Feature cards stagger
-    gsap.from(".feature-card", {
-        opacity: 0,
-        y: 50,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: {
-            trigger: ".features-grid",
-            start: "top 80%",
-            toggleActions: "play reverse play reverse"
-        }
-    });
 }
 
-
-function initHeroAnimations() {
-    gsap.timeline()
-        .from(".hero-badge", { opacity: 0, y: 30, duration: 0.6 })
-        .from(".hero-title .word", {
-            opacity: 0,
-            y: 50,
-            stagger: 0.1,
-            duration: 0.8,
-            ease: "power3.out"
-        }, "-=0.3")
-        .from(".hero-description", { opacity: 0, y: 30, duration: 0.6 }, "-=0.5")
-        .from(".hero-cta-group", { opacity: 0, y: 30, duration: 0.6 }, "-=0.4")
-        .from(".hero-stats", { opacity: 0, duration: 0.6 }, "-=0.4");
-}
-/* ============================================
-   10. PARALLAX EFFECTS
-   ============================================ */
+// ============================================
+// 10. PARALLAX EFFECTS
+// ============================================
 function initParallaxEffects() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
     
-    // Parallax for gradient orbs
     gsap.utils.toArray('.gradient-orb').forEach((orb, index) => {
         gsap.to(orb, {
             yPercent: 30,
@@ -800,7 +694,6 @@ function initParallaxEffects() {
         });
     });
     
-    // Parallax for grid overlay
     gsap.to('.grid-overlay', {
         yPercent: 20,
         ease: 'none',
@@ -813,48 +706,27 @@ function initParallaxEffects() {
     });
 }
 
-/* ============================================
-   11. NAVBAR SCROLL EFFECT
-   ============================================ */
+// ============================================
+// 11. NAVBAR SCROLL EFFECT
+// ============================================
 function initNavbarScroll() {
-    const navbar = document.querySelector(".navbar");
-
-    window.addEventListener("scroll", () => {
+    const navbar = document.querySelector('.navbar');
+    
+    if (!navbar) return;
+    
+    window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
-            navbar.classList.add("scrolled");
+            navbar.classList.add('scrolled');
         } else {
-            navbar.classList.remove("scrolled");
+            navbar.classList.remove('scrolled');
         }
     });
 }
 
-/* ============================================
-   12. HOVER EFFECTS
-   ============================================ */
-function initProductCards() {
-    const cards = document.querySelectorAll(".product-card");
-
-    cards.forEach(card => {
-        card.addEventListener("mouseenter", () => {
-            gsap.to(card, {
-                y: -10,
-                scale: 1.02,
-                boxShadow: "0 20px 60px rgba(0,0,0,0.3)",
-                duration: 0.3
-            });
-        });
-
-        card.addEventListener("mouseleave", () => {
-            gsap.to(card, {
-                y: 0,
-                scale: 1,
-                boxShadow: "none",
-                duration: 0.3
-            });
-        });
-    });
-}
-    
+// ============================================
+// 12. HOVER EFFECTS
+// ============================================
+function initHoverEffects() {
     // Filter button hover effects
     const filterBtns = document.querySelectorAll('.filter-btn');
     
@@ -918,43 +790,165 @@ function initProductCards() {
             }
         });
     });
+    
+    // Testimonial card hover
+    const testimonialCards = document.querySelectorAll('.testimonial-card');
+    
+    testimonialCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            gsap.to(card, {
+                y: -5,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            gsap.to(card, {
+                y: 0,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+    });
 }
 
-/* ============================================
-   13. UTILITY FUNCTIONS
-   ============================================ */
-
-// Debounce function for performance
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
+// ============================================
+// 13. FAQ ACCORDION
+// ============================================
+function initFAQ() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        const icon = item.querySelector('.faq-icon');
+        
+        if (!question || !answer) return;
+        
+        question.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            
+            // Close all other items
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                    const otherAnswer = otherItem.querySelector('.faq-answer');
+                    if (otherAnswer) {
+                        otherAnswer.style.maxHeight = '0';
+                    }
+                }
+            });
+            
+            // Toggle current item
+            item.classList.toggle('active');
+            
+            if (!isActive) {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                if (icon) icon.textContent = '×';
+            } else {
+                answer.style.maxHeight = '0';
+                if (icon) icon.textContent = '+';
+            }
+        });
+    });
 }
 
-// Throttle function for scroll events
-function throttle(func, limit) {
-    let inThrottle;
-    return function(...args) {
-        if (!inThrottle) {
-            func.apply(this, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    };
+// ============================================
+// 14. CONTACT FORM
+// ============================================
+function initContactForm() {
+    const form = document.getElementById('contactForm');
+    
+    if (!form) return;
+    
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const btn = form.querySelector('.submit-btn');
+        const originalText = btn.innerHTML;
+        
+        btn.innerHTML = '<span>Sending...</span>';
+        btn.style.pointerEvents = 'none';
+        
+        setTimeout(() => {
+            btn.innerHTML = '<span>Message Sent!</span>';
+            btn.style.background = 'linear-gradient(135deg, #00ff88, #00cc6a)';
+            
+            showNotification('Message sent successfully!');
+            
+            form.reset();
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = '';
+                btn.style.pointerEvents = 'auto';
+            }, 2000);
+        }, 1500);
+    });
 }
 
-// Random number generator
-function random(min, max) {
-    return Math.random() * (max - min) + min;
-}
-
-// Clamp number between min and max
-function clamp(num, min, max) {
-    return Math.min(Math.max(num, min), max);
+// ============================================
+// 15. TEXT ANIMATIONS
+// ============================================
+function initTextAnimations() {
+    // Animate section labels
+    const labels = document.querySelectorAll('.section-label');
+    
+    labels.forEach(label => {
+        gsap.fromTo(label,
+            { opacity: 0, x: -30 },
+            {
+                opacity: 1,
+                x: 0,
+                duration: 0.6,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: label,
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                }
+            }
+        );
+    });
+    
+    // Animate section titles
+    const titles = document.querySelectorAll('.section-title');
+    
+    titles.forEach(title => {
+        gsap.fromTo(title,
+            { opacity: 0, y: 30 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: title,
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                }
+            }
+        );
+    });
+    
+    // Animate section descriptions
+    const descriptions = document.querySelectorAll('.section-description');
+    
+    descriptions.forEach(desc => {
+        gsap.fromTo(desc,
+            { opacity: 0, y: 20 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: desc,
+                    start: 'top 75%',
+                    toggleActions: 'play none none reverse'
+                }
+            }
+        );
+    });
 }
