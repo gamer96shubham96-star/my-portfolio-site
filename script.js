@@ -12,27 +12,6 @@ window.addEventListener("load", () => {
 
 
 // ========================================
-// NAVBAR SCROLL
-// ========================================
-window.addEventListener("scroll", () => {
-  const navbar = document.querySelector(".navbar");
-  if (navbar) {
-    navbar.classList.toggle("scrolled", window.scrollY > 50);
-  }
-
-  const scrollBar = document.querySelector(".scroll-progress");
-  if (scrollBar) {
-    const scrollTop = document.documentElement.scrollTop;
-    const height =
-      document.documentElement.scrollHeight -
-      document.documentElement.clientHeight;
-
-    scrollBar.style.width = (scrollTop / height) * 100 + "%";
-  }
-});
-
-
-// ========================================
 // SCROLL REVEAL
 // ========================================
 document.addEventListener("DOMContentLoaded", () => {
