@@ -2,257 +2,327 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Rachna Hub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rachna Hub - Premium Minecraft & Discord Solutions</title>
+  <meta name="description" content="Production-ready systems designed for scalability, automation and elite community performance.">
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-<div class="cursor-glow"></div>
-<div class="scroll-progress"></div>
-<video autoplay muted loop playsinline class="video-bg">
-  <source src="background.mp4" type="video/mp4">
-</video>
-<header class="navbar animate zoom">
-  <div class="logo">Rachna Hub</div>
+  <!-- Cursor Glow Effect -->
+  <div class="cursor-glow"></div>
+  
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress"></div>
+  
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline class="video-bg">
+    <source src="background.mp4" type="video/mp4">
+  </video>
+  
+  <!-- Overlay -->
+  <div class="video-overlay"></div>
 
-  <nav class="nav-links">
-    <a href="#projects">Projects</a>
-    <a href="#projects">Categories</a>
-    <a href="#about">About</a>
-    <a href="#donate">Support</a>
-  </nav>
-
-</div>
-  <div class="nav-actions">
-    <a href="https://discord.com" target="_blank" class="discord-btn">
-      Discord
-    </a>
-    <button onclick="toggleTheme()" class="theme-toggle">🌙</button>
-    <a href="#projects" class="cta-btn">Explore</a>
-  </div>
-</header>
-<section class="hero">
-  <div class="hero-background">
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-    <div class="orb orb3"></div>
-    <div class="grid-bg"></div>
-  </div>
-
-  <div class="hero-content reveal">
-    <span class="badge">🚀 Next-Gen Systems</span>
-
-    <h1>
-      Build Powerful <span class="gradient-text">Minecraft & Discord</span><br>
-      Infrastructure
-    </h1>
-
-    <p>
-      Production-ready systems designed for scalability, automation
-      and elite community performance.
-    </p>
-
-    <div class="hero-buttons">
-      <a href="#projects" class="btn-primary">Explore Projects</a>
-      <a href="#features" class="btn-outline">View Architecture</a>
-    </div>
-  </div>
-</section>
-<section class="dashboard-preview">
-  <h2>Live System Preview</h2>
-
-  <div class="dashboard-card">
-    <div class="dashboard-top">
-      <span class="dot red"></span>
-      <span class="dot yellow"></span>
-      <span class="dot green"></span>
-    </div>
-
-    <div class="dashboard-content">
-      <div class="bar"></div>
-      <div class="bar short"></div>
-      <div class="bar"></div>
-      <div class="bar tiny"></div>
-    </div>
-  </div>
-</section><section class="stats animate">
-  <div class="stat-box">
-    <h2 class="counter" data-target="1500">0</h2>
-    <p>Downloads</p>
-  </div>
-  <div class="stat-box">
-    <h2 class="counter" data-target="20">0</h2>
-    <p>Projects</p>
-  </div>
-  <div class="stat-box">
-    <h2 class="counter" data-target="500">0</h2>
-    <p>Community Members</p>
-  </div>
-  <div class="stat-box">
-    <h2 class="counter" data-target="4.9">0</h2>
-    <p>Average Rating</p>
-  </div>
-</section>
-<section class="features animate">
-  <h2>Why Choose My Products?</h2>
-
-  <div class="features-grid">
-    <div class="feature">
-      <h3>⚡ High Performance</h3>
-      <p>Optimized for speed and low resource usage.</p>
-    </div>
-
-    <div class="feature">
-      <h3>🔒 Secure & Reliable</h3>
-      <p>Clean code structure with strong stability.</p>
-    </div>
-
-    <div class="feature">
-      <h3>🛠 Easy Setup</h3>
-      <p>Documentation included for quick installation.</p>
-    </div>
-  </div>
-</section>
-<section class="testimonials">
-  <h2>What Users Say</h2>
-
-  <div class="testimonial-wrapper">
-    <div class="testimonial active">
-      <p>"Best plugin dev ever. Super optimized!"</p>
-      <span>- SMP Owner</span>
-    </div>
-
-    <div class="testimonial">
-      <p>"Clean code and fast support."</p>
-      <span>- Discord Admin</span>
-    </div>
-
-    <div class="testimonial">
-      <p>"Worth every rupee."</p>
-      <span>- Server Creator</span>
-    </div>
-  </div>
-</section><section class="faq animate zoom">
-  <h2>Frequently Asked Questions</h2>
-
-  <div class="faq-item">
-    <h4>How do I install the plugin?</h4>
-    <p>Upload the file to your plugins folder and restart server.</p>
-  </div>
-
-  <div class="faq-item">
-    <h4>Do you provide support?</h4>
-    <p>Yes, join the Discord server for help.</p>
-  </div>
-
-  <div class="faq-item">
-    <h4>Are updates free?</h4>
-    <p>Yes, lifetime updates included.</p>
-  </div>
-</section>
-<section id="projects" class="projects animate slide-right">
-  <h2 class="section-title">Featured Projects</h2>
-
-  <div class="products">
-
-    <!-- PRODUCT 1 -->
-    <div class="product-card animate" onclick="openDatapack()">
-      <div class="image-container">
-        <img src="images/datapacks.jpg" alt="Datapack">
-      </div>
-
-      <div class="product-info">
-        <h3>Minecraft Datapack Bundle</h3>
-        <p>High performance datapacks for survival & SMP servers.</p>
-
-        <div class="product-bottom">
-          <a href="#" class="buy-btn">Buy Now</a>
-          <span class="price-tag">₹29</span>
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="container">
+      <div class="navbar-content">
+        <a href="#" class="logo">
+          <span class="logo-icon">◆</span>
+          Rachna Hub
+        </a>
+        
+        <nav class="nav-links">
+          <a href="#projects">Projects</a>
+          <a href="#features">Features</a>
+          <a href="#about">About</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+        
+        <div class="nav-actions">
+          <a href="https://discord.com" target="_blank" class="discord-btn" aria-label="Discord">
+            <i class="fab fa-discord"></i>
+            Discord
+          </a>
+          <button onclick="toggleTheme()" class="theme-toggle" aria-label="Toggle theme">
+            <span class="theme-icon">🌙</span>
+          </button>
+          <a href="#projects" class="cta-btn">Explore</a>
         </div>
       </div>
     </div>
+  </header>
 
-    <!-- PRODUCT 2 -->
-    <div class="product-card animate">
-      <div class="image-container">
-        <img src="images/discordbot.jpg" alt="Discord Bot">
-      </div>
-
-      <div class="product-info">
-        <h3>Advanced Discord Bot</h3>
-        <p>Moderation, logging, slash commands & dashboard.</p>
-
-        <div class="product-bottom">
-          <a href="#" class="buy-btn">Buy Now</a>
-          <span class="price-tag">₹19</span>
-        </div>
-      </div>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-background">
+      <div class="orb orb1"></div>
+      <div class="orb orb2"></div>
+      <div class="orb orb3"></div>
+      <div class="grid-bg"></div>
     </div>
-
-  </div>
-
-  <!-- VIEW MORE BUTTON (OUTSIDE CARDS) -->
-  <div class="more-projects">
-    <a href="projects.html" class="view-more-btn">
-      View More Projects →
-    </a>
-  </div>
-
-</section>
-<footer>
-<p>© 2026 Shubham96. All rights reserved.</p>
-</footer>
-
-<script src="script.js"></script>
-
-<div id="datapackModal" class="project-modal">
-  <div class="project-content">
-
-    <span class="close-btn" onclick="closeDatapack()">&times;</span>
-
-    <div class="project-grid">
-
-      <!-- LEFT SIDE (IMAGE / GIF) -->
-      <div class="project-preview">
-        <video autoplay muted loop playsinline>
-        <source src="images/datapack-preview.mp4" type="video/mp4">
-        </video>
-      </div>
-
-      <!-- RIGHT SIDE (INFO) -->
-      <div class="project-details">
-        <h2>Minecraft Datapack Bundle</h2>
-        <p class="project-desc">
-          Premium optimized datapacks built for survival & SMP servers.
-          Lightweight, scalable and performance-focused.
+    
+    <div class="container">
+      <div class="hero-content reveal">
+        <span class="badge">
+          <i class="fas fa-rocket"></i>
+          Next-Gen Systems
+        </span>
+        
+        <h1>
+          Build Powerful <span class="gradient-text">Minecraft & Discord</span><br>
+          Infrastructure
+        </h1>
+        
+        <p>
+          Production-ready systems designed for scalability, automation
+          and elite community performance.
         </p>
-
-        <ul class="feature-list">
-          <li>✔ Custom mobs & abilities</li>
-          <li>✔ Performance optimized</li>
-          <li>✔ Fully configurable</li>
-          <li>✔ Detailed documentation</li>
-        </ul>
-
-        <div class="project-meta">
-          <span>Version: 1.20+</span>
-          <span>Support: Discord</span>
+        
+        <div class="hero-buttons">
+          <a href="#projects" class="btn-primary">
+            <i class="fas fa-compass"></i>
+            Explore Projects
+          </a>
+          <a href="#features" class="btn-outline">View Architecture</a>
         </div>
-
-        <button class="buy-now-btn">Buy Now – ₹29</button>
       </div>
-
     </div>
+  </section>
 
+  <!-- Dashboard Preview -->
+  <section class="dashboard-preview">
+    <div class="container">
+      <h2 class="section-title">Live System Preview</h2>
+      
+      <div class="dashboard-card">
+        <div class="dashboard-top">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+        
+        <div class="dashboard-content">
+          <div class="bar"></div>
+          <div class="bar short"></div>
+          <div class="bar"></div>
+          <div class="bar tiny"></div>
+          <div class="bar medium"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats animate">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-icon">
+            <i class="fas fa-download"></i>
+          </div>
+          <h2 class="counter" data-target="1500">0</h2>
+          <p>Downloads</p>
+        </div>
+        
+        <div class="stat-box">
+          <div class="stat-icon">
+            <i class="fas fa-code"></i>
+          </div>
+          <h2 class="counter" data-target="20">0</h2>
+          <p>Projects</p>
+        </div>
+        
+        <div class="stat-box">
+          <div class="stat-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h2 class="counter" data-target="500">0</h2>
+          <p>Community Members</p>
+        </div>
+        
+        <div class="stat-box">
+          <div class="stat-icon">
+            <i class="fas fa-star"></i>
+          </div>
+          <h2 class="counter" data-target="4.9">0</h2>
+          <p>Average Rating</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features animate">
+    <div class="container">
+      <h2 class="section-title">Why Choose My Products?</h2>
+      
+      <div class="features-grid">
+        <div class="feature">
+          <div class="feature-icon">⚡</div>
+          <h3>High Performance</h3>
+          <p>Optimized for speed and low resource usage.</p>
+        </div>
+        
+        <div class="feature">
+          <div class="feature-icon">🔒</div>
+          <h3>Secure & Reliable</h3>
+          <p>Clean code structure with strong stability.</p>
+        </div>
+        
+        <div class="feature">
+          <div class="feature-icon">🛠</div>
+          <h3>Easy Setup</h3>
+          <p>Documentation included for quick installation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <div class="container">
+      <h2 class="section-title">What Users Say</h2>
+      
+      <div class="testimonial-wrapper">
+        <div class="testimonial active">
+          <p>"Best plugin dev ever. Super optimized!"</p>
+          <span class="testimonial-author">- SMP Owner</span>
+        </div>
+        
+        <div class="testimonial">
+          <p>"Clean code and fast support."</p>
+          <span class="testimonial-author">- Discord Admin</span>
+        </div>
+        
+        <div class="testimonial">
+          <p>"Worth every rupee."</p>
+          <span class="testimonial-author">- Server Creator</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="faq animate zoom">
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      
+      <div class="faq-list">
+        <div class="faq-item">
+          <h4>How do I install the plugin?</h4>
+          <p>Upload the file to your plugins folder and restart server.</p>
+        </div>
+        
+        <div class="faq-item">
+          <h4>Do you provide support?</h4>
+          <p>Yes, join the Discord server for help.</p>
+        </div>
+        
+        <div class="faq-item">
+          <h4>Are updates free?</h4>
+          <p>Yes, lifetime updates included.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="projects animate slide-right">
+    <div class="container">
+      <h2 class="section-title">Featured Projects</h2>
+      
+      <div class="products">
+        <!-- PRODUCT 1 -->
+        <div class="product-card" onclick="openDatapack()">
+          <div class="image-container">
+            <img src="images/datapacks.jpg" alt="Datapack">
+          </div>
+          
+          <div class="product-info">
+            <h3>Minecraft Datapack Bundle</h3>
+            <p>High performance datapacks for survival & SMP servers.</p>
+            
+            <div class="product-bottom">
+              <a href="#" class="buy-btn">Buy Now</a>
+              <span class="price-tag">₹29</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- PRODUCT 2 -->
+        <div class="product-card">
+          <div class="image-container">
+            <img src="images/discordbot.jpg" alt="Discord Bot">
+          </div>
+          
+          <div class="product-info">
+            <h3>Advanced Discord Bot</h3>
+            <p>Moderation, logging, slash commands & dashboard.</p>
+            
+            <div class="product-bottom">
+              <a href="#" class="buy-btn">Buy Now</a>
+              <span class="price-tag">₹19</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- View More Button -->
+      <div class="more-projects">
+        <a href="projects.html" class="view-more-btn">
+          View More Projects <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Shubham96. All rights reserved.</p>
+  </footer>
+
+  <!-- Datapack Modal -->
+  <div id="datapackModal" class="project-modal">
+    <div class="project-content">
+      <span class="close-btn" onclick="closeDatapack()">&times;</span>
+      
+      <div class="project-grid">
+        <!-- Left Side (Image/GIF) -->
+        <div class="project-preview">
+          <video autoplay muted loop playsinline>
+            <source src="images/datapack-preview.mp4" type="video/mp4">
+          </video>
+        </div>
+        
+        <!-- Right Side (Info) -->
+        <div class="project-details">
+          <h2>Minecraft Datapack Bundle</h2>
+          <p class="project-desc">
+            Premium optimized datapacks built for survival & SMP servers.
+            Lightweight, scalable and performance-focused.
+          </p>
+          
+          <ul class="feature-list">
+            <li><i class="fas fa-check"></i> Custom mobs & abilities</li>
+            <li><i class="fas fa-check"></i> Performance optimized</li>
+            <li><i class="fas fa-check"></i> Fully configurable</li>
+            <li><i class="fas fa-check"></i> Detailed documentation</li>
+          </ul>
+          
+          <div class="project-meta">
+            <span><i class="fas fa-tag"></i> Version: 1.20+</span>
+            <span><i class="fas fa-headset"></i> Support: Discord</span>
+          </div>
+          
+          <button class="buy-now-btn">Buy Now – ₹29</button>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 
-    <video controls width="100%" id="modalVideo">
-      <source src="/background.mp4" type="video/mp4">
-    </video>
-  </div>
-</div>
-
+  <!-- Scripts -->
+  <script src="script.js"></script>
 </body>
 </html>
