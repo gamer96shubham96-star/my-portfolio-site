@@ -1,20 +1,3 @@
-<think>
-The user wants me to create a complete script.js file for their Rachna Hub website. They want it to be working, good, wonderful, and professional. This should include:
-
-1. Custom cursor functionality
-2. GSAP animations for text reveals, scroll triggers
-3. Product filtering
-4. Payment modal simulation
-5. Download functionality
-6. Smooth scrolling
-7. Number counter animations
-8. Interactive hover effects
-
-Let me create a comprehensive script.js that covers all these features with professional-grade code.
-
-</think># Complete Professional script.js for Rachna Hub
-
-```javascript
 /* ============================================
    RACHNA HUB - PROFESSIONAL JAVASCRIPT
    God-Level Animations & Functionality
@@ -25,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize all modules
     initCustomCursor();
+    initLoadingScreen();
     initTextAnimations();
     initScrollAnimations();
     initProductCards();
@@ -33,11 +17,101 @@ document.addEventListener('DOMContentLoaded', () => {
     initCounterAnimation();
     initSmoothScroll();
     initParallaxEffects();
+    initNavbarScroll();
+    initHoverEffects();
     
 });
 
 /* ============================================
-   1. CUSTOM CURSOR SYSTEM
+   1. LOADING SCREEN
+   ============================================ */
+function initLoadingScreen() {
+    const loader = document.querySelector('.loader');
+    if (!loader) return;
+    
+    // Hide loader after animations complete
+    setTimeout(() => {
+        loader.classList.add('hidden');
+        
+        // Trigger hero animations after loader
+        setTimeout(() => {
+            initHeroAnimations();
+        }, 500);
+    }, 2500);
+}
+
+/* ============================================
+   2. HERO ANIMATIONS
+   ============================================ */
+function initHeroAnimations() {
+    if (typeof gsap === 'undefined') return;
+    
+    // Animate hero badge
+    gsap.to('.hero-badge', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out'
+    });
+    
+    // Animate title words with stagger
+    const words = document.querySelectorAll('.word');
+    words.forEach((word, index) => {
+        gsap.to(word, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            delay: index * 0.1
+        });
+    });
+    
+    // Animate description lines
+    const descLines = document.querySelectorAll('.desc-line');
+    descLines.forEach((line, index) => {
+        gsap.to(line, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            delay: 0.8 + (index * 0.1)
+        });
+    });
+    
+    // Animate buttons
+    gsap.to('.btn-main', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        delay: 1
+    });
+    
+    gsap.to('.btn-secondary', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        delay: 1.1
+    });
+    
+    // Animate stats
+    gsap.to('.hero-stats', {
+        opacity: 1,
+        duration: 0.8,
+        delay: 1.3
+    });
+    
+    // Animate scroll indicator
+    gsap.to('.scroll-indicator', {
+        opacity: 1,
+        duration: 0.8,
+        delay: 1.8
+    });
+}
+
+/* ============================================
+   3. CUSTOM CURSOR SYSTEM
    ============================================ */
 function initCustomCursor() {
     const cursor = document.querySelector('.cursor');
@@ -60,13 +134,13 @@ function initCustomCursor() {
     
     // Smooth cursor animation
     function animateCursor() {
-        // Direct cursor follow
-        cursorX += (mouseX - cursorX) * 0.2;
-        cursorY += (mouseY - cursorY) * 0.2;
+        // Direct cursor follow with slight delay
+        cursorX += (mouseX - cursorX) * 0.15;
+        cursorY += (mouseY - cursorY) * 0.15;
         
-        // Delayed follower
-        followerX += (mouseX - followerX) * 0.1;
-        followerY += (mouseY - followerY) * 0.1;
+        // Delayed follower for trail effect
+        followerX += (mouseX - followerX) * 0.08;
+        followerY += (mouseY - followerY) * 0.08;
         
         cursor.style.left = cursorX + 'px';
         cursor.style.top = cursorY + 'px';
@@ -80,7 +154,7 @@ function initCustomCursor() {
     animateCursor();
     
     // Hover effects on interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, .product-card, .filter-btn');
+    const interactiveElements = document.querySelectorAll('a, button, .product-card, .filter-btn, .feature-card');
     
     interactiveElements.forEach(el => {
         el.addEventListener('mouseenter', () => {
@@ -107,98 +181,53 @@ function initCustomCursor() {
 }
 
 /* ============================================
-   2. TEXT ANIMATIONS WITH GSAP
-   ============================================ */
-function initTextAnimations() {
-    // Check if GSAP is available
-    if (typeof gsap === 'undefined') {
-        console.warn('GSAP not loaded');
-        return;
-    }
-    
-    gsap.registerPlugin(ScrollTrigger);
-    
-    // Animate hero words
-    const words = document.querySelectorAll('.word');
-    words.forEach((word, index) => {
-        gsap.to(word, {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: 'power3.out',
-            delay: index * 0.1
-        });
-    });
-    
-    // Animate description lines
-    const descLines = document.querySelectorAll('.desc-line');
-    descLines.forEach((line, index) => {
-        gsap.to(line, {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: 'power3.out',
-            delay: 0.8 + (index * 0.1)
-        });
-    });
-    
-    // Animate buttons
-    const mainBtn = document.querySelector('.btn-main');
-    const secondaryBtn = document.querySelector('.btn-secondary');
-    
-    if (mainBtn) {
-        gsap.to(mainBtn, {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: 'power3.out',
-            delay: 1
-        });
-    }
-    
-    if (secondaryBtn) {
-        gsap.to(secondaryBtn, {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: 'power3.out',
-            delay: 1.1
-        });
-    }
-    
-    // Animate stats
-    gsap.to('.hero-stats', {
-        opacity: 1,
-        duration: 1,
-        delay: 1.5
-    });
-    
-    // Animate scroll indicator
-    gsap.to('.scroll-indicator', {
-        opacity: 1,
-        duration: 1,
-        delay: 2
-    });
-}
-
-/* ============================================
-   3. SCROLL ANIMATIONS
+   4. SCROLL ANIMATIONS WITH GSAP
    ============================================ */
 function initScrollAnimations() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
     
-    // Animate section headers
-    gsap.utils.toArray('.section-header').forEach(header => {
-        gsap.fromTo(header, 
-            { opacity: 0, y: 50 },
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // Animate all sections on scroll
+    const sections = document.querySelectorAll('section');
+    
+    sections.forEach(section => {
+        // Animate section header
+        const header = section.querySelector('.section-header');
+        if (header) {
+            gsap.fromTo(header,
+                { opacity: 0, y: 50 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 75%',
+                        end: 'bottom 25%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        }
+    });
+    
+    // Animate feature cards
+    const featureCards = document.querySelectorAll('.feature-card');
+    featureCards.forEach((card, index) => {
+        gsap.fromTo(card,
+            { opacity: 0, y: 50, rotationX: 10 },
             {
                 opacity: 1,
                 y: 0,
-                duration: 1,
+                rotationX: 0,
+                duration: 0.8,
+                ease: 'power3.out',
                 scrollTrigger: {
-                    trigger: header,
-                    start: 'top 80%',
-                    end: 'bottom 20%',
+                    trigger: card,
+                    start: 'top 85%',
+                    end: 'bottom 15%',
                     toggleActions: 'play none none reverse'
                 }
             }
@@ -206,24 +235,32 @@ function initScrollAnimations() {
     });
     
     // Animate filter buttons
-    gsap.from('.filter-btn', {
-        opacity: 0,
-        y: 20,
-        stagger: 0.1,
-        duration: 0.6,
-        scrollTrigger: {
-            trigger: '.products-filter',
-            start: 'top 85%'
-        }
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach((btn, index) => {
+        gsap.fromTo(btn,
+            { opacity: 0, y: 20 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.5,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: '.products-filter',
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                }
+            }
+        );
     });
     
     // Animate product cards on scroll
-    gsap.utils.toArray('.product-card').forEach((card, index) => {
+    const productCards = document.querySelectorAll('.product-card');
+    productCards.forEach((card, index) => {
         gsap.fromTo(card,
             { 
                 opacity: 0, 
-                y: 50,
-                rotationX: 10
+                y: 60,
+                rotationX: 15
             },
             {
                 opacity: 1,
@@ -240,10 +277,43 @@ function initScrollAnimations() {
             }
         );
     });
+    
+    // Animate stats numbers
+    const statNumbers = document.querySelectorAll('.stat-number');
+    statNumbers.forEach(stat => {
+        const target = parseInt(stat.dataset.count) || 0;
+        
+        gsap.fromTo(stat,
+            { innerText: 0 },
+            {
+                innerText: target,
+                duration: 2,
+                ease: 'power2.out',
+                snap: { innerText: 1 },
+                scrollTrigger: {
+                    trigger: stat,
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                }
+            }
+        );
+    });
+    
+    // Parallax effect for gradient orbs
+    gsap.to('.gradient-orb', {
+        yPercent: 50,
+        ease: 'none',
+        scrollTrigger: {
+            trigger: '.hero-section',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+        }
+    });
 }
 
 /* ============================================
-   4. PRODUCT CARD INTERACTIONS
+   5. PRODUCT CARD INTERACTIONS
    ============================================ */
 function initProductCards() {
     const cards = document.querySelectorAll('.product-card');
@@ -258,25 +328,26 @@ function initProductCards() {
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
             
-            const rotateX = ((y - centerY) / centerY) * -5;
-            const rotateY = ((x - centerX) / centerX) * 5;
+            const rotateX = ((y - centerY) / centerY) * -8;
+            const rotateY = ((x - centerX) / centerX) * 8;
             
             gsap.to(card, {
                 rotationX: rotateX,
                 rotationY: rotateY,
-                duration: 0.5,
+                duration: 0.3,
                 ease: 'power2.out',
-                transformPerspective: 1000
+                transformPerspective: 1000,
+                boxShadow: '0 25px 50px rgba(0, 255, 136, 0.15)'
             });
             
             // Move glow effect
             const glow = card.querySelector('.card-glow');
             if (glow) {
                 gsap.to(glow, {
-                    opacity: 0.15,
+                    opacity: 0.2,
                     x: x - rect.width / 2,
                     y: y - rect.height / 2,
-                    duration: 0.3
+                    duration: 0.2
                 });
             }
         });
@@ -287,7 +358,8 @@ function initProductCards() {
                 rotationX: 0,
                 rotationY: 0,
                 duration: 0.5,
-                ease: 'power2.out'
+                ease: 'power2.out',
+                boxShadow: 'none'
             });
             
             const glow = card.querySelector('.card-glow');
@@ -302,7 +374,7 @@ function initProductCards() {
         // Scale effect on click
         card.addEventListener('mousedown', () => {
             gsap.to(card, {
-                scale: 0.98,
+                scale: 0.97,
                 duration: 0.1
             });
         });
@@ -317,7 +389,7 @@ function initProductCards() {
 }
 
 /* ============================================
-   5. PRODUCT FILTERING
+   6. PRODUCT FILTERING
    ============================================ */
 function initProductFilters() {
     const filterBtns = document.querySelectorAll('.filter-btn');
@@ -337,22 +409,29 @@ function initProductFilters() {
                 const shouldShow = filter === 'all' || category === filter;
                 
                 if (shouldShow) {
+                    // Reset card state
+                    card.style.display = 'block';
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(30px) scale(0.95)';
+                    
+                    // Animate in
                     gsap.to(card, {
                         opacity: 1,
-                        scale: 1,
                         y: 0,
+                        scale: 1,
                         duration: 0.5,
                         delay: index * 0.05,
                         ease: 'power3.out',
                         onComplete: () => {
-                            card.style.display = 'block';
+                            card.style.transform = '';
                         }
                     });
                 } else {
+                    // Animate out
                     gsap.to(card, {
                         opacity: 0,
-                        scale: 0.8,
-                        y: 20,
+                        scale: 0.9,
+                        y: -20,
                         duration: 0.3,
                         ease: 'power3.in',
                         onComplete: () => {
@@ -366,7 +445,7 @@ function initProductFilters() {
 }
 
 /* ============================================
-   6. PAYMENT MODAL SYSTEM
+   7. PAYMENT MODAL SYSTEM
    ============================================ */
 function initPaymentModal() {
     const modal = document.getElementById('paymentModal');
@@ -377,7 +456,9 @@ function initPaymentModal() {
     
     // Open modal on buy button click
     buyBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
             const card = btn.closest('.product-card');
             const productName = card.dataset.name;
             const productPrice = card.dataset.price;
@@ -414,7 +495,6 @@ function openPaymentModal(productName, productPrice, productFile) {
     const successContent = document.querySelector('.success-content');
     const spinner = document.querySelector('.spinner');
     const paymentStatus = document.getElementById('payment-status');
-    const downloadLink = document.getElementById('download-link');
     
     // Reset modal state
     modalTitle.textContent = `Checkout: ${productName}`;
@@ -427,7 +507,7 @@ function openPaymentModal(productName, productPrice, productFile) {
     modal.classList.add('active');
     
     gsap.fromTo('.modal-content',
-        { scale: 0.8, opacity: 0, y: 20 },
+        { scale: 0.8, opacity: 0, y: 30 },
         { scale: 1, opacity: 1, y: 0, duration: 0.4, ease: 'back.out(1.7)' }
     );
     
@@ -595,3 +675,253 @@ function showNotification(message) {
     document.body.appendChild(notification);
     
     // Remove after 3 seconds
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease forwards';
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 3000);
+}
+
+/* ============================================
+   8. COUNTER ANIMATION
+   ============================================ */
+function initCounterAnimation() {
+    const counters = document.querySelectorAll('.stat-number');
+    
+    counters.forEach(counter => {
+        const target = parseInt(counter.dataset.count) || 0;
+        const duration = 2;
+        const start = 0;
+        
+        ScrollTrigger.create({
+            trigger: counter,
+            start: 'top 85%',
+            once: true,
+            onEnter: () => {
+                gsap.to(counter, {
+                    innerText: target,
+                    duration: duration,
+                    ease: 'power2.out',
+                    snap: { innerText: 1 },
+                    onUpdate: function() {
+                        counter.innerText = Math.round(this.targets()[0].innerText);
+                    }
+                });
+            }
+        });
+    });
+}
+
+/* ============================================
+   9. SMOOTH SCROLL
+   ============================================ */
+function initSmoothScroll() {
+    const links = document.querySelectorAll('a[href^="#"]');
+    
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            const targetId = link.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                const offsetTop = targetElement.offsetTop - 100;
+                
+                gsap.to(window, {
+                    scrollTo: offsetTop,
+                    duration: 1.5,
+                    ease: 'power3.inOut'
+                });
+            }
+        });
+    });
+}
+
+/* ============================================
+   10. PARALLAX EFFECTS
+   ============================================ */
+function initParallaxEffects() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    
+    // Parallax for gradient orbs
+    gsap.utils.toArray('.gradient-orb').forEach((orb, index) => {
+        gsap.to(orb, {
+            yPercent: 30,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.hero-section',
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: true
+            }
+        });
+    });
+    
+    // Parallax for grid overlay
+    gsap.to('.grid-overlay', {
+        yPercent: 20,
+        ease: 'none',
+        scrollTrigger: {
+            trigger: '.hero-section',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+        }
+    });
+}
+
+/* ============================================
+   11. NAVBAR SCROLL EFFECT
+   ============================================ */
+function initNavbarScroll() {
+    const navbar = document.querySelector('.navbar');
+    if (!navbar) return;
+    
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        // Add/remove background on scroll
+        if (currentScroll > 50) {
+            navbar.style.background = 'rgba(10, 10, 11, 0.95)';
+            navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.3)';
+        } else {
+            navbar.style.background = 'rgba(10, 10, 11, 0.8)';
+            navbar.style.boxShadow = 'none';
+        }
+        
+        lastScroll = currentScroll;
+    });
+}
+
+/* ============================================
+   12. HOVER EFFECTS
+   ============================================ */
+function initHoverEffects() {
+    // Button hover effects
+    const buttons = document.querySelectorAll('.btn-main, .btn-secondary, .nav-cta');
+    
+    buttons.forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+            gsap.to(btn, {
+                scale: 1.05,
+                duration: 0.2,
+                ease: 'power2.out'
+            });
+        });
+        
+        btn.addEventListener('mouseleave', () => {
+            gsap.to(btn, {
+                scale: 1,
+                duration: 0.2,
+                ease: 'power2.out'
+            });
+        });
+    });
+    
+    // Filter button hover effects
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+            gsap.to(btn, {
+                scale: 1.05,
+                y: -2,
+                duration: 0.2,
+                ease: 'power2.out'
+            });
+        });
+        
+        btn.addEventListener('mouseleave', () => {
+            gsap.to(btn, {
+                scale: 1,
+                y: 0,
+                duration: 0.2,
+                ease: 'power2.out'
+            });
+        });
+    });
+    
+    // Feature card hover effects
+    const featureCards = document.querySelectorAll('.feature-card');
+    
+    featureCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            gsap.to(card, {
+                y: -10,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+            
+            const icon = card.querySelector('.feature-icon');
+            if (icon) {
+                gsap.to(icon, {
+                    scale: 1.1,
+                    rotation: 5,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            }
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            gsap.to(card, {
+                y: 0,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+            
+            const icon = card.querySelector('.feature-icon');
+            if (icon) {
+                gsap.to(icon, {
+                    scale: 1,
+                    rotation: 0,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            }
+        });
+    });
+}
+
+/* ============================================
+   13. UTILITY FUNCTIONS
+   ============================================ */
+
+// Debounce function for performance
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Throttle function for scroll events
+function throttle(func, limit) {
+    let inThrottle;
+    return function(...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
+
+// Random number generator
+function random(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+// Clamp number between min and max
+function clamp(num, min, max) {
+    return Math.min(Math.max(num, min), max);
+}
