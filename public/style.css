@@ -7,13 +7,27 @@
    CSS VARIABLES
 ============================= */
 :root {
+
+  /* Background */
   --bg-dark: #0a0a0f;
-  --bg-card: rgba(255, 255, 255, 0.04);
-  --neon-blue: #00f0ff;
-  --neon-purple: #7a5cff;
-  --text-main: #ffffff;
-  --text-muted: #9aa0a6;
-}  
+  --bg-card: rgba(255,255,255,0.05);
+  --bg-card-hover: rgba(255,255,255,0.08);
+
+  /* Text */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255,255,255,0.7);
+
+  /* Neon Colors */
+  --primary: #00f5ff;
+  --secondary: #7a5cff;
+  --accent: #9333ea;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg,#00f5ff,#7a5cff);
+
+  /* Border */
+  --border-color: rgba(255,255,255,0.1);
+ 
   /* Dark Theme */
   --bg-dark: #0a0a0f;
   --bg-card: rgba(255, 255, 255, 0.03);
