@@ -46,18 +46,10 @@
       </a>
       
       <nav class="nav-menu">
-        <a href="#home" class="nav-link active">
-          <span class="nav-text">Home</span>
-        </a>
-        <a href="#projects" class="nav-link">
-          <span class="nav-text">Projects</span>
-        </a>
-        <a href="#features" class="nav-link">
-          <span class="nav-text">Features</span>
-        </a>
-        <a href="#faq" class="nav-link">
-          <span class="nav-text">FAQ</span>
-        </a>
+        <a href="#home" class="nav-link active"><span class="nav-text">Home</span></a>
+        <a href="#projects" class="nav-link"><span class="nav-text">Projects</span></a>
+        <a href="#features" class="nav-link"><span class="nav-text">Features</span></a>
+        <a href="#faq" class="nav-link"><span class="nav-text">FAQ</span></a>
       </nav>
       
       <div class="nav-actions">
@@ -82,22 +74,10 @@
   <!-- Mobile Menu -->
   <div class="mobile-menu">
     <nav class="mobile-nav">
-      <a href="#home" class="mobile-link">
-        <i class="fas fa-home"></i>
-        <span>Home</span>
-      </a>
-      <a href="#projects" class="mobile-link">
-        <i class="fas fa-cube"></i>
-        <span>Projects</span>
-      </a>
-      <a href="#features" class="mobile-link">
-        <i class="fas fa-star"></i>
-        <span>Features</span>
-      </a>
-      <a href="#faq" class="mobile-link">
-        <i class="fas fa-question"></i>
-        <span>FAQ</span>
-      </a>
+      <a href="#home" class="mobile-link"><i class="fas fa-home"></i><span>Home</span></a>
+      <a href="#projects" class="mobile-link"><i class="fas fa-cube"></i><span>Projects</span></a>
+      <a href="#features" class="mobile-link"><i class="fas fa-star"></i><span>Features</span></a>
+      <a href="#faq" class="mobile-link"><i class="fas fa-question"></i><span>FAQ</span></a>
     </nav>
   </div>
 
@@ -112,7 +92,7 @@
     </div>
     
     <div class="hero-container">
-      <div class="hero-content">
+      <div class="hero-content reveal">
         <div class="badge-wrapper">
           <span class="badge-pill">
             <span class="badge-icon">🚀</span>
@@ -134,17 +114,11 @@
         <div class="hero-cta">
           <a href="#projects" class="btn-main primary">
             <span class="btn-bg"></span>
-            <span class="btn-content">
-              <i class="fas fa-compass"></i>
-              <span>Explore Projects</span>
-            </span>
+            <span class="btn-content"><i class="fas fa-compass"></i><span>Explore Projects</span></span>
           </a>
           <a href="#features" class="btn-main secondary">
             <span class="btn-bg"></span>
-            <span class="btn-content">
-              <i class="fas fa-cube"></i>
-              <span>View Features</span>
-            </span>
+            <span class="btn-content"><i class="fas fa-cube"></i><span>View Features</span></span>
           </a>
         </div>
         
@@ -155,23 +129,23 @@
           </div>
           <div class="stat-divider"></div>
           <div class="stat-item">
-            <span class="stat-number" data-count="20">0</span>
+            <span class="stat-number counter" data-target="20">0</span>
             <span class="stat-label">Projects</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat-item">
-            <span class="stat-number" data-count="500">0</span>
+            <span class="stat-number counter" data-target="500">0</span>
             <span class="stat-label">Members</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat-item">
-            <span class="stat-number" data-count="4.9">0</span>
+            <span class="stat-number counter" data-target="4.9">0</span>
             <span class="stat-label">Rating</span>
           </div>
         </div>
       </div>
       
-      <div class="hero-visual">
+      <div class="hero-visual reveal">
         <div class="dashboard-preview">
           <div class="preview-header">
             <div class="preview-dots">
@@ -182,155 +156,93 @@
             <span class="preview-title">Live Preview</span>
           </div>
           <div class="preview-content">
-            <div class="code-line">
-              <span class="line-num">1</span>
-              <span class="line-text"><span class="keyword">const</span> <span class="variable"> RachnaHub</span> = <span class="function">require</span>(<span class="string">'@rachna/core'</span>);</span>
-            </div>
-            <div class="code-line">
-              <span class="line-num">2</span>
-              <span class="line-text"><span class="variable">const</span> <span class="property">bot</span> = <span class="keyword">new</span> <span class="function">Client</span>({</span>
-            </div>
-            <div class="code-line indent">
-              <span class="line-num">3</span>
-              <span class="line-text"><span class="property">intents</span>: [<span class="string">'GUILDS'</span>, <span class="string">'MESSAGES'</span>]</span>
-            </div>
-            <div class="code-line">
-              <span class="line-num">4</span>
-              <span class="line-text">});</span>
-            </div>
-            <div class="code-line glowing">
-              <span class="line-num">5</span>
-              <span class="line-text"><span class="variable">bot</span>.<span class="function">login</span>(<span class="string">'TOKEN'</span>);</span>
-            </div>
+            <div class="code-line"><span class="line-num">1</span><span class="line-text"><span class="keyword">const</span> <span class="variable">RachnaHub</span> = <span class="function">require</span>(<span class="string">'@rachna/core'</span>);</span></div>
+            <div class="code-line"><span class="line-num">2</span><span class="line-text"><span class="variable">const</span> <span class="property">bot</span> = <span class="keyword">new</span> <span class="function">Client</span>({</span></div>
+            <div class="code-line indent"><span class="line-num">3</span><span class="line-text"><span class="property">intents</span>: [<span class="string">'GUILDS'</span>, <span class="string">'MESSAGES'</span>]</span></div>
+            <div class="code-line"><span class="line-num">4</span><span class="line-text">});</span></div>
+            <div class="code-line glowing"><span class="line-num">5</span><span class="line-text"><span class="variable">bot</span>.<span class="function">login</span>(<span class="string">'TOKEN'</span>);</span></div>
           </div>
         </div>
         
         <div class="floating-cards">
-          <div class="float-card card-1">
-            <i class="fas fa-rocket"></i>
-            <span>Fast</span>
-          </div>
-          <div class="float-card card-2">
-            <i class="fas fa-shield-alt"></i>
-            <span>Secure</span>
-          </div>
-          <div class="float-card card-3">
-            <i class="fas fa-code"></i>
-            <span>Clean</span>
-          </div>
+          <div class="float-card card-1"><i class="fas fa-rocket"></i><span>Fast</span></div>
+          <div class="float-card card-2"><i class="fas fa-shield-alt"></i><span>Secure</span></div>
+          <div class="float-card card-3"><i class="fas fa-code"></i><span>Clean</span></div>
         </div>
       </div>
     </div>
     
     <div class="scroll-indicator">
-      <div class="mouse">
-        <div class="wheel"></div>
-      </div>
+      <div class="mouse"><div class="wheel"></div></div>
       <span>Scroll to explore</span>
     </div>
   </section>
 
   <!-- Features Section -->
   <section id="features" class="features">
-    <div class="section-header">
+    <div class="section-header reveal">
       <span class="section-tag">Why Choose Us</span>
       <h2 class="section-title">Premium Features</h2>
       <p class="section-subtitle">Built with cutting-edge technology for maximum performance</p>
     </div>
     
     <div class="features-grid">
-      <div class="feature-card" data-delay="0">
+      <div class="feature-card reveal" data-delay="0">
         <div class="feature-inner">
-          <div class="feature-icon">
-            <div class="icon-bg"></div>
-            <i class="fas fa-bolt"></i>
-          </div>
+          <div class="feature-icon"><div class="icon-bg"></div><i class="fas fa-bolt"></i></div>
           <h3>High Performance</h3>
           <p>Optimized for speed and low resource usage. Our systems handle thousands of concurrent operations seamlessly.</p>
-          <div class="feature-link">
-            <span>Learn More</span>
-            <i class="fas fa-arrow-right"></i>
-          </div>
+          <div class="feature-link"><span>Learn More</span><i class="fas fa-arrow-right"></i></div>
         </div>
         <div class="feature-glow"></div>
       </div>
       
-      <div class="feature-card" data-delay="100">
+      <div class="feature-card reveal" data-delay="100">
         <div class="feature-inner">
-          <div class="feature-icon">
-            <div class="icon-bg"></div>
-            <i class="fas fa-shield-alt"></i>
-          </div>
+          <div class="feature-icon"><div class="icon-bg"></div><i class="fas fa-shield-alt"></i></div>
           <h3>Secure & Reliable</h3>
           <p>Clean code structure with strong stability. Enterprise-grade security protocols protect your data.</p>
-          <div class="feature-link">
-            <span>Learn More</span>
-            <i class="fas fa-arrow-right"></i>
-          </div>
+          <div class="feature-link"><span>Learn More</span><i class="fas fa-arrow-right"></i></div>
         </div>
         <div class="feature-glow"></div>
       </div>
       
-      <div class="feature-card" data-delay="200">
+      <div class="feature-card reveal" data-delay="200">
         <div class="feature-inner">
-          <div class="feature-icon">
-            <div class="icon-bg"></div>
-            <i class="fas fa-book"></i>
-          </div>
+          <div class="feature-icon"><div class="icon-bg"></div><i class="fas fa-book"></i></div>
           <h3>Easy Setup</h3>
           <p>Comprehensive documentation included for quick installation. Get started in minutes, not hours.</p>
-          <div class="feature-link">
-            <span>Learn More</span>
-            <i class="fas fa-arrow-right"></i>
-          </div>
+          <div class="feature-link"><span>Learn More</span><i class="fas fa-arrow-right"></i></div>
         </div>
         <div class="feature-glow"></div>
       </div>
       
-      <div class="feature-card" data-delay="300">
+      <div class="feature-card reveal" data-delay="300">
         <div class="feature-inner">
-          <div class="feature-icon">
-            <div class="icon-bg"></div>
-            <i class="fas fa-sync-alt"></i>
-          </div>
+          <div class="feature-icon"><div class="icon-bg"></div><i class="fas fa-sync-alt"></i></div>
           <h3>Auto Updates</h3>
           <p>Free lifetime updates with new features and bug fixes. Stay current with the latest technology.</p>
-          <div class="feature-link">
-            <span>Learn More</span>
-            <i class="fas fa-arrow-right"></i>
-          </div>
+          <div class="feature-link"><span>Learn More</span><i class="fas fa-arrow-right"></i></div>
         </div>
         <div class="feature-glow"></div>
       </div>
       
-      <div class="feature-card" data-delay="400">
+      <div class="feature-card reveal" data-delay="400">
         <div class="feature-inner">
-          <div class="feature-icon">
-            <div class="icon-bg"></div>
-            <i class="fas fa-headset"></i>
-          </div>
+          <div class="feature-icon"><div class="icon-bg"></div><i class="fas fa-headset"></i></div>
           <h3>24/7 Support</h3>
           <p>Dedicated Discord support from our team. Get help whenever you need it.</p>
-          <div class="feature-link">
-            <span>Learn More</span>
-            <i class="fas fa-arrow-right"></i>
-          </div>
+          <div class="feature-link"><span>Learn More</span><i class="fas fa-arrow-right"></i></div>
         </div>
         <div class="feature-glow"></div>
       </div>
       
-      <div class="feature-card" data-delay="500">
+      <div class="feature-card reveal" data-delay="500">
         <div class="feature-inner">
-          <div class="feature-icon">
-            <div class="icon-bg"></div>
-            <i class="fas fa-sliders-h"></i>
-          </div>
+          <div class="feature-icon"><div class="icon-bg"></div><i class="fas fa-sliders-h"></i></div>
           <h3>Fully Customizable</h3>
           <p>Extensive configuration options to tailor the system to your exact needs.</p>
-          <div class="feature-link">
-            <span>Learn More</span>
-            <i class="fas fa-arrow-right"></i>
-          </div>
+          <div class="feature-link"><span>Learn More</span><i class="fas fa-arrow-right"></i></div>
         </div>
         <div class="feature-glow"></div>
       </div>
@@ -339,104 +251,97 @@
 
   <!-- Projects Section -->
   <section id="projects" class="projects">
-    <div class="section-header">
+    <div class="section-header reveal">
       <span class="section-tag">Featured Work</span>
       <h2 class="section-title">Our Projects</h2>
       <p class="section-subtitle">Discover our premium collection of Minecraft and Discord solutions</p>
     </div>
     
-    <div class="projects-filter">
+    <div class="projects-filter reveal">
       <button class="filter-btn active" data-filter="all">All</button>
       <button class="filter-btn" data-filter="minecraft">Minecraft</button>
       <button class="filter-btn" data-filter="discord">Discord</button>
     </div>
     
     <div class="projects-grid">
-      <!-- Project 1 -->
-      <div class="project-card" data-category="minecraft" onclick="openModal('datapack')">
+      <div class="project-card reveal" data-category="minecraft" onclick="openModal('datapack')">
         <div class="card-inner">
           <div class="card-image">
             <img src="images/datapacks.jpg" alt="Datapack Bundle">
-            <div class="card-overlay">
-              <div class="overlay-content">
-                <i class="fas fa-eye"></i>
-                <span>Quick View</span>
-              </div>
-            </div>
+            <div class="card-overlay"><div class="overlay-content"><i class="fas fa-eye"></i><span>Quick View</span></div></div>
             <div class="card-badge">Popular</div>
           </div>
           <div class="card-content">
-            <div class="card-tags">
-              <span class="tag">Minecraft</span>
-              <span class="tag">1.20+</span>
-            </div>
+            <div class="card-tags"><span class="tag">Minecraft</span><span class="tag">1.20+</span></div>
             <h3>Minecraft Datapack Bundle</h3>
             <p>High performance datapacks for survival & SMP servers. Optimized for minimal lag.</p>
             <div class="card-footer">
-              <div class="price">
-                <span class="currency">₹</span>
-                <span class="amount">29</span>
-              </div>
-              <button class="buy-btn">
-                <span>Buy Now</span>
-                <i class="fas fa-arrow-right"></i>
-              </button>
+              <div class="price"><span class="currency">₹</span><span class="amount">29</span></div>
+              <button class="buy-btn"><span>Buy Now</span><i class="fas fa-arrow-right"></i></button>
             </div>
           </div>
         </div>
         <div class="card-border"></div>
       </div>
       
-      <!-- Project 2 -->
-      <div class="project-card" data-category="discord" onclick="openModal('bot')">
+      <div class="project-card reveal" data-category="discord" onclick="openModal('bot')">
         <div class="card-inner">
           <div class="card-image">
             <img src="images/discordbot.jpg" alt="Discord Bot">
-            <div class="card-overlay">
-              <div class="overlay-content">
-                <i class="fas fa-eye"></i>
-                <span>Quick View</span>
-              </div>
-            </div>
+            <div class="card-overlay"><div class="overlay-content"><i class="fas fa-eye"></i><span>Quick View</span></div></div>
             <div class="card-badge new">New</div>
           </div>
           <div class="card-content">
-            <div class="card-tags">
-              <span class="tag">Discord</span>
-              <span class="tag">Bot</span>
-            </div>
+            <div class="card-tags"><span class="tag">Discord</span><span class="tag">Bot</span></div>
             <h3>Advanced Discord Bot</h3>
             <p>Complete moderation, logging, slash commands & web dashboard solution.</p>
             <div class="card-footer">
-              <div class="price">
-                <span class="currency">₹</span>
-                <span class="amount">19</span>
-              </div>
-              <button class="buy-btn">
-                <span>Buy Now</span>
-                <i class="fas fa-arrow-right"></i>
-              </button>
+              <div class="price"><span class="currency">₹</span><span class="amount">19</span></div>
+              <button class="buy-btn"><span>Buy Now</span><i class="fas fa-arrow-right"></i></button>
             </div>
           </div>
         </div>
         <div class="card-border"></div>
       </div>
       
-      <!-- Project 3 -->
-      <div class="project-card" data-category="minecraft">
+      <div class="project-card reveal" data-category="minecraft">
         <div class="card-inner">
           <div class="card-image">
             <img src="images/plugin.jpg" alt="Plugin">
-            <div class="card-overlay">
-              <div class="overlay-content">
-                <i class="fas fa-eye"></i>
-                <span>Quick View</span>
-              </div>
-            </div>
+            <div class="card-overlay"><div class="overlay-content"><i class="fas fa-eye"></i><span>Quick View</span></div></div>
           </div>
           <div class="card-content">
-            <div class="card-tags">
-              <span class="tag">Minecraft</span>
-              <span class="tag">Plugin</span>
-            </div>
+            <div class="card-tags"><span class="tag">Minecraft</span><span class="tag">Plugin</span></div>
             <h3>Custom Plugin Development</h3>
+            <p>Bespoke Minecraft plugins tailored to your server's unique requirements.</p>
+            <div class="card-footer">
+              <div class="price"><span class="currency">₹</span><span class="amount">49</span></div>
+              <button class="buy-btn"><span>Buy Now</span><i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="card-border"></div>
+      </div>
+    </div>
+    
+    <div class="more-projects reveal">
+      <a href="projects.html" class="view-more-btn"><span>View More Projects</span><i class="fas fa-arrow-right"></i></a>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="faq">
+    <div class="section-header reveal">
+      <span class="section-tag">FAQ</span>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="section-subtitle">Everything you need to know about our products and services</p>
+    </div>
+    
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-question"><span>How do I install the plugin?</span><i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer"><p>Upload the file to your plugins folder and restart your server. Detailed installation guides are included in the documentation.</p></div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question"><span>Do you provide support?
