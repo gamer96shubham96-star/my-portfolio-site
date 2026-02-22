@@ -60,6 +60,19 @@ window.addEventListener("scroll", () => {
   scrollBar.style.width = (scrollTop / height) * 100 + "%";
 });
 
+const reveals = document.querySelectorAll(".reveal");
+
+window.addEventListener("scroll", () => {
+  reveals.forEach(reveal => {
+    const windowHeight = window.innerHeight;
+    const elementTop = reveal.getBoundingClientRect().top;
+
+    if (elementTop < windowHeight - 100) {
+      reveal.classList.add("active");
+    }
+  });
+});
+
 
 // ========================================
 // COUNTER ANIMATION
