@@ -530,44 +530,18 @@ function simulatePaymentProcess(statusEl, spinnerEl, simulationEl, successEl, pr
 
 function setupDownload(filename, productName) {
     const downloadBtn = document.getElementById('download-link');
-    
+
     if (downloadBtn) {
-        downloadBtn.onclick = (e) => {
-            e.preventDefault();
-            downloadFile(filename, productName);
+        downloadBtn.href = `downloads/${filename}`;
+        downloadBtn.setAttribute('download', filename);
+
+        downloadBtn.onclick = () => {
+            showNotification(`${productName} download started!`);
         };
     }
 }
 
-function downloadFile(filename, productName) {
-    const content = `RACHNA HUB - PRODUCT FILE
-=======================
-Product: ${productName}
-File: ${filename}
-Date: ${new Date().toLocaleDateString()}
 
-Thank you for purchasing from Rachna Hub!
-This is a demo file for testing purposes.
-
-For real products, this would contain your actual
-Minecraft datapack, plugin, or bot source code.
-
-Visit https://rachnahub.com for more products!
-`;
-    
-    const blob = new Blob([content], { type: 'text/plain' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
-    
-    showNotification('Download started!');
-}
 
 function updateCartCount() {
     const cartCount = document.querySelector('.cart-count');
