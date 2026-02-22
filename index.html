@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <!-- GSAP Core + ScrollTrigger + SplitText -->
+    <!-- GSAP Core + ScrollTrigger + TextPlugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
@@ -32,10 +32,10 @@
             <span class="logo-text secondary">HUB</span>
         </div>
         <div class="nav-menu">
-            <a href="#home" class="nav-link" data-text="Home">Home</a>
-            <a href="#products" class="nav-link" data-text="Products">Products</a>
-            <a href="#features" class="nav-link" data-text="Features">Features</a>
-            <a href="#contact" class="nav-link" data-text="Contact">Contact</a>
+            <a href="#home" class="nav-link" data-text="Home"><span class="original-text">Home</span></a>
+            <a href="#products" class="nav-link" data-text="Products"><span class="original-text">Products</span></a>
+            <a href="#features" class="nav-link" data-text="Features"><span class="original-text">Features</span></a>
+            <a href="#contact" class="nav-link" data-text="Contact"><span class="original-text">Contact</span></a>
         </div>
         <div class="nav-actions">
             <div class="cart-wrapper">
@@ -46,7 +46,7 @@
                 </svg>
                 <span class="cart-count">0</span>
             </div>
-            <button class="nav-cta">Get Started</button>
+            <button class="nav-cta"><span>Get Started</span></button>
         </div>
         <div class="menu-toggle">
             <span></span>
@@ -147,11 +147,11 @@
         </div>
 
         <div class="products-filter">
-            <button class="filter-btn active" data-filter="all">All Products</button>
-            <button class="filter-btn" data-filter="datapack">Datapacks</button>
-            <button class="filter-btn" data-filter="plugin">Plugins</button>
-            <button class="filter-btn" data-filter="bot">Bot Codes</button>
-            <button class="filter-btn" data-filter="resource">Resources</button>
+            <button class="filter-btn active" data-filter="all"><span>All Products</span></button>
+            <button class="filter-btn" data-filter="datapack"><span>Datapacks</span></button>
+            <button class="filter-btn" data-filter="plugin"><span>Plugins</span></button>
+            <button class="filter-btn" data-filter="bot"><span>Bot Codes</span></button>
+            <button class="filter-btn" data-filter="resource"><span>Resources</span></button>
         </div>
 
         <div class="products-grid">
@@ -338,7 +338,7 @@
                         <h3 class="product-title">Economy Plus</h3>
                         <p class="product-category">Plugin</p>
                         <p class="product-description">Complete economy system with banks, shops, auctions, and API support.</p>
-                    </div>
+                    </div
                     <div class="card-footer">
                         <div class="price-wrapper">
                             <span class="currency">$</span>
