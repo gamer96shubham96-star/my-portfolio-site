@@ -2313,6 +2313,92 @@ section {
     line-height: 1.6;
 }
 
+.cart-panel {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 380px;
+    height: 100%;
+    background: #0f0f14;
+    box-shadow: -10px 0 40px rgba(0,0,0,0.4);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    transition: right 0.4s ease;
+}
+
+.cart-panel.active {
+    right: 0;
+}
+
+.cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s;
+    z-index: 9998;
+}
+
+.cart-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.cart-header {
+    padding: 20px;
+    border-bottom: 1px solid #222;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.cart-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #181820;
+    border-radius: 12px;
+}
+
+.cart-footer {
+    padding: 20px;
+    border-top: 1px solid #222;
+}
+
+.product-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.add-cart-btn,
+.buy-now-btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
+}
+
+.add-cart-btn {
+    background: #222;
+    color: white;
+}
+
+.buy-now-btn {
+    background: linear-gradient(45deg, #7c3aed, #2563eb);
+    color: white;
+}
+
+
 /* ============================================
    RESPONSIVE ADJUSTMENTS
    ============================================ */

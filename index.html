@@ -224,7 +224,14 @@
                             <span class="currency">$</span>
                             <span class="price">5.00</span>
                         </div>
-                        <button class="buy-btn">
+                        <div class="product-buttons">
+    <button class="add-cart-btn">
+        <span>Add to Cart</span>
+    </button>
+    <button class="buy-now-btn">
+        <span>Buy Now</span>
+    </button>
+</div>
                             <span class="btn-text">Purchase</span>
                             <span class="btn-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -253,7 +260,14 @@
                             <span class="currency">$</span>
                             <span class="price">10.00</span>
                         </div>
-                        <button class="buy-btn">
+                        <div class="product-buttons">
+    <button class="add-cart-btn">
+        <span>Add to Cart</span>
+    </button>
+    <button class="buy-now-btn">
+        <span>Buy Now</span>
+    </button>
+</div>
                             <span class="btn-text">Purchase</span>
                             <span class="btn-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -282,7 +296,14 @@
                             <span class="currency">$</span>
                             <span class="price">15.00</span>
                         </div>
-                        <button class="buy-btn">
+                        <div class="product-buttons">
+    <button class="add-cart-btn">
+        <span>Add to Cart</span>
+    </button>
+    <button class="buy-now-btn">
+        <span>Buy Now</span>
+    </button>
+</div>
                             <span class="btn-text">Purchase</span>
                             <span class="btn-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -311,7 +332,14 @@
                             <span class="currency">$</span>
                             <span class="price">8.00</span>
                         </div>
-                        <button class="buy-btn">
+                        <div class="product-buttons">
+    <button class="add-cart-btn">
+        <span>Add to Cart</span>
+    </button>
+    <button class="buy-now-btn">
+        <span>Buy Now</span>
+    </button>
+</div>
                             <span class="btn-text">Purchase</span>
                             <span class="btn-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -340,7 +368,14 @@
                             <span class="currency">$</span>
                             <span class="price">3.00</span>
                         </div>
-                        <button class="buy-btn">
+                        <div class="product-buttons">
+    <button class="add-cart-btn">
+        <span>Add to Cart</span>
+    </button>
+    <button class="buy-now-btn">
+        <span>Buy Now</span>
+    </button>
+</div>
                             <span class="btn-text">Purchase</span>
                             <span class="btn-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -369,7 +404,14 @@
                             <span class="currency">$</span>
                             <span class="price">7.00</span>
                         </div>
-                        <button class="buy-btn">
+                        <div class="product-buttons">
+    <button class="add-cart-btn">
+        <span>Add to Cart</span>
+    </button>
+    <button class="buy-now-btn">
+        <span>Buy Now</span>
+    </button>
+</div>
                             <span class="btn-text">Purchase</span>
                             <span class="btn-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -591,6 +633,23 @@
             </div>
         </div>
     </div>
+
+<div class="cart-panel" id="cartPanel">
+    <div class="cart-header">
+        <h3>Your Cart</h3>
+        <button class="close-cart">×</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+        <div class="cart-total">
+            Total: $<span id="cartTotal">0.00</span>
+        </div>
+        <button class="checkout-btn-main">Proceed to Checkout</button>
+    </div>
+</div>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+
     <script src="script.js"></script>
 </body>
 </html>
