@@ -1,11 +1,36 @@
 /**
  * Rachna Hub | Premium Minecraft Assets Store
- * Main JavaScript File
+ * Main JavaScript File with Download Management
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     // Register GSAP Plugins
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+    // --- FILE DOWNLOAD CONFIGURATION ---
+    // Map product IDs to actual file paths in your downloads folder
+    const fileDownloads = {
+        1: 'downloads/eternal-fortune-1.1.zip',
+        2: 'downloads/grass-drops-op-items.zip',
+        3: 'downloads/discord-bot-code.txt',
+        4: 'downloads/stone-drops-op-items.zip',
+        5: 'downloads/jumping-gives-op-items.zip',
+        6: 'downloads/dirt-drops-op-items.zip'
+    };
+
+    // Alternative: Map by filename (useful if you have many products)
+    const fileByName = {
+        'eternal-fortune-1.1.zip': 'downloads/eternal-fortune-1.1.zip',
+        'grass-drops-op-items.zip': 'downloads/grass-drops-op-items.zip',
+        'discord-bot-code.txt': 'downloads/discord-bot-code.txt',
+        'stone-drops-op-items.zip': 'downloads/stone-drops-op-items.zip',
+        'jumping-gives-op-items.zip': 'downloads/jumping-gives-op-items.zip',
+        'dirt-drops-op-items.zip': 'downloads/dirt-drops-op-items.zip'
+    };
+
+    // Cart Management
+    let cart = [];
+    let cartCount = 0;
 
     // --- 1. Loader Animation ---
     const loaderTl = gsap.timeline();
@@ -203,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 8. Payment Modal System ---
+    // --- 8. Payment Modal & File Download System ---
     const modal = document.getElementById('paymentModal');
     const closeModal = document.querySelector('.close-modal');
     const buyBtns = document.querySelectorAll('.buy-btn');
@@ -213,21 +238,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const paymentStatus = document.getElementById('payment-status');
     const downloadLink = document.getElementById('download-link');
     const modalTitle = document.getElementById('modal-title');
+    const modalProductName = document.querySelector('.modal-header p');
 
-    let cartCount = 0;
-
-    // Open Modal
+    // Open Modal with Product Info
     buyBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             const card = e.currentTarget.closest('.product-card');
+            const productId = card.getAttribute('data-id');
             const name = card.getAttribute('data-name');
             const price = card.getAttribute('data-price');
-            const file = card.getAttribute('data-file');
+            const filename = card.getAttribute('data-file');
 
+            // Get the actual file path
+            const filePath = fileDownloads[productId] || fileByName[filename] || `downloads/${filename}`;
+
+            // Store product info for download
+            modal.setAttribute('data-product-id', productId);
+            modal.setAttribute('data-file-path', filePath);
+            modal.setAttribute('data-product-name', name);
+
+            // Update modal content
             modalTitle.textContent = `Checkout: ${name}`;
-            downloadLink.setAttribute('download', file);
-            // In a real app, the href would be a secure download URL
-            
+            modalProductName.textContent = `Price: $${price}`;
+            downloadLink.setAttribute('download', filename);
+            downloadLink.setAttribute('data-file-path', filePath);
+
+            // Show modal
             modal.classList.add('active');
             resetModal();
             simulatePayment();
@@ -252,13 +288,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function simulatePayment() {
-        setTimeout(() => {
-            paymentStatus.textContent = 'Processing Payment...';
-        }, 1000);
+        const steps = [
+            { text: 'Connecting to payment gateway...', delay: 800 },
+            { text: 'Processing payment...', delay: 2000 },
+            { text: 'Verifying transaction...', delay: 3500 },
+            { text: 'Preparing download...', delay: 4500 }
+        ];
 
-        setTimeout(() => {
-            paymentStatus.textContent = 'Verifying Transaction...';
-        }, 2500);
+        steps.forEach(step => {
+            setTimeout(() => {
+                paymentStatus.textContent = step.text;
+            }, step.delay);
+        });
 
         setTimeout(() => {
             paymentSim.style.display = 'none';
@@ -270,10 +311,44 @@ document.addEventListener('DOMContentLoaded', () => {
             cartCountEl.style.transform = 'scale(1.5)';
             setTimeout(() => cartCountEl.style.transform = 'scale(1)', 200);
 
-        }, 4000);
+            // Add to cart array
+            const productName = modal.getAttribute('data-product-name');
+            const filePath = modal.getAttribute('data-file-path');
+            cart.push({ name: productName, file: filePath });
+            
+            console.log('Cart updated:', cart);
+
+        }, 5500);
     }
 
-    // --- 9. Contact Form ---
+    // --- 9. Download Button Handler ---
+    downloadLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        const filePath = downloadLink.getAttribute('data-file-path');
+        const filename = downloadLink.getAttribute('download');
+
+        // Method 1: Direct download (works if files are in accessible folder)
+        downloadFile(filePath, filename);
+    });
+
+    function downloadFile(filePath, filename) {
+        // Create an invisible anchor element
+        const link = document.createElement('a');
+        link.href = filePath;
+        link.download = filename;
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        
+        // Trigger download
+        link.click();
+        
+        // Clean up
+        document.body.removeChild(link);
+        
+        console.log(`Downloading: ${filename} from ${filePath}`);
+    }
+
+    // --- 10. Contact Form ---
     const contactForm = document.getElementById('contactForm');
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -293,4 +368,63 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 3000);
         }, 1500);
     });
+
+    // --- 11. My Downloads Page (Optional) ---
+    // If you want to show all purchased files in a modal/page
+    const myDownloadsBtn = document.querySelector('.cart-wrapper');
+    if (myDownloadsBtn) {
+        myDownloadsBtn.addEventListener('click', () => {
+            if (cart.length > 0) {
+                showMyDownloads();
+            } else {
+                alert('No purchases yet!');
+            }
+        });
+    }
+
+    function showMyDownloads() {
+        let downloadList = '<h3>Your Purchases:</h3><ul>';
+        cart.forEach(item => {
+            downloadList += `<li><a href="${item.file}" download="${item.file.split('/').pop()}">${item.name}</a></li>`;
+        });
+        downloadList += '</ul>';
+        
+        // Create a simple modal for downloads
+        const existingModal = document.getElementById('downloadsListModal');
+        if (existingModal) existingModal.remove();
+
+        const modalDiv = document.createElement('div');
+        modalDiv.id = 'downloadsListModal';
+        modalDiv.className = 'modal-overlay';
+        modalDiv.innerHTML = `
+            <div class="modal-content" style="max-width: 400px;">
+                <button class="close-modal" onclick="this.parentElement.parentElement.remove()">×</button>
+                <div class="modal-header">
+                    <h3>My Downloads</h3>
+                </div>
+                <div style="padding: 20px;">
+                    ${downloadList}
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modalDiv);
+    }
+
+    // --- 12. Utility: Check if file exists ---
+    async function checkFileExists(url) {
+        try {
+            const response = await fetch(url, { method: 'HEAD' });
+            return response.ok;
+        } catch (error) {
+            return false;
+        }
+    }
+
+    // --- 13. Console Info for Testing ---
+    console.log('=== Rachna Hub Store Loaded ===');
+    console.log('Available files for download:');
+    Object.entries(fileDownloads).forEach(([id, path]) => {
+        console.log(`  ID ${id}: ${path}`);
+    });
+    console.log('Cart:', cart);
 });
