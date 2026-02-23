@@ -1,227 +1,296 @@
-// ============================================
-// RACHNA HUB CLEAN WORKING SCRIPT
-// ============================================
+/**
+ * Rachna Hub | Premium Minecraft Assets Store
+ * Main JavaScript File
+ */
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', () => {
+    // Register GSAP Plugins
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-    initBuyButtons();
-    initModalSystem();
-    initSmoothScroll();
-    initFAQ();
-    initContactForm();
+    // --- 1. Loader Animation ---
+    const loaderTl = gsap.timeline();
 
-});
+    loaderTl
+        .to('.loader-progress', {
+            width: '100%',
+            duration: 1.5,
+            ease: 'power2.inOut'
+        })
+        .to('.loader', {
+            y: '-100%',
+            duration: 1,
+            ease: 'power4.inOut',
+            delay: 0.2
+        })
+        .from('.navbar', {
+            y: -100,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out'
+        }, '-=0.5')
+        .from('.hero-content > *', {
+            y: 50,
+            opacity: 0,
+            stagger: 0.1,
+            duration: 1,
+            ease: 'power3.out'
+        }, '-=0.8');
 
+    // --- 2. Custom Cursor ---
+    const cursor = document.querySelector('.cursor');
+    const follower = document.querySelector('.cursor-follower');
+    const links = document.querySelectorAll('a, button, .buy-btn');
 
-// ============================================
-// BUY BUTTON SYSTEM
-// ============================================
-
-let selectedFile = "";
-let selectedProductName = "";
-
-function initBuyButtons() {
-
-    const buyButtons = document.querySelectorAll(".buy-btn");
-
-    buyButtons.forEach(button => {
-
-        button.addEventListener("click", function () {
-
-            const card = this.closest(".product-card");
-
-            selectedFile = card.dataset.file;
-            selectedProductName = card.dataset.name;
-
-            openPaymentModal();
-
+    document.addEventListener('mousemove', (e) => {
+        gsap.to(cursor, {
+            x: e.clientX,
+            y: e.clientY,
+            duration: 0.1
         });
-
-    });
-}
-
-
-// ============================================
-// MODAL SYSTEM
-// ============================================
-
-function initModalSystem() {
-
-    const modal = document.getElementById("paymentModal");
-    const closeBtn = document.querySelector(".close-modal");
-
-    if (!modal) return;
-
-    // Close button
-    closeBtn.addEventListener("click", closePaymentModal);
-
-    // Click outside to close
-    window.addEventListener("click", function (e) {
-        if (e.target === modal) {
-            closePaymentModal();
-        }
+        gsap.to(follower, {
+            x: e.clientX,
+            y: e.clientY,
+            duration: 0.3
+        });
     });
 
-    // ESC key close
-    document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") {
-            closePaymentModal();
-        }
+    // Cursor Hover Effect
+    links.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            gsap.to(follower, { scale: 2, backgroundColor: 'rgba(255,255,255,0.1)' });
+            gsap.to(cursor, { scale: 0 });
+        });
+        link.addEventListener('mouseleave', () => {
+            gsap.to(follower, { scale: 1, backgroundColor: 'transparent' });
+            gsap.to(cursor, { scale: 1 });
+        });
     });
 
-}
+    // --- 3. Navigation & Mobile Menu ---
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
 
-function openPaymentModal() {
+    // Mobile Menu Toggle
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
 
-    const modal = document.getElementById("paymentModal");
-    const simulation = document.querySelector(".payment-simulation");
-    const success = document.querySelector(".success-content");
+    // Close mobile menu on link click
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+        });
+    });
 
-    modal.style.display = "flex";
+    // Smooth Scroll for Nav Links
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            gsap.to(window, {
+                scrollTo: targetId,
+                duration: 1,
+                ease: 'power3.inOut'
+            });
+        });
+    });
 
-    simulation.style.display = "flex";
-    success.style.display = "none";
+    // --- 4. Stats Counter Animation ---
+    const statNumbers = document.querySelectorAll('.stat-number');
+    
+    statNumbers.forEach(stat => {
+        const targetValue = parseInt(stat.getAttribute('data-count'));
+        
+        ScrollTrigger.create({
+            trigger: stat,
+            start: 'top 85%',
+            once: true,
+            onEnter: () => {
+                const proxy = { val: 0 };
+                gsap.to(proxy, {
+                    val: targetValue,
+                    duration: 2,
+                    ease: 'power2.out',
+                    onUpdate: () => {
+                        stat.textContent = Math.ceil(proxy.val);
+                    }
+                });
+            }
+        });
+    });
 
-    simulatePayment();
-
-}
-
-function closePaymentModal() {
-
-    const modal = document.getElementById("paymentModal");
-    modal.style.display = "none";
-
-}
-
-
-// ============================================
-// PAYMENT SIMULATION
-// ============================================
-
-function simulatePayment() {
-
-    const simulation = document.querySelector(".payment-simulation");
-    const success = document.querySelector(".success-content");
-
-    setTimeout(function () {
-
-        simulation.style.display = "none";
-        success.style.display = "block";
-
-        setupDownload(selectedFile, selectedProductName);
-
-    }, 2000);
-
-}
-
-
-// ============================================
-// DOWNLOAD SYSTEM
-// ============================================
-
-function setupDownload(filename, productName) {
-
-    const downloadBtn = document.getElementById("download-link");
-
-    if (!filename) return;
-
-    downloadBtn.href = "/downloads/" + filename;
-    downloadBtn.setAttribute("download", filename);
-
-    downloadBtn.onclick = function () {
-        console.log(productName + " download started");
+    // --- 5. Scroll Animations (General) ---
+    const animateElements = (selector) => {
+        gsap.utils.toArray(selector).forEach(el => {
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 90%',
+                    toggleActions: 'play none none reverse'
+                },
+                y: 50,
+                opacity: 0,
+                duration: 0.8,
+                ease: 'power3.out'
+            });
+        });
     };
 
-}
+    animateElements('.feature-card');
+    animateElements('.testimonial-card');
+    animateElements('.faq-item');
 
+    // --- 6. Product Filtering ---
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const productCards = document.querySelectorAll('.product-card');
 
-// ============================================
-// SMOOTH SCROLL (GSAP)
-// ============================================
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Update Active Button
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
 
-function initSmoothScroll() {
+            const filterValue = btn.getAttribute('data-filter');
 
-    const links = document.querySelectorAll("a[href^='#']");
-
-    links.forEach(link => {
-
-        link.addEventListener("click", function (e) {
-
-            const targetId = this.getAttribute("href");
-
-            if (targetId.length > 1) {
-
-                e.preventDefault();
-
-                const target = document.querySelector(targetId);
-
-                if (target) {
-                    gsap.to(window, {
-                        duration: 1,
-                        scrollTo: target,
-                        ease: "power3.inOut"
+            productCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                
+                if (filterValue === 'all' || filterValue === category) {
+                    // Show Card
+                    gsap.to(card, {
+                        display: 'block',
+                        opacity: 1,
+                        scale: 1,
+                        duration: 0.4,
+                        delay: 0.1
+                    });
+                } else {
+                    // Hide Card
+                    gsap.to(card, {
+                        opacity: 0,
+                        scale: 0.8,
+                        duration: 0.3,
+                        onComplete: () => {
+                            card.style.display = 'none';
+                        }
                     });
                 }
-            }
-
+            });
         });
-
     });
 
-}
+    // --- 7. FAQ Accordion ---
+    const faqQuestions = document.querySelectorAll('.faq-question');
 
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const answer = question.nextElementSibling;
+            const isOpen = question.classList.contains('active');
 
-// ============================================
-// FAQ ACCORDION
-// ============================================
-
-function initFAQ() {
-
-    const faqItems = document.querySelectorAll(".faq-item");
-
-    faqItems.forEach(item => {
-
-        const question = item.querySelector(".faq-question");
-        const answer = item.querySelector(".faq-answer");
-        const icon = item.querySelector(".faq-icon");
-
-        question.addEventListener("click", function () {
-
-            const isOpen = item.classList.contains("active");
-
-            document.querySelectorAll(".faq-item").forEach(i => {
-                i.classList.remove("active");
-                i.querySelector(".faq-answer").style.maxHeight = null;
-                i.querySelector(".faq-icon").textContent = "+";
+            // Close all others
+            document.querySelectorAll('.faq-question').forEach(q => {
+                q.classList.remove('active');
+                gsap.to(q.nextElementSibling, { maxHeight: 0, duration: 0.4 });
             });
 
             if (!isOpen) {
-                item.classList.add("active");
-                answer.style.maxHeight = answer.scrollHeight + "px";
-                icon.textContent = "−";
+                question.classList.add('active');
+                gsap.to(answer, { maxHeight: '500px', duration: 0.5 });
             }
-
         });
-
     });
 
-}
+    // --- 8. Payment Modal System ---
+    const modal = document.getElementById('paymentModal');
+    const closeModal = document.querySelector('.close-modal');
+    const buyBtns = document.querySelectorAll('.buy-btn');
+    const cartCountEl = document.querySelector('.cart-count');
+    const paymentSim = document.querySelector('.payment-simulation');
+    const successContent = document.querySelector('.success-content');
+    const paymentStatus = document.getElementById('payment-status');
+    const downloadLink = document.getElementById('download-link');
+    const modalTitle = document.getElementById('modal-title');
 
+    let cartCount = 0;
 
-// ============================================
-// CONTACT FORM
-// ============================================
+    // Open Modal
+    buyBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const card = e.currentTarget.closest('.product-card');
+            const name = card.getAttribute('data-name');
+            const price = card.getAttribute('data-price');
+            const file = card.getAttribute('data-file');
 
-function initContactForm() {
+            modalTitle.textContent = `Checkout: ${name}`;
+            downloadLink.setAttribute('download', file);
+            // In a real app, the href would be a secure download URL
+            
+            modal.classList.add('active');
+            resetModal();
+            simulatePayment();
+        });
+    });
 
-    const form = document.getElementById("contactForm");
+    // Close Modal
+    closeModal.addEventListener('click', () => {
+        modal.classList.remove('active');
+    });
 
-    if (!form) return;
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+        }
+    });
 
-    form.addEventListener("submit", function (e) {
+    function resetModal() {
+        paymentSim.style.display = 'block';
+        successContent.style.display = 'none';
+        paymentStatus.textContent = 'Initializing payment...';
+    }
+
+    function simulatePayment() {
+        setTimeout(() => {
+            paymentStatus.textContent = 'Processing Payment...';
+        }, 1000);
+
+        setTimeout(() => {
+            paymentStatus.textContent = 'Verifying Transaction...';
+        }, 2500);
+
+        setTimeout(() => {
+            paymentSim.style.display = 'none';
+            successContent.style.display = 'block';
+            
+            // Update Cart
+            cartCount++;
+            cartCountEl.textContent = cartCount;
+            cartCountEl.style.transform = 'scale(1.5)';
+            setTimeout(() => cartCountEl.style.transform = 'scale(1)', 200);
+
+        }, 4000);
+    }
+
+    // --- 9. Contact Form ---
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        alert("Message sent successfully!");
-        form.reset();
-    });
+        const btn = contactForm.querySelector('.submit-btn');
+        const originalText = btn.innerHTML;
 
-}
+        btn.innerHTML = '<span>Sending...</span>';
+        
+        setTimeout(() => {
+            btn.innerHTML = '<span>Message Sent!</span>';
+            btn.style.backgroundColor = '#4ade80'; // Green
+            contactForm.reset();
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.backgroundColor = '';
+            }, 3000);
+        }, 1500);
+    });
+});
