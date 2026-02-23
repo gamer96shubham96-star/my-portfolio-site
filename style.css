@@ -1840,7 +1840,7 @@ section {
     color: var(--text-secondary);
     font-size: 1.2rem;
     line-height: 1;
-    cursor: none;
+    cursor: pointer;
 }
 
 .cart-preview-items {
@@ -1879,7 +1879,7 @@ section {
     border-radius: 50%;
     color: #ff6464;
     font-size: 1rem;
-    cursor: none;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1932,7 +1932,13 @@ section {
     border-radius: 50%;
     color: var(--text-primary);
     transition: all 0.3s ease;
-    cursor: none;
+    cursor: pointer;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .theme-toggle:hover {
@@ -1941,10 +1947,8 @@ section {
 }
 
 .theme-toggle svg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
 }
 
 .theme-toggle .sun-icon {
@@ -2056,11 +2060,19 @@ section {
     border-radius: 50%;
     color: #5865F2;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .discord-nav-btn:hover {
     border-color: #5865F2;
     transform: scale(1.1);
+}
+
+.discord-nav-btn svg {
+    width: 20px;
+    height: 20px;
 }
 
 /* ============================================
@@ -2142,7 +2154,7 @@ section {
     border-radius: 25px;
     color: var(--text-secondary);
     font-size: 0.9rem;
-    cursor: none;
+    cursor: pointer;
     transition: all 0.3s ease;
 }
 
@@ -2163,7 +2175,7 @@ section {
     border-radius: 20px;
     color: var(--text-secondary);
     font-size: 0.8rem;
-    cursor: none;
+    cursor: pointer;
     transition: all 0.3s ease;
     margin-top: 10px;
 }
@@ -2213,7 +2225,7 @@ section {
 .star-option {
     font-size: 2rem;
     color: var(--glass-border);
-    cursor: none;
+    cursor: pointer;
     transition: all 0.2s ease;
 }
 
@@ -2231,7 +2243,7 @@ section {
     border-radius: 12px;
     color: var(--bg-primary);
     font-weight: 700;
-    cursor: none;
+    cursor: pointer;
     transition: all 0.3s ease;
 }
 
@@ -2320,11 +2332,6 @@ section {
     
     .review-modal-content {
         padding: 25px;
-    }
-}
-    
-    body {
-        cursor: auto;
     }
 }
 

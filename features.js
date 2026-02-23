@@ -1,125 +1,237 @@
-/**
- * Rachna Hub - Additional Features
- * Includes: Shopping Cart, Theme Toggle, Discord Integration,
- * Installation Guides, and Reviews System
- */
+// ============================================
+// RACHNA HUB FULL ECOMMERCE SYSTEM
+// ============================================
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize all features
-    new ShoppingCart();
-    new ThemeManager();
-    new DiscordIntegration();
-    new InstallationGuides();
-    new ProductReviews();
+document.addEventListener("DOMContentLoaded", () => {
+    RachnaStore.init();
 });
 
-// ============================================
-// SHOPPING CART SYSTEM
-// ============================================
-class ShoppingCart {
-    constructor() {
-        this.items = [];
-        this.storageKey = 'rachna_hub_cart';
-        this.loadFromStorage();
-        this.init();
-    }
+const RachnaStore = {
+
+    cart: [],
+    selectedProduct: null,
+    storageKey: "rachna_cart",
+
+    // ===============================
+    // INIT
+    // ===============================
 
     init() {
+        this.loadCart();
+        this.initBuyButtons();
+        this.initCartUI();
+        this.initModal();
+        this.initFAQ();
         this.updateCartUI();
-        this.bindEvents();
-    }
+    },
 
-    loadFromStorage() {
-        const saved = localStorage.getItem(this.storageKey);
-        if (saved) {
-            this.items = JSON.parse(saved);
-        }
-    }
+    // ===============================
+    // BUY BUTTONS
+    // ===============================
 
-    saveToStorage() {
-        localStorage.setItem(this.storageKey, JSON.stringify(this.items));
-    }
+    initBuyButtons() {
+        document.querySelectorAll(".buy-btn").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                const card = e.target.closest(".product-card");
 
-    addItem(product) {
-        const existingItem = this.items.find(item => item.id === product.id);
-        if (existingItem) {
-            existingItem.quantity++;
+                const product = {
+                    id: card.dataset.id,
+                    name: card.dataset.name,
+                    price: parseFloat(card.dataset.price),
+                    file: card.dataset.file,
+                    quantity: 1
+                };
+
+                this.addToCart(product);
+            });
+        });
+    },
+
+    // ===============================
+    // CART LOGIC
+    // ===============================
+
+    addToCart(product) {
+        const existing = this.cart.find(item => item.id === product.id);
+
+        if (existing) {
+            existing.quantity++;
         } else {
-            this.items.push({ ...product, quantity: 1 });
+            this.cart.push(product);
         }
-        this.saveToStorage();
-        this.updateCartUI();
-        
-        // Show feedback
-        this.showAddedFeedback(product.name);
-    }
 
-    removeItem(productId) {
-        this.items = this.items.filter(item => item.id !== productId);
-        this.saveToStorage();
+        this.saveCart();
         this.updateCartUI();
-    }
+        this.animateCart();
+    },
 
-    updateQuantity(productId, quantity) {
-        const item = this.items.find(item => item.id === productId);
-        if (item) {
-            item.quantity = Math.max(1, quantity);
-            this.saveToStorage();
-            this.updateCartUI();
+    removeFromCart(id) {
+        this.cart = this.cart.filter(item => item.id !== id);
+        this.saveCart();
+        this.updateCartUI();
+    },
+
+    updateQuantity(id, amount) {
+        const item = this.cart.find(item => item.id === id);
+        if (!item) return;
+
+        item.quantity += amount;
+        if (item.quantity <= 0) {
+            this.removeFromCart(id);
         }
-    }
+
+        this.saveCart();
+        this.updateCartUI();
+    },
 
     getTotal() {
-        return this.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    }
+        return this.cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
+    },
 
     getItemCount() {
-        return this.items.reduce((sum, item) => sum + item.quantity, 0);
-    }
+        return this.cart.reduce((sum, item) => sum + item.quantity, 0);
+    },
+
+    saveCart() {
+        localStorage.setItem(this.storageKey, JSON.stringify(this.cart));
+    },
+
+    loadCart() {
+        const saved = localStorage.getItem(this.storageKey);
+        if (saved) this.cart = JSON.parse(saved);
+    },
+
+    // ===============================
+    // CART UI
+    // ===============================
+
+    initCartUI() {
+        const cartWrapper = document.querySelector(".cart-wrapper");
+
+        cartWrapper.addEventListener("click", () => {
+            this.toggleCartPreview();
+        });
+    },
+
+    toggleCartPreview() {
+        let preview = document.querySelector(".cart-preview");
+
+        if (!preview) {
+            preview = document.createElement("div");
+            preview.className = "cart-preview";
+            document.querySelector(".cart-wrapper").appendChild(preview);
+        }
+
+        preview.classList.toggle("active");
+        this.renderCart(preview);
+    },
+
+    renderCart(preview) {
+
+        if (this.cart.length === 0) {
+            preview.innerHTML = `<p style="padding:20px;text-align:center;">Cart is empty</p>`;
+            return;
+        }
+
+        preview.innerHTML = `
+            <div class="cart-items">
+                ${this.cart.map(item => `
+                    <div class="cart-item">
+                        <div>
+                            <strong>${item.name}</strong>
+                            <p>$${item.price} x ${item.quantity}</p>
+                        </div>
+                        <div class="cart-controls">
+                            <button onclick="RachnaStore.updateQuantity('${item.id}', -1)">-</button>
+                            <button onclick="RachnaStore.updateQuantity('${item.id}', 1)">+</button>
+                            <button onclick="RachnaStore.removeFromCart('${item.id}')">x</button>
+                        </div>
+                    </div>
+                `).join("")}
+            </div>
+            <div class="cart-total">
+                Total: $${this.getTotal()}
+            </div>
+            <button class="checkout-btn">Checkout</button>
+        `;
+
+        preview.querySelector(".checkout-btn")
+            .addEventListener("click", () => this.openCheckout());
+    },
 
     updateCartUI() {
-        const cartCount = document.querySelector('.cart-count');
-        const cartWrapper = document.querySelector('.cart-wrapper');
-        
-        if (cartCount) {
-            cartCount.textContent = this.getItemCount();
-            if (this.getItemCount() > 0) {
-                cartCount.classList.add('active');
-            } else {
-                cartCount.classList.remove('active');
-            }
-        }
+        const count = document.querySelector(".cart-count");
+        count.textContent = this.getItemCount();
+        count.classList.toggle("active", this.getItemCount() > 0);
+    },
 
-        if (cartWrapper) {
-            this.showCartPreview(cartWrapper);
-        }
+    animateCart() {
+        gsap.from(".cart-icon", {
+            scale: 1.3,
+            duration: 0.3,
+            yoyo: true,
+            repeat: 1
+        });
+    },
+
+    // ===============================
+    // CHECKOUT MODAL
+    // ===============================
+
+    initModal() {
+        document.querySelector(".close-modal")
+            .addEventListener("click", () => this.closeModal());
+
+        window.addEventListener("click", (e) => {
+            if (e.target.id === "paymentModal") {
+                this.closeModal();
+            }
+        });
+    },
+
+    openCheckout() {
+        if (this.cart.length === 0) return;
+
+        const modal = document.getElementById("paymentModal");
+        modal.style.display = "flex";
+
+        document.querySelector(".payment-simulation").style.display = "flex";
+        document.querySelector(".success-content").style.display = "none";
+
+        setTimeout(() => {
+            this.completePayment();
+        }, 2000);
+    },
+
+    completePayment() {
+        document.querySelector(".payment-simulation").style.display = "none";
+        document.querySelector(".success-content").style.display = "block";
+
+        const firstItem = this.cart[0];
+
+        const downloadBtn = document.getElementById("download-link");
+        downloadBtn.href = "/downloads/" + firstItem.file;
+        downloadBtn.setAttribute("download", firstItem.file);
+
+        this.cart = [];
+        this.saveCart();
+        this.updateCartUI();
+    },
+
+    closeModal() {
+        document.getElementById("paymentModal").style.display = "none";
+    },
+
+    // ===============================
+    // FAQ
+    // ===============================
+
+    initFAQ() {
+        document.querySelectorAll(".faq-item").forEach(item => {
+            item.querySelector(".faq-question").addEventListener("click", () => {
+                item.classList.toggle("active");
+            });
+        });
     }
 
-    showCartPreview(element) {
-        let preview = document.querySelector('.cart-preview');
-        if (!preview) {
-            preview = document.createElement('div');
-            preview.className = 'cart-preview';
-            element.appendChild(preview);
-        }
-
-        if (this.items.length === 0) {
-            preview.innerHTML = `
-                <div class="cart-preview-header">
-                    <h4>Your Cart</h4>
-                    <button class="close-preview">×</button>
-                </div>
-                <div class="cart-preview-items">
-                    <p style="text-align: center; color: var(--text-muted); padding: 20px 0;">
-                        Your cart is empty
-                    </p>
-                </div>
-            `;
-        } else {
-            preview.innerHTML = `
-                <div class="cart-preview-header">
-                    <h4>Your Cart (${this.getItemCount()})</h4>
-                    <button class="close-preview">×</button>
-                </div>
-                <div class="cart-preview-items">
-                    ${
+};
