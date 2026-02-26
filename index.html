@@ -6,11 +6,8 @@
     <title>Rachna Hub | Premium Minecraft Assets</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js" defer></script>
     <script src="script.js" defer></script>
 </head>
 <body>
@@ -207,7 +204,7 @@
 
         <div class="products-grid" id="productsGrid">
 
-            <article class="prod-card reveal" data-category="datapack" data-id="1" data-name="Lucky Blocks" data-price="5.00" data-file="eternal-fortune-1.1.zip">
+            <article class="prod-card reveal" data-category="datapack" data-id="1" data-name="Lucky Blocks" data-scarcity="🔥 Selling fast" data-price="5.00" data-file="eternal-fortune-1.1.zip">
                 <div class="prod-glow"></div>
                 <div class="prod-top">
                     <div class="prod-emoji">🌲</div>
@@ -230,7 +227,7 @@
                 </div>
             </article>
 
-            <article class="prod-card reveal" data-category="datapack" data-id="2" data-name="Grass Drops Op Items" data-price="10.00" data-file="grass-drops-op-items.zip">
+            <article class="prod-card reveal" data-category="datapack" data-id="2" data-name="Grass Drops Op Items" data-scarcity="📦 Only 3 left" data-price="10.00" data-file="grass-drops-op-items.zip">
                 <div class="prod-glow"></div>
                 <div class="prod-top">
                     <div class="prod-emoji">🛡️</div>
@@ -253,7 +250,7 @@
                 </div>
             </article>
 
-            <article class="prod-card reveal" data-category="bot" data-id="3" data-name="Discord Bot" data-price="15.00" data-file="discord-bot-code.txt">
+            <article class="prod-card reveal" data-category="bot" data-id="3" data-name="Discord Bot" data-scarcity="⚡ Limited release" data-price="15.00" data-file="discord-bot-code.txt">
                 <div class="prod-glow"></div>
                 <div class="prod-top">
                     <div class="prod-emoji">🤖</div>
@@ -276,7 +273,7 @@
                 </div>
             </article>
 
-            <article class="prod-card reveal" data-category="datapack" data-id="4" data-name="Stone Drops Op Items" data-price="8.00" data-file="stone-drops-op-items.zip">
+            <article class="prod-card reveal" data-category="datapack" data-id="4" data-name="Stone Drops Op Items" data-scarcity="🔥 Selling fast" data-price="8.00" data-file="stone-drops-op-items.zip">
                 <div class="prod-glow"></div>
                 <div class="prod-top">
                     <div class="prod-emoji">👹</div>
@@ -299,7 +296,7 @@
                 </div>
             </article>
 
-            <article class="prod-card reveal" data-category="datapack" data-id="5" data-name="Jumping Drops Op Items" data-price="3.00" data-file="jumping-gives-op-items.zip">
+            <article class="prod-card reveal" data-category="datapack" data-id="5" data-name="Jumping Drops Op Items" data-scarcity="📦 Only 5 left" data-price="3.00" data-file="jumping-gives-op-items.zip">
                 <div class="prod-glow"></div>
                 <div class="prod-top">
                     <div class="prod-emoji">🎨</div>
@@ -322,7 +319,7 @@
                 </div>
             </article>
 
-            <article class="prod-card reveal" data-category="datapack" data-id="6" data-name="Dirt Drops Op Items" data-price="7.00" data-file="dirt-drops-op-items.zip">
+            <article class="prod-card reveal" data-category="datapack" data-id="6" data-name="Dirt Drops Op Items" data-scarcity="🔥 Selling fast" data-price="7.00" data-file="dirt-drops-op-items.zip">
                 <div class="prod-glow"></div>
                 <div class="prod-top">
                     <div class="prod-emoji">💰</div>
@@ -595,9 +592,14 @@
     </div>
     <div class="cp-items" id="cpItems"></div>
     <div class="cp-footer">
+        <div id="cpDiscountLine"></div>
         <div class="cp-total">
             <span>Total</span>
             <strong>$<span id="cpTotal">0.00</span></strong>
+        </div>
+        <div class="cp-discount">
+            <input type="text" id="discountInput" placeholder="Discount code…" autocomplete="off">
+            <button id="discountApply">Apply</button>
         </div>
         <button class="btn-primary w-full" id="checkoutBtn">
             <span>Proceed to Checkout</span>

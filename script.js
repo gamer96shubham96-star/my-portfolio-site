@@ -1,96 +1,87 @@
 /**
- * ═══════════════════════════════════════════════
- * RACHNA HUB — MAIN SCRIPT v5.0
- * ✅ Features section FIXED (removed GSAP conflict)
- * ✅ Premium animations: magnetic buttons, particle trails,
- *    text scramble, stagger reveals, parallax orbs,
- *    number morphing, smooth page transitions
- * ✅ Cart: badge = unique items, downloads ALL files
- * ═══════════════════════════════════════════════
+ * RACHNA HUB — v6.0
+ * ✅ No GSAP (removed — saves 60kb)
+ * ✅ Cursor lag fixed (transition:none on dot)
+ * ✅ Faster loader (2 msgs only)
+ * ✅ Interactive grid reacts to mouse
+ * ✅ Holographic card shine sweep
+ * ✅ Trust badges + scarcity injected
+ * ✅ Search text highlighting
+ * ✅ Mobile cart slides from bottom
+ * ✅ Discount code field
+ * ✅ Colored glowing shadows on buttons
  */
-
 'use strict';
 
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
-function debounce(fn, ms = 100) { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; }
-function lerp(a, b, t) { return a + (b - a) * t; }
+function debounce(fn, ms) { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; }
+function lerp(a, b, n) { return a + (b - a) * n; }
+function highlight(text, query) {
+    if (!query) return text;
+    const re = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
+    return text.replace(re, '<mark>$1</mark>');
+}
 
-/* ── LOADER ── */
+/* ── LOADER (fast — 2 messages) ── */
 const Loader = {
     el: $('#loader'), bar: $('#loaderBar'), sub: $('#loaderSub'),
-    msgs: ['Initializing store...','Loading assets...','Polishing pixels...','Almost there...','Ready!'],
+    msgs: ['Loading store...', 'Ready!'],
     init() {
         let progress = 0, msgIdx = 0;
         const tick = setInterval(() => {
-            progress += Math.random() * 18 + 8;
+            progress += Math.random() * 28 + 14;
             if (progress > 100) progress = 100;
             this.bar.style.width = progress + '%';
             const step = Math.floor((progress / 100) * (this.msgs.length - 1));
             if (step !== msgIdx) { msgIdx = step; this.sub.textContent = this.msgs[msgIdx]; }
-            if (progress >= 100) { clearInterval(tick); this.sub.textContent = 'Ready!'; setTimeout(() => this.hide(), 400); }
-        }, 120);
+            if (progress >= 100) {
+                clearInterval(tick);
+                this.sub.textContent = 'Ready!';
+                setTimeout(() => this.hide(), 280);
+            }
+        }, 90);
     },
     hide() {
         this.el.classList.add('hidden');
         document.body.style.overflow = '';
-        // Trigger entrance animations after loader
-        setTimeout(() => PageEntrance.play(), 100);
-    }
-};
-
-/* ── PAGE ENTRANCE ── */
-const PageEntrance = {
-    play() {
-        // Stagger feat-cards on scroll (pure CSS IntersectionObserver — no GSAP conflict)
         Reveal.init();
         Counter.init();
         MagneticButtons.init();
-        ParallaxOrbs.init();
-        TextScramble.init();
     }
 };
 
-/* ── CURSOR ── */
+/* ── CURSOR (transition:none on dot for zero lag) ── */
 const Cursor = {
     el: $('#cursor'), trail: $('#cursorTrail'),
     mx: 0, my: 0, tx: 0, ty: 0,
-    hovering: false,
-
     init() {
-        if (window.matchMedia('(max-width:768px)').matches) return;
-        document.addEventListener('mousemove', e => { this.mx = e.clientX; this.my = e.clientY; });
-
-        // Scale up on interactive elements
+        if (window.matchMedia('(max-width:768px)').matches) { this.el.style.display = 'none'; this.trail.style.display = 'none'; return; }
+        // NO transition on cursor dot — instant response
+        this.el.style.transition = 'none';
+        document.addEventListener('mousemove', e => { this.mx = e.clientX; this.my = e.clientY; }, { passive: true });
         document.addEventListener('mouseover', e => {
             if (e.target.closest('a,button,.prod-card,.feat-card,.filter-btn')) {
-                this.el.style.width = '6px';
-                this.el.style.height = '6px';
-                this.trail.style.width = '54px';
-                this.trail.style.height = '54px';
-                this.trail.style.borderColor = 'var(--green)';
-                this.trail.style.background = 'rgba(0,245,160,0.06)';
+                this.el.classList.add('cursor-hover');
+                this.trail.classList.add('cursor-hover');
             }
         });
         document.addEventListener('mouseout', e => {
             if (e.target.closest('a,button,.prod-card,.feat-card,.filter-btn')) {
-                this.el.style.width = '';
-                this.el.style.height = '';
-                this.trail.style.width = '';
-                this.trail.style.height = '';
-                this.trail.style.borderColor = '';
-                this.trail.style.background = '';
+                this.el.classList.remove('cursor-hover');
+                this.trail.classList.remove('cursor-hover');
             }
         });
-
-        this.animate();
+        this.raf();
     },
-    animate() {
+    raf() {
+        // Cursor dot: instant
         this.el.style.transform = `translate(${this.mx}px,${this.my}px) translate(-50%,-50%)`;
-        this.tx = lerp(this.tx, this.mx, 0.12);
-        this.ty = lerp(this.ty, this.my, 0.12);
+        // Trail: smooth lerp
+        this.tx = lerp(this.tx, this.mx, 0.14);
+        this.ty = lerp(this.ty, this.my, 0.14);
         this.trail.style.transform = `translate(${this.tx}px,${this.ty}px) translate(-50%,-50%)`;
-        requestAnimationFrame(() => this.animate());
+        requestAnimationFrame(() => this.raf());
     }
 };
 
@@ -124,32 +115,26 @@ const Nav = {
     }
 };
 
-/* ── SCROLL REVEAL ── (CSS-only, no GSAP conflict) ── */
+/* ── SCROLL REVEAL (re-triggers every time) ── */
 const Reveal = {
     timers: new Map(),
     init() {
         const obs = new IntersectionObserver(entries => {
             entries.forEach(e => {
-                const el = e.target;
-                const delay = +(el.dataset.delay || 0);
+                const el = e.target, delay = +(el.dataset.delay || 0);
+                clearTimeout(this.timers.get(el));
                 if (e.isIntersecting) {
-                    // Clear any pending hide timer
-                    clearTimeout(this.timers.get(el));
-                    const t = setTimeout(() => el.classList.add('visible'), delay);
-                    this.timers.set(el, t);
+                    this.timers.set(el, setTimeout(() => el.classList.add('visible'), delay));
                 } else {
-                    // Element scrolled out — reset so it re-animates next time
-                    clearTimeout(this.timers.get(el));
-                    const t = setTimeout(() => el.classList.remove('visible'), 80);
-                    this.timers.set(el, t);
+                    this.timers.set(el, setTimeout(() => el.classList.remove('visible'), 60));
                 }
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
         $$('.reveal').forEach(el => obs.observe(el));
     }
 };
 
-/* ── STATS COUNTER ── */
+/* ── STATS COUNTER (re-triggers) ── */
 const Counter = {
     running: new Set(),
     init() {
@@ -160,12 +145,11 @@ const Counter = {
                     this.running.add(el);
                     const end = +el.dataset.count; let cur = 0;
                     const t = setInterval(() => {
-                        cur += end / 55;
+                        cur += end / 50;
                         if (cur >= end) { cur = end; clearInterval(t); this.running.delete(el); }
                         el.textContent = Math.ceil(cur);
-                    }, 18);
+                    }, 16);
                 } else if (!e.isIntersecting) {
-                    // Reset to 0 when scrolled out so it counts up again on re-entry
                     el.textContent = '0';
                     this.running.delete(el);
                 }
@@ -181,76 +165,123 @@ const MagneticButtons = {
         $$('.btn-primary, .btn-buy, .cta-pill').forEach(btn => {
             btn.addEventListener('mousemove', e => {
                 const r = btn.getBoundingClientRect();
-                const dx = (e.clientX - r.left - r.width / 2) * 0.3;
-                const dy = (e.clientY - r.top - r.height / 2) * 0.3;
-                btn.style.transform = `translate(${dx}px, ${dy}px)`;
+                btn.style.transform = `translate(${(e.clientX - r.left - r.width/2) * 0.28}px,${(e.clientY - r.top - r.height/2) * 0.28}px)`;
             });
             btn.addEventListener('mouseleave', () => {
+                btn.style.transition = 'transform 0.45s cubic-bezier(0.34,1.56,0.64,1)';
                 btn.style.transform = '';
-                btn.style.transition = 'transform 0.4s cubic-bezier(0.34,1.56,0.64,1)';
-                setTimeout(() => btn.style.transition = '', 400);
+                setTimeout(() => btn.style.transition = '', 450);
             });
         });
     }
 };
 
-/* ── PARALLAX ORBS ── */
-const ParallaxOrbs = {
+/* ── INTERACTIVE GRID (reacts to mouse — not just orbs) ── */
+const InteractiveGrid = {
     init() {
-        const orbs = $$('.orb');
-        if (!orbs.length) return;
-        window.addEventListener('mousemove', e => {
-            const cx = (e.clientX / window.innerWidth - 0.5);
-            const cy = (e.clientY / window.innerHeight - 0.5);
-            orbs.forEach((orb, i) => {
-                const depth = (i + 1) * 18;
-                orb.style.transform = `translate(${cx * depth}px, ${cy * depth}px)`;
+        const grid = $('.grid-mesh');
+        if (!grid || window.matchMedia('(max-width:768px)').matches) return;
+        let mx = 0, my = 0;
+        document.addEventListener('mousemove', e => {
+            mx = (e.clientX / window.innerWidth) * 100;
+            my = (e.clientY / window.innerHeight) * 100;
+            grid.style.backgroundPosition = `${mx * 0.3}px ${my * 0.3}px`;
+            // Also move orbs for depth
+            $$('.orb').forEach((orb, i) => {
+                const d = (i + 1) * 15;
+                orb.style.transform = `translate(${(mx - 50) * d * 0.01}px,${(my - 50) * d * 0.01}px)`;
             });
         }, { passive: true });
     }
 };
 
-/* ── TEXT SCRAMBLE ── (hero title on hover) ── */
+/* ── TEXT SCRAMBLE on logo hover ── */
 const TextScramble = {
-    chars: 'アイウエオカキクケコ!@#$%^&*<>?/|',
+    chars: 'アイウエオ!@#$%^&*<>',
     init() {
-        const logo = $('.nav-logo');
-        if (!logo) return;
-        const orig = logo.querySelector('.logo-name');
+        const logo = $('.nav-logo'), orig = logo?.querySelector('.logo-name');
         if (!orig) return;
-        const origText = orig.textContent;
-
+        const txt = orig.textContent;
         logo.addEventListener('mouseenter', () => {
             let iter = 0;
             const t = setInterval(() => {
-                orig.textContent = origText.split('').map((c, i) => {
-                    if (i < iter) return origText[i];
-                    return this.chars[Math.floor(Math.random() * this.chars.length)];
-                }).join('');
-                if (iter >= origText.length) { clearInterval(t); orig.textContent = origText; }
-                iter += 0.5;
-            }, 35);
+                orig.textContent = txt.split('').map((c, i) => i < iter ? txt[i] : this.chars[Math.floor(Math.random() * this.chars.length)]).join('');
+                if (iter >= txt.length) { clearInterval(t); orig.textContent = txt; }
+                iter += 0.6;
+            }, 30);
         });
     }
 };
 
-/* ── PRODUCT CARD 3D TILT (vanilla, no GSAP needed) ── */
-const CardTilt = {
+/* ── HOLOGRAPHIC CARD TILT + SHINE ── */
+const CardHolo = {
     init() {
         $$('.prod-card').forEach(card => {
+            // Create shine overlay
+            const shine = document.createElement('div');
+            shine.className = 'card-shine';
+            card.appendChild(shine);
+
             card.addEventListener('mousemove', e => {
                 const r = card.getBoundingClientRect();
-                const cx = (e.clientX - r.left) / r.width - 0.5;
-                const cy = (e.clientY - r.top) / r.height - 0.5;
-                card.style.transform = `perspective(800px) rotateX(${cy * -7}deg) rotateY(${cx * 7}deg) translateY(-8px)`;
-                card.style.boxShadow = `${-cx * 20}px ${-cy * 20}px 48px rgba(0,0,0,0.35), 0 0 32px rgba(0,245,160,0.1)`;
+                const cx = (e.clientX - r.left) / r.width;
+                const cy = (e.clientY - r.top) / r.height;
+                const rx = (cy - 0.5) * -10;
+                const ry = (cx - 0.5) * 10;
+
+                card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-8px) scale(1.01)`;
+
+                // Dynamic shadow follows tilt direction
+                card.style.boxShadow = `
+                    ${ry * -2}px ${rx * 2}px 40px rgba(0,0,0,0.4),
+                    0 0 30px rgba(0,245,160,0.08),
+                    inset 0 0 0 1px rgba(255,255,255,0.06)`;
+
+                // Holographic shine moves with mouse
+                shine.style.background = `radial-gradient(
+                    circle at ${cx * 100}% ${cy * 100}%,
+                    rgba(255,255,255,0.12) 0%,
+                    rgba(0,245,160,0.06) 30%,
+                    transparent 65%
+                )`;
+                shine.style.opacity = '1';
             });
+
             card.addEventListener('mouseleave', () => {
                 card.style.transform = '';
                 card.style.boxShadow = '';
-                card.style.transition = 'transform 0.5s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.5s ease';
-                setTimeout(() => card.style.transition = '', 500);
+                card.style.transition = 'transform 0.6s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.5s ease';
+                shine.style.opacity = '0';
+                setTimeout(() => card.style.transition = '', 600);
             });
+        });
+    }
+};
+
+/* ── TRUST BADGES + SCARCITY (injected into cards) ── */
+const ProductEnhancer = {
+    init() {
+        $$('.prod-card').forEach(card => {
+            // Trust badges row
+            const footer = $('.prod-footer', card);
+            if (!footer || $('.trust-row', card)) return;
+
+            const trust = document.createElement('div');
+            trust.className = 'trust-row';
+            trust.innerHTML = `
+                <span class="trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Instant</span>
+                <span class="trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Verified</span>
+                <span class="trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Secure</span>`;
+            footer.after(trust);
+
+            // Scarcity badge
+            const scarcity = card.dataset.scarcity;
+            if (scarcity && !$('.scarcity-badge', card)) {
+                const s = document.createElement('div');
+                s.className = 'scarcity-badge';
+                s.textContent = scarcity;
+                card.querySelector('.prod-info').prepend(s);
+            }
         });
     }
 };
@@ -279,9 +310,9 @@ const Filter = {
                 const f = btn.dataset.filter;
                 cards.forEach((card, i) => {
                     const show = f === 'all' || card.dataset.category === f;
-                    card.style.transition = `opacity .3s ${i * 30}ms, transform .3s ${i * 30}ms`;
+                    card.style.transition = `opacity .3s ${i*25}ms, transform .3s ${i*25}ms`;
                     if (show) { card.style.display = ''; requestAnimationFrame(() => { card.style.opacity = '1'; card.style.transform = ''; }); }
-                    else { card.style.opacity = '0'; card.style.transform = 'scale(0.88) translateY(12px)'; setTimeout(() => { card.style.display = 'none'; }, 350); }
+                    else { card.style.opacity = '0'; card.style.transform = 'scale(0.88) translateY(14px)'; setTimeout(() => card.style.display = 'none', 340); }
                 });
             });
         });
@@ -333,7 +364,7 @@ const Wishlist = {
     }
 };
 
-/* ── SEARCH ── */
+/* ── SEARCH with text highlighting ── */
 const Search = {
     init() {
         const actions = $('.nav-actions');
@@ -351,7 +382,7 @@ const Search = {
         actions.prepend(wrapper);
         const input = $('#searchInput'), box = $('#searchBox'), results = $('#searchResults');
         $('#searchToggle').addEventListener('click', () => { box.classList.toggle('open'); if (box.classList.contains('open')) input.focus(); });
-        input.addEventListener('input', debounce(() => this.search(input.value.trim(), results), 180));
+        input.addEventListener('input', debounce(() => this.search(input.value.trim(), results), 160));
         document.addEventListener('click', e => { if (!wrapper.contains(e.target)) box.classList.remove('open'); });
         document.addEventListener('keydown', e => {
             if (e.key === '/' && !['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) { e.preventDefault(); box.classList.add('open'); input.focus(); }
@@ -361,10 +392,21 @@ const Search = {
     search(query, resultsEl) {
         if (!query) { resultsEl.innerHTML = ''; resultsEl.classList.remove('show'); return; }
         const q = query.toLowerCase();
-        const matches = $$('.prod-card').filter(c => (c.dataset.name || '').toLowerCase().includes(q) || ($('.prod-type', c)?.textContent || '').toLowerCase().includes(q) || ($('.prod-desc', c)?.textContent || '').toLowerCase().includes(q));
+        const matches = $$('.prod-card').filter(c =>
+            (c.dataset.name || '').toLowerCase().includes(q) ||
+            ($('.prod-type', c)?.textContent || '').toLowerCase().includes(q) ||
+            ($('.prod-desc', c)?.textContent || '').toLowerCase().includes(q)
+        );
         resultsEl.innerHTML = matches.length === 0
             ? `<div class="sr-empty">No results for "<strong>${query}</strong>"</div>`
-            : matches.map(c => `<div class="sr-item" data-id="${c.dataset.id}"><span class="sr-icon">${($('.prod-emoji', c) || { textContent: '📦' }).textContent}</span><div><strong>${c.dataset.name}</strong><span>$${parseFloat(c.dataset.price).toFixed(2)}</span></div></div>`).join('');
+            : matches.map(c => `
+                <div class="sr-item" data-id="${c.dataset.id}">
+                    <span class="sr-icon">${($('.prod-emoji', c) || {textContent:'📦'}).textContent}</span>
+                    <div>
+                        <strong>${highlight(c.dataset.name, query)}</strong>
+                        <span>$${parseFloat(c.dataset.price).toFixed(2)}</span>
+                    </div>
+                </div>`).join('');
         resultsEl.querySelectorAll('.sr-item').forEach(item => {
             item.addEventListener('click', () => {
                 const card = $$(`.prod-card[data-id="${item.dataset.id}"]`)[0];
@@ -378,23 +420,15 @@ const Search = {
 
 /* ── ANNOUNCEMENT TICKER ── */
 const Ticker = {
-    msgs: [
-        '🎉 New product dropping soon — Lucky Blocks v2!',
-        '⚡ All datapacks tested on Minecraft 1.21',
-        '💬 Join our Discord for exclusive discounts!',
-        '🔥 Grass Drops OP Items — most downloaded this week!',
-        '✅ Instant download after checkout — no waiting',
-        '🛡️ Every product manually verified & security-scanned',
-    ],
+    msgs: ['🎉 Lucky Blocks v2 dropping soon!','⚡ All datapacks tested on MC 1.21','💬 Discord exclusive discounts!','🔥 Grass Drops — most downloaded this week!','✅ Instant download after checkout','🛡️ Every product manually verified'],
     init() {
         const ticker = document.createElement('div');
         ticker.className = 'ticker-wrap';
-        ticker.innerHTML = `<div class="ticker-label">LIVE</div><div class="ticker-track"><div class="ticker-inner" id="tickerInner">${[...this.msgs, ...this.msgs].map(m => `<span class="ticker-item">${m}</span>`).join('')}</div></div><button class="ticker-close" title="Close">×</button>`;
+        ticker.innerHTML = `<div class="ticker-label">LIVE</div><div class="ticker-track"><div class="ticker-inner">${[...this.msgs,...this.msgs].map(m=>`<span class="ticker-item">${m}</span>`).join('')}</div></div><button class="ticker-close">×</button>`;
         const navbar = $('#navbar');
         if (navbar?.nextSibling) navbar.parentNode.insertBefore(ticker, navbar.nextSibling);
         ticker.querySelector('.ticker-close').addEventListener('click', () => {
-            ticker.style.maxHeight = ticker.offsetHeight + 'px';
-            ticker.style.transition = 'max-height 0.3s ease, opacity 0.3s';
+            ticker.style.cssText = 'max-height:36px;overflow:hidden;transition:max-height .3s,opacity .3s';
             requestAnimationFrame(() => { ticker.style.maxHeight = '0'; ticker.style.opacity = '0'; });
             setTimeout(() => ticker.remove(), 320);
         });
@@ -404,10 +438,10 @@ const Ticker = {
 /* ── CHAT BUBBLE ── */
 const ChatBubble = {
     init() {
-        const bubble = document.createElement('div');
-        bubble.className = 'chat-bubble';
-        bubble.innerHTML = `
-            <button class="chat-btn" id="chatBubbleBtn" title="Chat with us on Discord">
+        const el = document.createElement('div');
+        el.className = 'chat-bubble';
+        el.innerHTML = `
+            <button class="chat-btn" id="chatBubbleBtn">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.369-.444.85-.608 1.23a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.23A.077.077 0 0 0 8.562 3c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026c.462-.62.874-1.275 1.226-1.963a.074.074 0 0 0-.041-.104 13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028z"/></svg>
                 <span class="chat-pulse"></span>
             </button>
@@ -419,11 +453,11 @@ const ChatBubble = {
                 </div>
                 <div class="chat-popup-body">
                     <p>👋 Hey! Need help or have a question?</p>
-                    <p>We're active on Discord — usually reply in minutes!</p>
+                    <p>We reply on Discord within minutes!</p>
                 </div>
                 <a href="https://discord.gg/8Hj8p8cvBz" target="_blank" class="chat-popup-cta">Open Discord →</a>
             </div>`;
-        document.body.appendChild(bubble);
+        document.body.appendChild(el);
         const popup = $('#chatPopup');
         setTimeout(() => popup.classList.add('show'), 9000);
         $('#chatBubbleBtn').addEventListener('click', () => popup.classList.toggle('show'));
@@ -431,54 +465,58 @@ const ChatBubble = {
     }
 };
 
-/* ── FLOATING PARTICLES (hero background) ── */
+/* ── FLOATING PARTICLES ── */
 const Particles = {
     init() {
         const hero = $('.hero-bg');
         if (!hero || window.matchMedia('(max-width:768px)').matches) return;
-        for (let i = 0; i < 18; i++) {
+        for (let i = 0; i < 16; i++) {
             const p = document.createElement('div');
             p.className = 'hero-particle';
-            p.style.cssText = `
-                left: ${Math.random() * 100}%;
-                top: ${Math.random() * 100}%;
-                width: ${Math.random() * 3 + 1}px;
-                height: ${Math.random() * 3 + 1}px;
-                animation-delay: ${Math.random() * 8}s;
-                animation-duration: ${Math.random() * 10 + 8}s;
-                opacity: ${Math.random() * 0.5 + 0.1};`;
+            p.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;width:${Math.random()*3+1}px;height:${Math.random()*3+1}px;animation-delay:${Math.random()*8}s;animation-duration:${Math.random()*10+8}s;opacity:${Math.random()*0.4+0.1}`;
             hero.appendChild(p);
         }
     }
 };
 
-/* ── SECTION PROGRESS BAR ── */
+/* ── SCROLL PROGRESS BAR ── */
 const ProgressBar = {
     init() {
         const bar = document.createElement('div');
         bar.className = 'scroll-progress';
         document.body.appendChild(bar);
         window.addEventListener('scroll', () => {
-            const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
-            bar.style.width = pct + '%';
+            bar.style.width = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100) + '%';
         }, { passive: true });
     }
 };
 
-/* ── CART ── */
+/* ── CART (mobile: slides from bottom) ── */
 const Cart = {
-    key: 'rachna_v4_cart', items: [],
+    key: 'rachna_v6_cart', items: [],
+    DISCOUNT_CODES: { 'RACHNA10': 10, 'WELCOME20': 20, 'DISCORD15': 15 },
+    discountPct: 0,
     panel: $('#cartPanel'), mask: $('#cartMask'), badge: $('#cartBadge'), list: $('#cpItems'), total: $('#cpTotal'),
+
     init() {
         this.load(); this.render(); this.updateBadge();
         $('#cartBtn').addEventListener('click', () => this.open());
         $('#cartClose').addEventListener('click', () => this.close());
         this.mask.addEventListener('click', () => this.close());
+
         $('#checkoutBtn').addEventListener('click', () => {
             if (!this.items.length) { Toast.show('Your cart is empty!', 'warn'); return; }
             this.close();
             Modal.open(this.items);
         });
+
+        // Discount code
+        const applyBtn = $('#discountApply');
+        if (applyBtn) {
+            applyBtn.addEventListener('click', () => this.applyDiscount());
+            $('#discountInput')?.addEventListener('keydown', e => { if (e.key === 'Enter') this.applyDiscount(); });
+        }
+
         document.addEventListener('click', e => {
             const addBtn = e.target.closest('.add-cart-btn');
             const buyBtn = e.target.closest('.buy-now-btn');
@@ -486,33 +524,70 @@ const Cart = {
             if (buyBtn) { Modal.open([this.cardData(buyBtn.closest('.prod-card'))]); }
         });
     },
+
+    applyDiscount() {
+        const input = $('#discountInput');
+        const code = input?.value.trim().toUpperCase();
+        const pct = this.DISCOUNT_CODES[code];
+        if (pct) {
+            this.discountPct = pct;
+            input.value = '';
+            input.placeholder = `✓ ${code} applied (${pct}% off)`;
+            input.disabled = true;
+            this.render();
+            Toast.show(`🎉 ${pct}% discount applied!`);
+        } else {
+            Toast.show('Invalid discount code', 'warn');
+            input.style.borderColor = '#ef4444';
+            setTimeout(() => input.style.borderColor = '', 1500);
+        }
+    },
+
     cardData(card) { return { id: card.dataset.id, name: card.dataset.name, price: parseFloat(card.dataset.price), file: card.dataset.file, icon: $('.prod-emoji', card)?.textContent || '📦' }; },
+
     add(product) {
         if (this.items.find(i => i.id === product.id)) { Toast.show(`${product.name} already in cart!`, 'warn'); return; }
         this.items.push({ ...product, qty: 1 });
         this.save(); this.render(); this.updateBadge();
         Toast.show(`✓ ${product.name} added!`);
-        this.badge.style.transform = 'scale(1.5)';
+        this.badge.style.transform = 'scale(1.6)';
         setTimeout(() => this.badge.style.transform = '', 300);
     },
+
     remove(id) { this.items = this.items.filter(i => i.id !== id); this.save(); this.render(); this.updateBadge(); },
-    clear()    { this.items = []; this.save(); this.render(); this.updateBadge(); },
-    getTotal() { return this.items.reduce((s, i) => s + i.price, 0).toFixed(2); },
-    getCount() { return this.items.length; },
+    clear()    { this.items = []; this.discountPct = 0; this.save(); this.render(); this.updateBadge(); },
+    getRawTotal() { return this.items.reduce((s, i) => s + i.price, 0); },
+    getTotal()    {
+        const raw = this.getRawTotal();
+        const disc = this.discountPct ? raw * (this.discountPct / 100) : 0;
+        return (raw - disc).toFixed(2);
+    },
+    getCount()  { return this.items.length; },
     save() { localStorage.setItem(this.key, JSON.stringify(this.items)); },
     load() { try { this.items = JSON.parse(localStorage.getItem(this.key)) || []; } catch { this.items = []; } },
     updateBadge() { const c = this.getCount(); this.badge.textContent = c; this.badge.classList.toggle('show', c > 0); },
+
     render() {
         this.list.innerHTML = !this.items.length
             ? `<div class="cp-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><p>Your cart is empty</p></div>`
             : this.items.map(item => `
-                <div class="cp-item" data-id="${item.id}">
+                <div class="cp-item">
                     <div class="cp-item-icon">${item.icon}</div>
                     <div class="cp-item-info"><h4>${item.name}</h4><span>$${item.price.toFixed(2)}</span></div>
                     <div class="cp-item-ctrl"><button class="rm" onclick="Cart.remove('${item.id}')">×</button></div>
                 </div>`).join('');
+
+        // Show discount line if active
+        const raw = this.getRawTotal();
+        const discEl = $('#cpDiscountLine');
+        if (this.discountPct && discEl) {
+            discEl.innerHTML = `<span>Discount (${this.discountPct}%)</span><strong style="color:#22c55e">−$${(raw * this.discountPct / 100).toFixed(2)}</strong>`;
+            discEl.style.display = 'flex';
+        } else if (discEl) discEl.style.display = 'none';
+
         this.total.textContent = this.getTotal();
     },
+
     open()  { this.render(); this.panel.classList.add('open'); this.mask.classList.add('show'); document.body.style.overflow = 'hidden'; },
     close() { this.panel.classList.remove('open'); this.mask.classList.remove('show'); document.body.style.overflow = ''; }
 };
@@ -521,14 +596,13 @@ const Cart = {
 const Modal = {
     wrap: $('#modal'), closeBtn: $('#modalClose'), stepProc: $('#stepProcessing'),
     stepSucc: $('#stepSuccess'), titleEl: $('#modalTitle'), statusEl: $('#modalStatus'), dlLink: $('#downloadLink'),
-    msgs: ['Verifying order...', 'Preparing your files...', 'Packaging downloads...', 'Almost ready...', 'Done! 🎉'],
+    msgs: ['Verifying order...','Preparing files...','Packaging...','Almost ready...','Done! 🎉'],
     init() {
         this.closeBtn.addEventListener('click', () => this.hide());
         this.wrap.addEventListener('click', e => { if (e.target === this.wrap) this.hide(); });
     },
     open(items) {
-        const old = $('#stepSuccess .dl-buttons');
-        if (old) old.remove();
+        const old = $('#stepSuccess .dl-buttons'); if (old) old.remove();
         if (this.dlLink) this.dlLink.style.display = 'none';
         this.stepProc.classList.remove('hidden');
         this.stepSucc.classList.add('hidden');
@@ -539,9 +613,9 @@ const Modal = {
         let idx = 0;
         const t = setInterval(() => {
             idx++;
-            if (idx < this.msgs.length) { this.statusEl.textContent = this.msgs[idx]; }
+            if (idx < this.msgs.length) this.statusEl.textContent = this.msgs[idx];
             else { clearInterval(t); setTimeout(() => this.showSuccess(items), 300); }
-        }, 650);
+        }, 580);
     },
     showSuccess(items) {
         this.stepProc.classList.add('hidden');
@@ -550,21 +624,18 @@ const Modal = {
         wrap.className = 'dl-buttons';
         items.forEach(item => {
             const a = document.createElement('a');
-            a.href = `downloads/${item.file}`;
-            a.download = item.file;
-            a.className = 'btn-download';
+            a.href = `downloads/${item.file}`; a.download = item.file; a.className = 'btn-download';
             a.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download ${item.name}`;
             wrap.appendChild(a);
         });
         $('#stepSuccess').appendChild(wrap);
         Cart.clear();
-        Toast.show(items.length > 1 ? `${items.length} files ready to download!` : `${items[0].name} ready!`);
+        Toast.show(items.length > 1 ? `${items.length} files ready!` : `${items[0].name} ready!`);
     },
     hide() {
         this.wrap.classList.remove('show');
         document.body.style.overflow = '';
-        const old = $('#stepSuccess .dl-buttons');
-        if (old) old.remove();
+        const old = $('#stepSuccess .dl-buttons'); if (old) old.remove();
         if (this.dlLink) this.dlLink.style.display = '';
     }
 };
@@ -592,11 +663,20 @@ function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', e => {
             const target = document.querySelector(a.getAttribute('href'));
-            if (!target) return;
-            e.preventDefault();
+            if (!target) return; e.preventDefault();
             window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' });
         });
     });
+}
+
+/* ── BACK TO TOP ── */
+function initBackToTop() {
+    const btn = document.createElement('button');
+    btn.className = 'back-to-top'; btn.title = 'Back to top';
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>`;
+    document.body.appendChild(btn);
+    window.addEventListener('scroll', () => btn.classList.toggle('show', window.scrollY > 500), { passive: true });
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
 /* ── BOOT ── */
@@ -617,18 +697,11 @@ document.addEventListener('DOMContentLoaded', () => {
     ChatBubble.init();
     Particles.init();
     ProgressBar.init();
-    CardTilt.init();
+    CardHolo.init();
+    ProductEnhancer.init();
+    InteractiveGrid.init();
+    TextScramble.init();
     initSmoothScroll();
-    console.log('%c[RACHNA HUB v5] ✓', 'color:#00f5a0;font-weight:bold;font-size:13px');
+    initBackToTop();
+    console.log('%c[RACHNA HUB v6] ✓', 'color:#00f5a0;font-weight:bold;font-size:13px');
 });
-
-/* ── BACK TO TOP ── */
-(function() {
-    const btn = document.createElement('button');
-    btn.className = 'back-to-top';
-    btn.title = 'Back to top';
-    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>`;
-    document.body.appendChild(btn);
-    window.addEventListener('scroll', () => btn.classList.toggle('show', window.scrollY > 500), { passive: true });
-    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-})();

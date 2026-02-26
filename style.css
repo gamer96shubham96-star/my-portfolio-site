@@ -6,9 +6,9 @@
 /* ─── VARIABLES ─────────────────────────────── */
 :root {
     /* Dark theme (default) */
-    --bg:          #080810;
-    --bg2:         #0e0e1a;
-    --bg3:         #141425;
+    --bg:          #030307;
+    --bg2:         #08080f;
+    --bg3:         #0d0d1c;
     --surface:     rgba(255,255,255,0.04);
     --surface2:    rgba(255,255,255,0.07);
     --border:      rgba(255,255,255,0.08);
@@ -30,6 +30,7 @@
                    radial-gradient(ellipse at 20% 80%, rgba(139,92,246,0.1) 0%, transparent 50%);
 
     --font-main:   'Outfit', sans-serif;
+    --font-body:   'Plus Jakarta Sans', 'Outfit', sans-serif;
     --font-mono:   'DM Mono', monospace;
 
     --radius:      14px;
@@ -62,10 +63,10 @@
 /* ─── RESET ──────────────────────────────────── */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
-html { scroll-behavior: smooth; font-size: 16px; }
+html { scroll-behavior: smooth; font-size: 16px; scroll-padding-top: 80px; }
 
 body {
-    font-family: var(--font-main);
+    font-family: var(--font-body);
     background: var(--bg);
     color: var(--text);
     line-height: 1.6;
@@ -101,7 +102,7 @@ ul, ol { list-style: none; }
     z-index: 10000;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 18px var(--green-glow), 0 0 6px var(--green);
-    transition: width .2s, height .2s, background .2s;
+    transition: none;
     will-change: transform;
 }
 
@@ -196,7 +197,7 @@ body:has(button:hover) .cursor-trail {
     padding: 0 40px;
     gap: 40px;
     background: rgba(8,8,16,0.8);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(28px) saturate(1.4);
     border-bottom: 1px solid var(--border);
     transform: translateY(-100%);
     animation: navSlideIn .8s var(--ease) 2.8s forwards;
@@ -579,7 +580,7 @@ body:has(button:hover) .cursor-trail {
     transition: opacity var(--transition);
 }
 
-.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 36px var(--green-glow); }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 36px var(--green-glow), 0 0 60px rgba(0,245,160,0.18), 0 4px 16px rgba(0,0,0,0.3); }
 .btn-primary:hover::after { opacity: 1; }
 .btn-primary svg { width: 18px; height: 18px; flex-shrink: 0; }
 
@@ -943,7 +944,7 @@ body:has(button:hover) .cursor-trail {
 
 .btn-buy:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px var(--green-glow);
+    box-shadow: 0 8px 24px rgba(0,245,160,0.3), 0 2px 8px rgba(0,0,0,0.25);
     filter: brightness(1.08);
 }
 
@@ -2217,4 +2218,214 @@ body:has(button:hover) .cursor-trail {
 .back-to-top.show { opacity: 1; transform: none; pointer-events: all; }
 .back-to-top:hover { color: var(--green); border-color: var(--green); background: var(--green-dim); transform: translateY(-3px); }
 .back-to-top svg { width: 18px; height: 18px; }
+
+
+/* ═══════════════════════════════════════════════
+   v6.0 PREMIUM UPGRADES
+═══════════════════════════════════════════════ */
+
+/* ── CURSOR: zero lag on dot ── */
+.cursor { transition: none !important; will-change: transform; }
+.cursor-trail { will-change: transform; transition: width .25s, height .25s, border-color .25s, background .25s; }
+.cursor.cursor-hover  { width: 6px !important; height: 6px !important; }
+.cursor-trail.cursor-hover { width: 56px !important; height: 56px !important; border-color: var(--green) !important; background: rgba(0,245,160,0.06) !important; }
+
+/* ── GLASSMORPHISM CARDS ── */
+.feat-card, .review-card {
+    background: rgba(255,255,255,0.03) !important;
+    border: 1px solid rgba(255,255,255,0.06) !important;
+    backdrop-filter: blur(12px);
+}
+[data-theme="light"] .feat-card,
+[data-theme="light"] .review-card {
+    background: rgba(255,255,255,0.7) !important;
+    border: 1px solid rgba(0,0,0,0.07) !important;
+}
+
+/* ── COLORED GLOW on .btn-primary (always) ── */
+.btn-primary {
+    box-shadow: 0 4px 20px rgba(0,245,160,0.2), 0 1px 4px rgba(0,0,0,0.3);
+}
+.btn-primary:hover {
+    box-shadow: 0 14px 40px rgba(0,245,160,0.35), 0 0 70px rgba(0,245,160,0.15), 0 4px 16px rgba(0,0,0,0.3) !important;
+}
+
+/* ── HOLOGRAPHIC CARD SHINE OVERLAY ── */
+.card-shine {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: 1;
+    mix-blend-mode: screen;
+}
+
+/* ── TRUST BADGES ── */
+.trust-row {
+    display: flex;
+    gap: 8px;
+    padding: 10px 0 0;
+    flex-wrap: wrap;
+}
+.trust-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text2);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 3px 8px;
+    letter-spacing: 0.2px;
+    transition: all 0.2s;
+}
+.trust-badge svg { width: 11px; height: 11px; color: var(--green); flex-shrink: 0; }
+.trust-badge:hover { border-color: rgba(0,245,160,0.3); color: var(--green); }
+
+/* ── SCARCITY BADGE ── */
+.scarcity-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #ff6b35;
+    background: rgba(255,107,53,0.1);
+    border: 1px solid rgba(255,107,53,0.25);
+    border-radius: 6px;
+    padding: 3px 9px;
+    margin-bottom: 8px;
+    animation: scarcityPulse 2.5s ease-in-out infinite;
+}
+@keyframes scarcityPulse {
+    0%,100% { opacity: 1; }
+    50%      { opacity: 0.65; }
+}
+
+/* ── SEARCH RESULT HIGHLIGHTING ── */
+.sr-item mark {
+    background: rgba(0,245,160,0.25);
+    color: var(--green);
+    border-radius: 2px;
+    padding: 0 1px;
+    font-style: normal;
+}
+
+/* ── DISCOUNT CODE FIELD ── */
+.cp-discount {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+.cp-discount input {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    color: var(--text);
+    font-size: 0.82rem;
+    font-family: var(--font-mono);
+    outline: none;
+    transition: border-color 0.2s;
+    min-width: 0;
+}
+.cp-discount input:focus { border-color: var(--green); }
+.cp-discount input::placeholder { color: var(--text3); }
+.cp-discount button {
+    padding: 10px 14px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+.cp-discount button:hover { background: var(--green-dim); border-color: var(--green); color: var(--green); }
+
+/* Discount line in total area */
+#cpDiscountLine {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.82rem;
+    padding: 6px 0;
+    border-top: 1px dashed var(--border);
+    margin-bottom: 4px;
+}
+#cpDiscountLine span { color: var(--text2); }
+
+/* ── MOBILE CART: slides from BOTTOM ── */
+@media (max-width: 768px) {
+    .cart-panel {
+        top: auto !important;
+        bottom: -100% !important;
+        right: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 85vh !important;
+        border-left: none !important;
+        border-top: 1px solid var(--border) !important;
+        border-radius: 20px 20px 0 0 !important;
+        transition: bottom 0.4s cubic-bezier(0.34,1.2,0.64,1) !important;
+    }
+    .cart-panel.open {
+        bottom: 0 !important;
+        right: auto !important;
+    }
+    /* Drag handle pill */
+    .cp-header::before {
+        content: '';
+        display: block;
+        width: 36px; height: 4px;
+        background: var(--border2);
+        border-radius: 2px;
+        margin: 0 auto 16px;
+        position: absolute;
+        top: 10px; left: 50%; transform: translateX(-50%);
+    }
+    .cp-header { position: relative; padding-top: 28px; }
+}
+
+/* ── PLUS JAKARTA SANS for body copy ── */
+.prod-desc, .feat-card p, .review-card > p,
+.hero-desc, .contact-left > p, .faq-a-inner,
+.step-card p, .chat-popup-body p {
+    font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+    font-size: 0.92rem;
+    line-height: 1.72;
+}
+
+/* ── DEEPER CARD SHADOWS ── */
+.prod-card {
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+.prod-card:hover {
+    box-shadow: 0 20px 50px -10px rgba(0,245,160,0.12), 0 8px 32px rgba(0,0,0,0.4);
+}
+
+/* ── FEAT CARD hover glow ── */
+.feat-card:hover {
+    box-shadow: 0 20px 50px -10px rgba(0,245,160,0.12), 0 8px 32px rgba(0,0,0,0.3);
+}
+
+/* ── INTERACTIVE GRID transition ── */
+.grid-mesh {
+    transition: background-position 0.1s linear;
+}
+
+/* ── ENHANCED NAVBAR GLASS ── */
+.navbar {
+    border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+}
+[data-theme="light"] .navbar { border-bottom: 1px solid rgba(0,0,0,0.08) !important; }
+
+/* ── CARD CONTENT above shine ── */
+.prod-card > *:not(.card-shine):not(.prod-glow) { position: relative; z-index: 2; }
 
