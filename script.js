@@ -126,32 +126,49 @@ const Nav = {
 
 /* ── SCROLL REVEAL ── (CSS-only, no GSAP conflict) ── */
 const Reveal = {
+    timers: new Map(),
     init() {
         const obs = new IntersectionObserver(entries => {
             entries.forEach(e => {
+                const el = e.target;
+                const delay = +(el.dataset.delay || 0);
                 if (e.isIntersecting) {
-                    setTimeout(() => e.target.classList.add('visible'), +(e.target.dataset.delay || 0));
-                    obs.unobserve(e.target);
+                    // Clear any pending hide timer
+                    clearTimeout(this.timers.get(el));
+                    const t = setTimeout(() => el.classList.add('visible'), delay);
+                    this.timers.set(el, t);
+                } else {
+                    // Element scrolled out — reset so it re-animates next time
+                    clearTimeout(this.timers.get(el));
+                    const t = setTimeout(() => el.classList.remove('visible'), 80);
+                    this.timers.set(el, t);
                 }
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
         $$('.reveal').forEach(el => obs.observe(el));
     }
 };
 
 /* ── STATS COUNTER ── */
 const Counter = {
+    running: new Set(),
     init() {
         const obs = new IntersectionObserver(entries => {
             entries.forEach(e => {
-                if (!e.isIntersecting) return;
-                const el = e.target, end = +el.dataset.count; let cur = 0;
-                const t = setInterval(() => {
-                    cur += end / 55;
-                    if (cur >= end) { cur = end; clearInterval(t); }
-                    el.textContent = Math.ceil(cur);
-                }, 18);
-                obs.unobserve(el);
+                const el = e.target;
+                if (e.isIntersecting && !this.running.has(el)) {
+                    this.running.add(el);
+                    const end = +el.dataset.count; let cur = 0;
+                    const t = setInterval(() => {
+                        cur += end / 55;
+                        if (cur >= end) { cur = end; clearInterval(t); this.running.delete(el); }
+                        el.textContent = Math.ceil(cur);
+                    }, 18);
+                } else if (!e.isIntersecting) {
+                    // Reset to 0 when scrolled out so it counts up again on re-entry
+                    el.textContent = '0';
+                    this.running.delete(el);
+                }
             });
         }, { threshold: 0.6 });
         $$('.stat-val').forEach(el => obs.observe(el));
