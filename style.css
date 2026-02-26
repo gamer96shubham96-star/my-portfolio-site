@@ -1900,3 +1900,321 @@ body:has(button:hover) .cursor-trail {
 .dl-buttons .btn-download:hover { background: var(--green-dim, #00d98f); transform: translateY(-1px); }
 .dl-buttons .btn-download svg { width: 16px; height: 16px; }
 
+
+/* ═══════════════════════════════════════════════
+   v5.0 — PREMIUM UPGRADES
+   Fix feat-card visibility + new animations + new sections
+═══════════════════════════════════════════════ */
+
+/* ── FIX: feat-cards were invisible due to GSAP conflict ──
+   Remove GSAP from feat-cards entirely — pure CSS reveal */
+.feat-card {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.65s var(--ease), transform 0.65s var(--ease),
+                border-color 0.3s var(--ease), box-shadow 0.3s var(--ease) !important;
+}
+.feat-card.visible {
+    opacity: 1 !important;
+    transform: none !important;
+}
+.feat-card[data-delay="0"]   { transition-delay: 0ms; }
+.feat-card[data-delay="80"]  { transition-delay: 80ms; }
+.feat-card[data-delay="160"] { transition-delay: 160ms; }
+
+/* ── SCROLL PROGRESS BAR ── */
+.scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: var(--grad-green);
+    z-index: 99999;
+    transition: width 0.1s linear;
+    width: 0%;
+    pointer-events: none;
+}
+
+/* ── NAVBAR SCROLLED STATE ── */
+.navbar.scrolled {
+    box-shadow: 0 2px 32px rgba(0,0,0,0.35);
+    border-bottom-color: var(--border2);
+}
+
+/* ── FLOATING HERO PARTICLES ── */
+.hero-particle {
+    position: absolute;
+    background: var(--green);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: particleFloat linear infinite;
+    will-change: transform, opacity;
+}
+@keyframes particleFloat {
+    0%   { transform: translateY(0) translateX(0); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 0.6; }
+    100% { transform: translateY(-120px) translateX(40px); opacity: 0; }
+}
+
+/* ── CARD HIGHLIGHT (search result) ── */
+.prod-card.highlight {
+    outline: 2px solid var(--green);
+    outline-offset: 2px;
+    box-shadow: 0 0 32px var(--green-glow);
+    transition: outline 0.1s, box-shadow 0.1s;
+}
+
+/* ── MAGNETIC BUTTON OVERFLOW FIX ── */
+.btn-primary, .btn-buy, .cta-pill {
+    will-change: transform;
+    display: inline-flex;
+}
+
+/* ── HOW IT WORKS ── */
+.howitworks { background: var(--bg); }
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+}
+
+.step-card {
+    padding: 36px 28px;
+    text-align: center;
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-right: none;
+    transition: all 0.3s var(--ease);
+}
+.step-card:first-child { border-radius: var(--radius-lg) 0 0 var(--radius-lg); }
+.step-card:last-child  { border-right: 1px solid var(--border); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; }
+
+.step-card:hover {
+    background: var(--surface2);
+    border-color: rgba(0,245,160,0.25);
+    z-index: 1;
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(0,0,0,0.2);
+}
+.step-card:last-child:hover { border-right-color: rgba(0,245,160,0.25); }
+
+.step-num {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    background: var(--green-dim);
+    border: 1px solid rgba(0,245,160,0.2);
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+}
+
+.step-icon {
+    width: 60px; height: 60px;
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--green);
+    margin: 0 auto 20px;
+    transition: all 0.3s var(--ease);
+}
+.step-icon svg { width: 26px; height: 26px; }
+.step-card:hover .step-icon {
+    background: var(--green);
+    color: #000;
+    border-color: var(--green);
+    transform: rotate(-5deg) scale(1.08);
+}
+
+.step-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.step-card p {
+    font-size: 0.87rem;
+    color: var(--text2);
+    line-height: 1.65;
+}
+
+.step-connector {
+    display: none; /* handled by border layout */
+}
+
+@media (max-width: 900px) {
+    .steps-grid { grid-template-columns: repeat(2, 1fr); }
+    .step-card:nth-child(2) { border-right: 1px solid var(--border); }
+    .step-card:first-child { border-radius: var(--radius-lg) 0 0 0; }
+    .step-card:nth-child(2) { border-radius: 0 var(--radius-lg) 0 0; }
+    .step-card:nth-child(3) { border-top: none; border-radius: 0 0 0 var(--radius-lg); }
+    .step-card:last-child   { border-top: none; border-radius: 0 0 var(--radius-lg) 0; }
+}
+@media (max-width: 600px) {
+    .steps-grid { grid-template-columns: 1fr; }
+    .step-card { border-right: 1px solid var(--border) !important; border-bottom: none; border-radius: 0 !important; }
+    .step-card:first-child { border-radius: var(--radius-lg) var(--radius-lg) 0 0 !important; }
+    .step-card:last-child  { border-bottom: 1px solid var(--border) !important; border-radius: 0 0 var(--radius-lg) var(--radius-lg) !important; }
+}
+
+/* ── SOCIAL PROOF BAR ── */
+.social-proof-bar {
+    background: linear-gradient(90deg, rgba(0,245,160,0.07), rgba(139,92,246,0.07));
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+}
+
+.spb-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+}
+
+.spb-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 36px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text2);
+    transition: color 0.2s;
+}
+.spb-item:hover { color: var(--green); }
+.spb-item svg { width: 18px; height: 18px; color: var(--green); flex-shrink: 0; }
+
+.spb-divider {
+    width: 1px;
+    height: 32px;
+    background: var(--border);
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .spb-inner { flex-direction: column; gap: 8px; }
+    .spb-divider { display: none; }
+}
+
+/* ── ENHANCED TOAST ── */
+.toast[data-type="warn"] { border-color: rgba(245,166,35,0.4); }
+.toast[data-type="warn"] svg { color: var(--gold); }
+
+/* ── STAGGER REVEAL for product cards ── */
+.prod-card:nth-child(1) { transition-delay: 0ms; }
+.prod-card:nth-child(2) { transition-delay: 60ms; }
+.prod-card:nth-child(3) { transition-delay: 120ms; }
+.prod-card:nth-child(4) { transition-delay: 180ms; }
+.prod-card:nth-child(5) { transition-delay: 240ms; }
+.prod-card:nth-child(6) { transition-delay: 300ms; }
+
+/* ── FEAT-CARD STAGGER ── */
+.feat-card:nth-child(1) { transition-delay: 0ms; }
+.feat-card:nth-child(2) { transition-delay: 80ms; }
+.feat-card:nth-child(3) { transition-delay: 160ms; }
+.feat-card:nth-child(4) { transition-delay: 0ms; }
+.feat-card:nth-child(5) { transition-delay: 80ms; }
+.feat-card:nth-child(6) { transition-delay: 160ms; }
+
+/* ── ENHANCED SECTION HEAD ── */
+.section-head {
+    position: relative;
+}
+.section-head::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 3px;
+    background: var(--grad-green);
+    border-radius: 999px;
+    margin: 20px auto 0;
+}
+
+/* ── PRODUCT CARD SHIMMER on hover ── */
+.prod-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
+    transform: skewX(-20deg);
+    transition: none;
+    pointer-events: none;
+}
+.prod-card:hover::after {
+    left: 150%;
+    transition: left 0.6s ease;
+}
+
+/* ── FEAT CARD GLOWING BORDER on hover ── */
+.feat-card::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: var(--radius-lg);
+    background: var(--grad-green);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.feat-card:hover::after { opacity: 0.15; }
+
+/* ── REVIEW CARD QUOTE MARK ── */
+.review-card { position: relative; overflow: hidden; }
+.review-card::before {
+    content: '"';
+    position: absolute;
+    top: -10px; right: 16px;
+    font-size: 7rem;
+    font-weight: 900;
+    color: var(--green);
+    opacity: 0.06;
+    line-height: 1;
+    font-family: Georgia, serif;
+    pointer-events: none;
+}
+
+/* ── ENHANCED LOADER ── */
+.loader-rh {
+    animation: loaderPulse 1.5s ease-in-out infinite;
+}
+@keyframes loaderPulse {
+    0%,100% { text-shadow: 0 0 20px var(--green-glow); }
+    50%      { text-shadow: 0 0 60px var(--green-glow), 0 0 120px rgba(0,245,160,0.2); }
+}
+
+/* ── BACK TO TOP (auto) ── */
+.back-to-top {
+    position: fixed;
+    bottom: 100px;
+    right: 28px;
+    width: 42px; height: 42px;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text2);
+    z-index: 9998;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: all 0.3s var(--ease);
+    pointer-events: none;
+    cursor: pointer;
+}
+.back-to-top.show { opacity: 1; transform: none; pointer-events: all; }
+.back-to-top:hover { color: var(--green); border-color: var(--green); background: var(--green-dim); transform: translateY(-3px); }
+.back-to-top svg { width: 18px; height: 18px; }
+
