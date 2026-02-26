@@ -13,9 +13,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
 </head>
 <body>
+
+    <!-- Custom Cursor -->
     <div class="cursor"></div>
     <div class="cursor-follower"><div class="cursor-inner"></div></div>
+
+    <!-- Noise Overlay -->
     <div class="noise-overlay"></div>
+
+    <!-- Loader -->
     <div class="loader">
         <div class="loader-content">
             <div class="loader-logo">RACHNA<span class="accent">.</span>HUB</div>
@@ -23,6 +29,8 @@
             <div class="loader-text">Loading Experience...</div>
         </div>
     </div>
+
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-logo">
             <span class="logo-text">RACHNA</span>
@@ -30,26 +38,31 @@
             <span class="logo-text secondary">HUB</span>
         </div>
         <div class="nav-menu">
-            <a href="#home" class="nav-link" data-text="Home"><span class="original-text">Home</span></a>
-            <a href="#features" class="nav-link" data-text="Features"><span class="original-text">Features</span></a>
-            <a href="#products" class="nav-link" data-text="Products"><span class="original-text">Products</span></a>
-            <a href="#testimonials" class="nav-link" data-text="Reviews"><span class="original-text">Reviews</span></a>
-            <a href="#faq" class="nav-link" data-text="FAQ"><span class="original-text">FAQ</span></a>
-            <a href="#contact" class="nav-link" data-text="Contact"><span class="original-text">Contact</span></a>
+            <a href="#home"         class="nav-link" data-text="Home">        <span class="original-text">Home</span></a>
+            <a href="#features"     class="nav-link" data-text="Features">    <span class="original-text">Features</span></a>
+            <a href="#products"     class="nav-link" data-text="Products">    <span class="original-text">Products</span></a>
+            <a href="#testimonials" class="nav-link" data-text="Reviews">     <span class="original-text">Reviews</span></a>
+            <a href="#faq"          class="nav-link" data-text="FAQ">         <span class="original-text">FAQ</span></a>
+            <a href="#contact"      class="nav-link" data-text="Contact">     <span class="original-text">Contact</span></a>
         </div>
         <div class="nav-actions">
-            <div class="cart-wrapper">
+            <!-- Cart Icon -->
+            <div class="cart-wrapper" id="cartToggle">
                 <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
                     <line x1="3" y1="6" x2="21" y2="6"></line>
                     <path d="M16 10a4 4 0 0 1-8 0"></path>
                 </svg>
-                <span class="cart-count">0</span>
+                <span class="cart-count" id="cartCount">0</span>
             </div>
             <button class="nav-cta"><span>Get Started</span></button>
         </div>
-        <div class="menu-toggle"><span></span><span></span><span></span></div>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span><span></span><span></span>
+        </div>
     </nav>
+
+    <!-- ============ HERO ============ -->
     <section id="home" class="hero-section">
         <div class="hero-background">
             <div class="gradient-orb orb-1"></div>
@@ -115,6 +128,8 @@
             <div class="scroll-mouse"></div>
         </div>
     </section>
+
+    <!-- ============ FEATURES ============ -->
     <section id="features" class="features-section">
         <div class="section-header">
             <div class="section-label">
@@ -128,6 +143,7 @@
             <p class="section-description">Experience the difference with our professional-grade Minecraft assets.</p>
         </div>
         <div class="features-grid">
+
             <div class="feature-card">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -137,6 +153,7 @@
                 <h3>Lightning Fast</h3>
                 <p>Optimized code ensures zero lag and maximum performance for your server.</p>
             </div>
+
             <div class="feature-card">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -144,9 +161,10 @@
                         <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                     </svg>
                 </div>
-                <h3>Secure & Safe</h3>
+                <h3>Secure &amp; Safe</h3>
                 <p>All products are thoroughly tested and verified for security and compatibility.</p>
             </div>
+
             <div class="feature-card">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -157,6 +175,7 @@
                 <h3>Instant Delivery</h3>
                 <p>Get immediate access to your purchases with our automated delivery system.</p>
             </div>
+
             <div class="feature-card">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -166,6 +185,7 @@
                 <h3>24/7 Support</h3>
                 <p>Our dedicated team is always ready to help you with any questions.</p>
             </div>
+
             <div class="feature-card">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -175,6 +195,7 @@
                 <h3>Regular Updates</h3>
                 <p>All products receive free updates and improvements over time.</p>
             </div>
+
             <div class="feature-card">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -185,8 +206,11 @@
                 <h3>Fair Pricing</h3>
                 <p>Premium quality at affordable prices with flexible payment options.</p>
             </div>
+
         </div>
     </section>
+
+    <!-- ============ PRODUCTS ============ -->
     <section id="products" class="products-section">
         <div class="section-header">
             <div class="section-label">
@@ -199,15 +223,26 @@
             </h2>
             <p class="section-description">Instant digital delivery. Secure payments. Unlimited possibilities.</p>
         </div>
+
+        <!-- Filter Buttons -->
         <div class="products-filter">
-            <button class="filter-btn active" data-filter="all"><span>All Products</span></button>
-            <button class="filter-btn" data-filter="datapack"><span>Datapacks</span></button>
-            <button class="filter-btn" data-filter="plugin"><span>Plugins</span></button>
-            <button class="filter-btn" data-filter="bot"><span>Discord Bot Codes</span></button>
-            <button class="filter-btn" data-filter="resource"><span>Resource Packs</span></button>
+            <button class="filter-btn active" data-filter="all">    <span>All Products</span></button>
+            <button class="filter-btn" data-filter="datapack">      <span>Datapacks</span></button>
+            <button class="filter-btn" data-filter="plugin">        <span>Plugins</span></button>
+            <button class="filter-btn" data-filter="bot">           <span>Discord Bot Codes</span></button>
+            <button class="filter-btn" data-filter="resource">      <span>Resource Packs</span></button>
         </div>
+
+        <!-- Products Grid -->
         <div class="products-grid">
-            <div class="product-card" data-category="datapack" data-id="1" data-name="Eternal Fortune" data-price="5.00" data-file="eternal-fortune-1.1.zip">
+
+            <!-- Product 1 -->
+            <div class="product-card"
+                 data-category="datapack"
+                 data-id="1"
+                 data-name="Lucky Blocks"
+                 data-price="5.00"
+                 data-file="eternal-fortune-1.1.zip">
                 <div class="card-glow"></div>
                 <div class="card-content">
                     <div class="card-header">
@@ -225,17 +260,20 @@
                             <span class="price">5.00</span>
                         </div>
                         <div class="product-buttons">
-                            <button class="add-cart-btn">
-                                <span>Add to Cart</span>
-                            </button>
-                            <button class="buy-now-btn">
-                                <span>Buy Now</span>
-                            </button>
+                            <button class="add-cart-btn"><span>Add to Cart</span></button>
+                            <button class="buy-now-btn"><span>Buy Now</span></button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="product-card" data-category="datapack" data-id="2" data-name="Grass Drops Op Items" data-price="10.00" data-file="grass-drops-op-items.zip">
+
+            <!-- Product 2 -->
+            <div class="product-card"
+                 data-category="datapack"
+                 data-id="2"
+                 data-name="Grass Drops Op Items"
+                 data-price="10.00"
+                 data-file="grass-drops-op-items.zip">
                 <div class="card-glow"></div>
                 <div class="card-content">
                     <div class="card-header">
@@ -253,25 +291,20 @@
                             <span class="price">10.00</span>
                         </div>
                         <div class="product-buttons">
-    <button class="add-cart-btn">
-        <span>Add to Cart</span>
-    </button>
-    <button class="buy-now-btn">
-        <span>Buy Now</span>
-    </button>
-</div>
-                            <span class="btn-text">Purchase</span>
-                            <span class="btn-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                                </svg>
-                            </span>
-                        </button>
+                            <button class="add-cart-btn"><span>Add to Cart</span></button>
+                            <button class="buy-now-btn"><span>Buy Now</span></button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="product-card" data-category="bot" data-id="3" data-name="Discord Bot Code" data-price="15.00" data-file="discord-bot-code.txt">
+
+            <!-- Product 3 -->
+            <div class="product-card"
+                 data-category="bot"
+                 data-id="3"
+                 data-name="Discord Bot"
+                 data-price="15.00"
+                 data-file="discord-bot-code.txt">
                 <div class="card-glow"></div>
                 <div class="card-content">
                     <div class="card-header">
@@ -289,25 +322,20 @@
                             <span class="price">15.00</span>
                         </div>
                         <div class="product-buttons">
-    <button class="add-cart-btn">
-        <span>Add to Cart</span>
-    </button>
-    <button class="buy-now-btn">
-        <span>Buy Now</span>
-    </button>
-</div>
-                            <span class="btn-text">Purchase</span>
-                            <span class="btn-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                                </svg>
-                            </span>
-                        </button>
+                            <button class="add-cart-btn"><span>Add to Cart</span></button>
+                            <button class="buy-now-btn"><span>Buy Now</span></button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="product-card" data-category="datapack" data-id="4" data-name="Stone Drops Op Items" data-price="8.00" data-file="stone-drops-op-items.zip">
+
+            <!-- Product 4 -->
+            <div class="product-card"
+                 data-category="datapack"
+                 data-id="4"
+                 data-name="Stone Drops Op Items"
+                 data-price="8.00"
+                 data-file="stone-drops-op-items.zip">
                 <div class="card-glow"></div>
                 <div class="card-content">
                     <div class="card-header">
@@ -325,25 +353,20 @@
                             <span class="price">8.00</span>
                         </div>
                         <div class="product-buttons">
-    <button class="add-cart-btn">
-        <span>Add to Cart</span>
-    </button>
-    <button class="buy-now-btn">
-        <span>Buy Now</span>
-    </button>
-</div>
-                            <span class="btn-text">Purchase</span>
-                            <span class="btn-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                                </svg>
-                            </span>
-                        </button>
+                            <button class="add-cart-btn"><span>Add to Cart</span></button>
+                            <button class="buy-now-btn"><span>Buy Now</span></button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="product-card" data-category="datapack" data-id="5" data-name="Jumping Drops Op Items!" data-price="3.00" data-file="jumping-gives-op-items.zip">
+
+            <!-- Product 5 -->
+            <div class="product-card"
+                 data-category="datapack"
+                 data-id="5"
+                 data-name="Jumping Drops Op Items!"
+                 data-price="3.00"
+                 data-file="jumping-gives-op-items.zip">
                 <div class="card-glow"></div>
                 <div class="card-content">
                     <div class="card-header">
@@ -352,7 +375,7 @@
                     </div>
                     <div class="card-body">
                         <h3 class="product-title">Jumping Drops Op Items!</h3>
-                        <p class="product-category">Resource Pack</p>
+                        <p class="product-category">Datapack</p>
                         <p class="product-description">When You Jump Once You Get A Super Op Item!</p>
                     </div>
                     <div class="card-footer">
@@ -361,25 +384,20 @@
                             <span class="price">3.00</span>
                         </div>
                         <div class="product-buttons">
-    <button class="add-cart-btn">
-        <span>Add to Cart</span>
-    </button>
-    <button class="buy-now-btn">
-        <span>Buy Now</span>
-    </button>
-</div>
-                            <span class="btn-text">Purchase</span>
-                            <span class="btn-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                                </svg>
-                            </span>
-                        </button>
+                            <button class="add-cart-btn"><span>Add to Cart</span></button>
+                            <button class="buy-now-btn"><span>Buy Now</span></button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="product-card" data-category="datapack" data-id="6" data-name="Dirt Drops Op Items" data-price="7.00" data-file="dirt-drops-op-items.zip">
+
+            <!-- Product 6 -->
+            <div class="product-card"
+                 data-category="datapack"
+                 data-id="6"
+                 data-name="Dirt Drops Op Items"
+                 data-price="7.00"
+                 data-file="dirt-drops-op-items.zip">
                 <div class="card-glow"></div>
                 <div class="card-content">
                     <div class="card-header">
@@ -389,7 +407,7 @@
                     <div class="card-body">
                         <h3 class="product-title">Dirt Drops Op Items</h3>
                         <p class="product-category">Datapack</p>
-                        <p class="product-description">Breaking Dirt Drops Op Items!.</p>
+                        <p class="product-description">Breaking Dirt Drops Op Items!</p>
                     </div>
                     <div class="card-footer">
                         <div class="price-wrapper">
@@ -397,26 +415,17 @@
                             <span class="price">7.00</span>
                         </div>
                         <div class="product-buttons">
-    <button class="add-cart-btn">
-        <span>Add to Cart</span>
-    </button>
-    <button class="buy-now-btn">
-        <span>Buy Now</span>
-    </button>
-</div>
-                            <span class="btn-text">Purchase</span>
-                            <span class="btn-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                                </svg>
-                            </span>
-                        </button>
+                            <button class="add-cart-btn"><span>Add to Cart</span></button>
+                            <button class="buy-now-btn"><span>Buy Now</span></button>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
+
+    <!-- ============ TESTIMONIALS ============ -->
     <section id="testimonials" class="testimonials-section">
         <div class="section-header">
             <div class="section-label">
@@ -430,34 +439,37 @@
             <p class="section-description">See what our customers have to say about their experience.</p>
         </div>
         <div class="testimonials-grid">
+
             <div class="testimonial-card">
                 <div class="testimonial-rating">
                     <span class="star">★</span><span class="star">★</span><span class="star">★</span>
                     <span class="star">★</span><span class="star">★</span>
                 </div>
-                <p class="testimonial-text">"Absolutely amazing products! The Ultimate Trees datapack transformed our server completely. Highly recommended!"</p>
+                <p class="testimonial-text">"Absolutely amazing products! The Lucky Blocks datapack transformed our server completely. Highly recommended!"</p>
                 <div class="testimonial-author">
-                    <div class="author-avatar">JD</div>
+                    <div class="author-avatar">SB</div>
                     <div class="author-info">
                         <h4>Shubham96</h4>
                         <span>Server Owner</span>
                     </div>
                 </div>
             </div>
+
             <div class="testimonial-card">
                 <div class="testimonial-rating">
                     <span class="star">★</span><span class="star">★</span><span class="star">★</span>
                     <span class="star">★</span><span class="star">★</span>
                 </div>
-                <p class="testimonial-text">"Best investment for our Minecraft server. The Anti-Grief plugin works perfectly and support is exceptional."</p>
+                <p class="testimonial-text">"Best investment for our Minecraft server. The Stone Drops plugin works perfectly and support is exceptional."</p>
                 <div class="testimonial-author">
-                    <div class="author-avatar">MS</div>
+                    <div class="author-avatar">DD</div>
                     <div class="author-info">
                         <h4>Deadliest Darkito</h4>
                         <span>Community Manager</span>
                     </div>
                 </div>
             </div>
+
             <div class="testimonial-card">
                 <div class="testimonial-rating">
                     <span class="star">★</span><span class="star">★</span><span class="star">★</span>
@@ -465,15 +477,18 @@
                 </div>
                 <p class="testimonial-text">"The Discord bot source code was well-documented and easy to customize. Perfect for our community!"</p>
                 <div class="testimonial-author">
-                    <div class="author-avatar">AW</div>
+                    <div class="author-avatar">KQ</div>
                     <div class="author-info">
                         <h4>Krishna-qbhsihekyt_11</h4>
                         <span>Developer</span>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
+
+    <!-- ============ FAQ ============ -->
     <section id="faq" class="faq-section">
         <div class="section-header">
             <div class="section-label">
@@ -487,6 +502,7 @@
             <p class="section-description">Got questions? We've got answers.</p>
         </div>
         <div class="faq-container">
+
             <div class="faq-item">
                 <button class="faq-question">
                     <span>How do I receive my purchased products?</span>
@@ -496,6 +512,7 @@
                     <div class="faq-answer-content">After completing your purchase, you'll receive an email with download links instantly. You can also access all your purchases from your account dashboard.</div>
                 </div>
             </div>
+
             <div class="faq-item">
                 <button class="faq-question">
                     <span>Do you offer refunds?</span>
@@ -505,6 +522,7 @@
                     <div class="faq-answer-content">Yes, we offer a 30-day money-back guarantee on all products. If you're not satisfied, contact our support team for a full refund.</div>
                 </div>
             </div>
+
             <div class="faq-item">
                 <button class="faq-question">
                     <span>Are the products compatible with my server version?</span>
@@ -514,6 +532,7 @@
                     <div class="faq-answer-content">All our products are tested and compatible with Minecraft Java Edition 1.16.5 and above. Check individual product pages for specific version compatibility.</div>
                 </div>
             </div>
+
             <div class="faq-item">
                 <button class="faq-question">
                     <span>Do I need technical knowledge to use these products?</span>
@@ -523,8 +542,11 @@
                     <div class="faq-answer-content">Most products come with detailed installation guides. Basic products can be installed by anyone, while advanced products may require some technical knowledge.</div>
                 </div>
             </div>
+
         </div>
     </section>
+
+    <!-- ============ CONTACT ============ -->
     <section id="contact" class="contact-section">
         <div class="contact-container">
             <div class="contact-info">
@@ -584,6 +606,8 @@
             </div>
         </div>
     </section>
+
+    <!-- ============ FOOTER ============ -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-logo">RACHNA.HUB</div>
@@ -595,18 +619,22 @@
             </div>
         </div>
     </footer>
+
+    <!-- ============ PAYMENT MODAL ============ -->
     <div class="modal-overlay" id="paymentModal">
         <div class="modal-content">
-            <button class="close-modal">×</button>
+            <button class="close-modal" id="closeModal">×</button>
             <div class="modal-header">
                 <h3 id="modal-title">Checkout</h3>
                 <p>Complete your purchase securely</p>
             </div>
-            <div class="payment-simulation">
+            <!-- Payment Simulation (shown while processing) -->
+            <div class="payment-simulation" id="paymentSimulation">
                 <div class="spinner"></div>
                 <p class="payment-status" id="payment-status">Initializing payment...</p>
             </div>
-            <div class="success-content">
+            <!-- Success Content (shown after success) -->
+            <div class="success-content" id="successContent">
                 <div class="check-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
                         <polyline points="20 6 9 17 4 12"></polyline>
@@ -626,21 +654,25 @@
         </div>
     </div>
 
-<div class="cart-panel" id="cartPanel">
-    <div class="cart-header">
-        <h3>Your Cart</h3>
-        <button class="close-cart">×</button>
-    </div>
-    <div class="cart-items" id="cartItems"></div>
-    <div class="cart-footer">
-        <div class="cart-total">
-            Total: $<span id="cartTotal">0.00</span>
+    <!-- ============ CART PANEL ============ -->
+    <div class="cart-panel" id="cartPanel">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" id="closeCart">×</button>
         </div>
-        <button class="checkout-btn-main">Proceed to Checkout</button>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items injected by JS -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                Total: $<span id="cartTotal">0.00</span>
+            </div>
+            <button class="checkout-btn-main" id="checkoutBtn">Proceed to Checkout</button>
+        </div>
     </div>
-</div>
 
-<div class="cart-overlay" id="cartOverlay"></div>
+    <!-- Cart Overlay (closes cart on outside click) -->
+    <div class="cart-overlay" id="cartOverlay"></div>
 
     <script src="script.js"></script>
 </body>
