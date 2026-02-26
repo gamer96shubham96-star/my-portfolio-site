@@ -1,679 +1,574 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rachna Hub | Premium Minecraft Assets Store</title>
+    <title>Rachna Hub | Premium Minecraft Assets</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
 
-    <!-- Custom Cursor -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"><div class="cursor-inner"></div></div>
+<!-- ═══ CURSOR ═══ -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursorTrail"></div>
 
-    <!-- Noise Overlay -->
-    <div class="noise-overlay"></div>
+<!-- ═══ NOISE / GRAIN OVERLAY ═══ -->
+<div class="grain"></div>
 
-    <!-- Loader -->
-    <div class="loader">
-        <div class="loader-content">
-            <div class="loader-logo">RACHNA<span class="accent">.</span>HUB</div>
-            <div class="loader-bar"><div class="loader-progress"></div></div>
-            <div class="loader-text">Loading Experience...</div>
+<!-- ═══ LOADER ═══ -->
+<div class="loader" id="loader">
+    <div class="loader-inner">
+        <div class="loader-logo">
+            <span class="loader-rh">RH</span>
+            <div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div>
+        </div>
+        <p class="loader-sub" id="loaderSub">Initializing store...</p>
+    </div>
+</div>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav class="navbar" id="navbar">
+    <a href="#home" class="nav-logo">
+        <span class="logo-bracket">[</span>
+        <span class="logo-name">RACHNA</span>
+        <span class="logo-accent">HUB</span>
+        <span class="logo-bracket">]</span>
+    </a>
+
+    <div class="nav-links" id="navLinks">
+        <a href="#home"         class="nav-link"><span>00</span> Home</a>
+        <a href="#features"     class="nav-link"><span>01</span> Features</a>
+        <a href="#products"     class="nav-link"><span>02</span> Products</a>
+        <a href="#testimonials" class="nav-link"><span>03</span> Reviews</a>
+        <a href="#faq"          class="nav-link"><span>04</span> FAQ</a>
+        <a href="#contact"      class="nav-link"><span>05</span> Contact</a>
+    </div>
+
+    <div class="nav-actions">
+        <button class="theme-btn" id="themeBtn" title="Toggle theme">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="https://discord.gg/8Hj8p8cvBz" target="_blank" class="discord-btn" title="Join Discord">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.369-.444.85-.608 1.23a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.23A.077.077 0 0 0 8.562 3c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026c.462-.62.874-1.275 1.226-1.963a.074.074 0 0 0-.041-.104 13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028z"/></svg>
+        </a>
+        <button class="cart-btn" id="cartBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+        <a href="#products" class="cta-pill">Shop Now</a>
+    </div>
+
+    <button class="burger" id="burger">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="home" class="hero">
+    <div class="hero-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="grid-mesh"></div>
+        <div class="scanlines"></div>
+    </div>
+
+    <div class="hero-content">
+        <div class="hero-tag">
+            <span class="pulse-dot"></span>
+            <span>Premium Minecraft Assets Store</span>
+        </div>
+
+        <h1 class="hero-title">
+            <span class="ht-line" data-delay="0">Craft Your</span>
+            <span class="ht-line accent-line" data-delay="100">Ultimate</span>
+            <span class="ht-line" data-delay="200">Experience</span>
+        </h1>
+
+        <p class="hero-desc">
+            Datapacks, plugins &amp; Discord bots — handcrafted for servers that refuse to be ordinary.
+        </p>
+
+        <div class="hero-btns">
+            <a href="#products" class="btn-primary">
+                <span>Browse Products</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a href="#features" class="btn-ghost">Why Us?</a>
+        </div>
+
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="stat-val" data-count="500">0</span><span class="stat-plus">+</span>
+                <span class="stat-lbl">Downloads</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-val" data-count="50">0</span><span class="stat-plus">+</span>
+                <span class="stat-lbl">Products</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-val" data-count="99">0</span><span class="stat-plus">%</span>
+                <span class="stat-lbl">Satisfaction</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-val" data-count="24">0</span><span class="stat-plus">/7</span>
+                <span class="stat-lbl">Support</span>
+            </div>
         </div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-logo">
-            <span class="logo-text">RACHNA</span>
-            <span class="logo-dot">.</span>
-            <span class="logo-text secondary">HUB</span>
-        </div>
-        <div class="nav-menu">
-            <a href="#home"         class="nav-link" data-text="Home">        <span class="original-text">Home</span></a>
-            <a href="#features"     class="nav-link" data-text="Features">    <span class="original-text">Features</span></a>
-            <a href="#products"     class="nav-link" data-text="Products">    <span class="original-text">Products</span></a>
-            <a href="#testimonials" class="nav-link" data-text="Reviews">     <span class="original-text">Reviews</span></a>
-            <a href="#faq"          class="nav-link" data-text="FAQ">         <span class="original-text">FAQ</span></a>
-            <a href="#contact"      class="nav-link" data-text="Contact">     <span class="original-text">Contact</span></a>
-        </div>
-        <div class="nav-actions">
-            <!-- Cart Icon -->
-            <div class="cart-wrapper" id="cartToggle">
-                <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <path d="M16 10a4 4 0 0 1-8 0"></path>
-                </svg>
-                <span class="cart-count" id="cartCount">0</span>
-            </div>
-            <button class="nav-cta"><span>Get Started</span></button>
-        </div>
-        <div class="menu-toggle" id="menuToggle">
-            <span></span><span></span><span></span>
-        </div>
-    </nav>
+    <div class="scroll-hint">
+        <div class="scroll-track"><div class="scroll-thumb"></div></div>
+        <span>Scroll</span>
+    </div>
+</section>
 
-    <!-- ============ HERO ============ -->
-    <section id="home" class="hero-section">
-        <div class="hero-background">
-            <div class="gradient-orb orb-1"></div>
-            <div class="gradient-orb orb-2"></div>
-            <div class="gradient-orb orb-3"></div>
-            <div class="grid-overlay"></div>
-        </div>
-        <div class="hero-content">
-            <div class="hero-badge">
-                <span class="badge-dot"></span>
-                <span class="badge-text">Premium Minecraft Assets</span>
-            </div>
-            <h1 class="hero-title">
-                <div class="title-line line-1">
-                    <span class="word-wrapper"><span class="word">Craft</span></span>
-                    <span class="word-wrapper"><span class="word">Your</span></span>
-                </div>
-                <div class="title-line line-2">
-                    <span class="word-wrapper"><span class="word highlight">Ultimate</span></span>
-                </div>
-                <div class="title-line line-3">
-                    <span class="word-wrapper"><span class="word">Minecraft</span></span>
-                    <span class="word-wrapper"><span class="word">Experience</span></span>
-                </div>
-            </h1>
-            <p class="hero-description">
-                <span class="desc-line">Premium datapacks, plugins, and discord bot codes</span>
-                <span class="desc-line">that transform your server into a legend.</span>
-            </p>
-            <div class="hero-cta-group">
-                <a href="#products" class="btn-main">
-                    <span class="btn-text">Explore Products</span>
-                    <span class="btn-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
-                    </span>
-                </a>
-                <a href="#features" class="btn-secondary"><span>View Features</span></a>
-            </div>
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number" data-count="500">0</span>
-                    <span class="stat-label">+ Downloads</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" data-count="50">0</span>
-                    <span class="stat-label">+ Products</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" data-count="99">0</span>
-                    <span class="stat-label">% Satisfaction</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" data-count="24">0</span>
-                    <span class="stat-label">/7 Support</span>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <span>Scroll</span>
-            <div class="scroll-mouse"></div>
-        </div>
-    </section>
-
-    <!-- ============ FEATURES ============ -->
-    <section id="features" class="features-section">
-        <div class="section-header">
-            <div class="section-label">
-                <span class="label-line"></span>
-                <span class="label-text">Why Choose Us</span>
-            </div>
-            <h2 class="section-title">
-                <span class="title-word">Premium</span>
-                <span class="title-word outline">Quality</span>
-            </h2>
-            <p class="section-description">Experience the difference with our professional-grade Minecraft assets.</p>
+<!-- ═══ FEATURES ═══ -->
+<section id="features" class="features section">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="section-tag">WHY CHOOSE US</span>
+            <h2 class="section-title">Built Different.<br><em>Premium Quality</em></h2>
         </div>
         <div class="features-grid">
-
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
-                    </svg>
+            <div class="feat-card reveal" data-delay="0">
+                <div class="feat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
                 </div>
                 <h3>Lightning Fast</h3>
-                <p>Optimized code ensures zero lag and maximum performance for your server.</p>
+                <p>Optimized code with zero bloat. Your server stays silky smooth no matter how many players are online.</p>
             </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                    </svg>
+            <div class="feat-card reveal" data-delay="80">
+                <div class="feat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                 </div>
-                <h3>Secure &amp; Safe</h3>
-                <p>All products are thoroughly tested and verified for security and compatibility.</p>
+                <h3>Secure &amp; Verified</h3>
+                <p>Every product is manually reviewed, tested, and security-scanned before it ever reaches the store.</p>
             </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <polyline points="12 6 12 12 16 14"></polyline>
-                    </svg>
+            <div class="feat-card reveal" data-delay="160">
+                <div class="feat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 </div>
                 <h3>Instant Delivery</h3>
-                <p>Get immediate access to your purchases with our automated delivery system.</p>
+                <p>Automated download system. Your files are ready the moment payment clears — no waiting, no delays.</p>
             </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                    </svg>
+            <div class="feat-card reveal" data-delay="0">
+                <div class="feat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                 </div>
                 <h3>24/7 Support</h3>
-                <p>Our dedicated team is always ready to help you with any questions.</p>
+                <p>Real humans, real help. Our team is on Discord around the clock ready to solve any issue fast.</p>
             </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                    </svg>
+            <div class="feat-card reveal" data-delay="80">
+                <div class="feat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
-                <h3>Regular Updates</h3>
-                <p>All products receive free updates and improvements over time.</p>
+                <h3>Free Updates</h3>
+                <p>All products receive lifetime updates. New Minecraft versions? We've got it covered — at no extra cost.</p>
             </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="12" y1="1" x2="12" y2="23"></line>
-                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                    </svg>
+            <div class="feat-card reveal" data-delay="160">
+                <div class="feat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                 </div>
                 <h3>Fair Pricing</h3>
-                <p>Premium quality at affordable prices with flexible payment options.</p>
+                <p>Premium quality at prices that don't hurt. No subscriptions, no hidden fees — just one clean payment.</p>
             </div>
-
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- ============ PRODUCTS ============ -->
-    <section id="products" class="products-section">
-        <div class="section-header">
-            <div class="section-label">
-                <span class="label-line"></span>
-                <span class="label-text">Our Collection</span>
-            </div>
-            <h2 class="section-title">
-                <span class="title-word">Premium</span>
-                <span class="title-word outline">Assets</span>
-            </h2>
-            <p class="section-description">Instant digital delivery. Secure payments. Unlimited possibilities.</p>
+<!-- ═══ PRODUCTS ═══ -->
+<section id="products" class="products section">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="section-tag">OUR COLLECTION</span>
+            <h2 class="section-title">Premium Assets.<br><em>Instant Downloads</em></h2>
         </div>
 
-        <!-- Filter Buttons -->
-        <div class="products-filter">
-            <button class="filter-btn active" data-filter="all">    <span>All Products</span></button>
-            <button class="filter-btn" data-filter="datapack">      <span>Datapacks</span></button>
-            <button class="filter-btn" data-filter="plugin">        <span>Plugins</span></button>
-            <button class="filter-btn" data-filter="bot">           <span>Discord Bot Codes</span></button>
-            <button class="filter-btn" data-filter="resource">      <span>Resource Packs</span></button>
+        <div class="filter-bar reveal">
+            <button class="filter-btn active" data-filter="all">All Products</button>
+            <button class="filter-btn" data-filter="datapack">Datapacks</button>
+            <button class="filter-btn" data-filter="plugin">Plugins</button>
+            <button class="filter-btn" data-filter="bot">Discord Bots</button>
+            <button class="filter-btn" data-filter="resource">Resource Packs</button>
         </div>
 
-        <!-- Products Grid -->
-        <div class="products-grid">
+        <div class="products-grid" id="productsGrid">
 
-            <!-- Product 1 -->
-            <div class="product-card"
-                 data-category="datapack"
-                 data-id="1"
-                 data-name="Lucky Blocks"
-                 data-price="5.00"
-                 data-file="eternal-fortune-1.1.zip">
-                <div class="card-glow"></div>
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="product-icon-wrapper"><div class="product-icon">🌲</div></div>
-                        <div class="product-badge">Bestseller</div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="product-title">Lucky Blocks</h3>
-                        <p class="product-category">Datapack</p>
-                        <p class="product-description">Gives The Game Custom LuckyBlocks!</p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="price-wrapper">
-                            <span class="currency">$</span>
-                            <span class="price">5.00</span>
-                        </div>
-                        <div class="product-buttons">
-                            <button class="add-cart-btn"><span>Add to Cart</span></button>
-                            <button class="buy-now-btn"><span>Buy Now</span></button>
-                        </div>
+            <article class="prod-card reveal" data-category="datapack" data-id="1" data-name="Lucky Blocks" data-price="5.00" data-file="eternal-fortune-1.1.zip">
+                <div class="prod-glow"></div>
+                <div class="prod-top">
+                    <div class="prod-emoji">🌲</div>
+                    <span class="prod-badge best">Bestseller</span>
+                </div>
+                <div class="prod-info">
+                    <p class="prod-type">Datapack</p>
+                    <h3 class="prod-name">Lucky Blocks</h3>
+                    <p class="prod-desc">Adds fully custom Lucky Blocks with unique drop tables and rare rewards to any world.</p>
+                </div>
+                <div class="prod-footer">
+                    <div class="prod-price"><sup>$</sup>5<small>.00</small></div>
+                    <div class="prod-actions">
+                        <button class="btn-cart add-cart-btn" title="Add to cart">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                            Add
+                        </button>
+                        <button class="btn-buy buy-now-btn">Buy Now</button>
                     </div>
                 </div>
-            </div>
+            </article>
 
-            <!-- Product 2 -->
-            <div class="product-card"
-                 data-category="datapack"
-                 data-id="2"
-                 data-name="Grass Drops Op Items"
-                 data-price="10.00"
-                 data-file="grass-drops-op-items.zip">
-                <div class="card-glow"></div>
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="product-icon-wrapper"><div class="product-icon">🛡️</div></div>
-                        <div class="product-badge hot">Hot</div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="product-title">Grass Drops Op Items</h3>
-                        <p class="product-category">Datapack</p>
-                        <p class="product-description">Breaking Grass Block Gives You Super Op Items!</p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="price-wrapper">
-                            <span class="currency">$</span>
-                            <span class="price">10.00</span>
-                        </div>
-                        <div class="product-buttons">
-                            <button class="add-cart-btn"><span>Add to Cart</span></button>
-                            <button class="buy-now-btn"><span>Buy Now</span></button>
-                        </div>
+            <article class="prod-card reveal" data-category="datapack" data-id="2" data-name="Grass Drops Op Items" data-price="10.00" data-file="grass-drops-op-items.zip">
+                <div class="prod-glow"></div>
+                <div class="prod-top">
+                    <div class="prod-emoji">🛡️</div>
+                    <span class="prod-badge hot">Hot 🔥</span>
+                </div>
+                <div class="prod-info">
+                    <p class="prod-type">Datapack</p>
+                    <h3 class="prod-name">Grass Drops OP Items</h3>
+                    <p class="prod-desc">Break grass blocks and receive super overpowered gear. Chaos mode: activated.</p>
+                </div>
+                <div class="prod-footer">
+                    <div class="prod-price"><sup>$</sup>10<small>.00</small></div>
+                    <div class="prod-actions">
+                        <button class="btn-cart add-cart-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                            Add
+                        </button>
+                        <button class="btn-buy buy-now-btn">Buy Now</button>
                     </div>
                 </div>
-            </div>
+            </article>
 
-            <!-- Product 3 -->
-            <div class="product-card"
-                 data-category="bot"
-                 data-id="3"
-                 data-name="Discord Bot"
-                 data-price="15.00"
-                 data-file="discord-bot-code.txt">
-                <div class="card-glow"></div>
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="product-icon-wrapper"><div class="product-icon">🤖</div></div>
-                        <div class="product-badge new">New</div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="product-title">Discord Bot</h3>
-                        <p class="product-category">Bot</p>
-                        <p class="product-description">Discord Bot Code Naming Crystal Hub Very Efficient!</p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="price-wrapper">
-                            <span class="currency">$</span>
-                            <span class="price">15.00</span>
-                        </div>
-                        <div class="product-buttons">
-                            <button class="add-cart-btn"><span>Add to Cart</span></button>
-                            <button class="buy-now-btn"><span>Buy Now</span></button>
-                        </div>
+            <article class="prod-card reveal" data-category="bot" data-id="3" data-name="Discord Bot" data-price="15.00" data-file="discord-bot-code.txt">
+                <div class="prod-glow"></div>
+                <div class="prod-top">
+                    <div class="prod-emoji">🤖</div>
+                    <span class="prod-badge new">New ✨</span>
+                </div>
+                <div class="prod-info">
+                    <p class="prod-type">Discord Bot</p>
+                    <h3 class="prod-name">Crystal Hub Bot</h3>
+                    <p class="prod-desc">Full-featured Discord bot source code — moderation, tickets, economy &amp; more. Well-documented.</p>
+                </div>
+                <div class="prod-footer">
+                    <div class="prod-price"><sup>$</sup>15<small>.00</small></div>
+                    <div class="prod-actions">
+                        <button class="btn-cart add-cart-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                            Add
+                        </button>
+                        <button class="btn-buy buy-now-btn">Buy Now</button>
                     </div>
                 </div>
-            </div>
+            </article>
 
-            <!-- Product 4 -->
-            <div class="product-card"
-                 data-category="datapack"
-                 data-id="4"
-                 data-name="Stone Drops Op Items"
-                 data-price="8.00"
-                 data-file="stone-drops-op-items.zip">
-                <div class="card-glow"></div>
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="product-icon-wrapper"><div class="product-icon">👹</div></div>
-                        <div class="product-badge">Popular</div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="product-title">Stone Drops Op Items!</h3>
-                        <p class="product-category">Datapack</p>
-                        <p class="product-description">Breaking Stone Gives You Super Op Items!</p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="price-wrapper">
-                            <span class="currency">$</span>
-                            <span class="price">8.00</span>
-                        </div>
-                        <div class="product-buttons">
-                            <button class="add-cart-btn"><span>Add to Cart</span></button>
-                            <button class="buy-now-btn"><span>Buy Now</span></button>
-                        </div>
+            <article class="prod-card reveal" data-category="datapack" data-id="4" data-name="Stone Drops Op Items" data-price="8.00" data-file="stone-drops-op-items.zip">
+                <div class="prod-glow"></div>
+                <div class="prod-top">
+                    <div class="prod-emoji">👹</div>
+                    <span class="prod-badge pop">Popular</span>
+                </div>
+                <div class="prod-info">
+                    <p class="prod-type">Datapack</p>
+                    <h3 class="prod-name">Stone Drops OP Items</h3>
+                    <p class="prod-desc">Mining stone has never been this rewarding. Every break could drop legendary loot.</p>
+                </div>
+                <div class="prod-footer">
+                    <div class="prod-price"><sup>$</sup>8<small>.00</small></div>
+                    <div class="prod-actions">
+                        <button class="btn-cart add-cart-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                            Add
+                        </button>
+                        <button class="btn-buy buy-now-btn">Buy Now</button>
                     </div>
                 </div>
-            </div>
+            </article>
 
-            <!-- Product 5 -->
-            <div class="product-card"
-                 data-category="datapack"
-                 data-id="5"
-                 data-name="Jumping Drops Op Items!"
-                 data-price="3.00"
-                 data-file="jumping-gives-op-items.zip">
-                <div class="card-glow"></div>
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="product-icon-wrapper"><div class="product-icon">🎨</div></div>
-                        <div class="product-badge">Trending</div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="product-title">Jumping Drops Op Items!</h3>
-                        <p class="product-category">Datapack</p>
-                        <p class="product-description">When You Jump Once You Get A Super Op Item!</p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="price-wrapper">
-                            <span class="currency">$</span>
-                            <span class="price">3.00</span>
-                        </div>
-                        <div class="product-buttons">
-                            <button class="add-cart-btn"><span>Add to Cart</span></button>
-                            <button class="buy-now-btn"><span>Buy Now</span></button>
-                        </div>
+            <article class="prod-card reveal" data-category="datapack" data-id="5" data-name="Jumping Drops Op Items" data-price="3.00" data-file="jumping-gives-op-items.zip">
+                <div class="prod-glow"></div>
+                <div class="prod-top">
+                    <div class="prod-emoji">🎨</div>
+                    <span class="prod-badge trend">Trending</span>
+                </div>
+                <div class="prod-info">
+                    <p class="prod-type">Datapack</p>
+                    <h3 class="prod-name">Jump &amp; Get OP Items</h3>
+                    <p class="prod-desc">Every single jump has a chance to reward you with an insane OP item. Bounce your way to victory.</p>
+                </div>
+                <div class="prod-footer">
+                    <div class="prod-price"><sup>$</sup>3<small>.00</small></div>
+                    <div class="prod-actions">
+                        <button class="btn-cart add-cart-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                            Add
+                        </button>
+                        <button class="btn-buy buy-now-btn">Buy Now</button>
                     </div>
                 </div>
-            </div>
+            </article>
 
-            <!-- Product 6 -->
-            <div class="product-card"
-                 data-category="datapack"
-                 data-id="6"
-                 data-name="Dirt Drops Op Items"
-                 data-price="7.00"
-                 data-file="dirt-drops-op-items.zip">
-                <div class="card-glow"></div>
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="product-icon-wrapper"><div class="product-icon">💰</div></div>
-                        <div class="product-badge hot">Hot</div>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="product-title">Dirt Drops Op Items</h3>
-                        <p class="product-category">Datapack</p>
-                        <p class="product-description">Breaking Dirt Drops Op Items!</p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="price-wrapper">
-                            <span class="currency">$</span>
-                            <span class="price">7.00</span>
-                        </div>
-                        <div class="product-buttons">
-                            <button class="add-cart-btn"><span>Add to Cart</span></button>
-                            <button class="buy-now-btn"><span>Buy Now</span></button>
-                        </div>
+            <article class="prod-card reveal" data-category="datapack" data-id="6" data-name="Dirt Drops Op Items" data-price="7.00" data-file="dirt-drops-op-items.zip">
+                <div class="prod-glow"></div>
+                <div class="prod-top">
+                    <div class="prod-emoji">💰</div>
+                    <span class="prod-badge hot">Hot 🔥</span>
+                </div>
+                <div class="prod-info">
+                    <p class="prod-type">Datapack</p>
+                    <h3 class="prod-name">Dirt Drops OP Items</h3>
+                    <p class="prod-desc">Humble dirt block? Not anymore. Dig it up and watch the overpowered loot pour out.</p>
+                </div>
+                <div class="prod-footer">
+                    <div class="prod-price"><sup>$</sup>7<small>.00</small></div>
+                    <div class="prod-actions">
+                        <button class="btn-cart add-cart-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                            Add
+                        </button>
+                        <button class="btn-buy buy-now-btn">Buy Now</button>
                     </div>
                 </div>
-            </div>
+            </article>
 
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- ============ TESTIMONIALS ============ -->
-    <section id="testimonials" class="testimonials-section">
-        <div class="section-header">
-            <div class="section-label">
-                <span class="label-line"></span>
-                <span class="label-text">Testimonials</span>
-            </div>
-            <h2 class="section-title">
-                <span class="title-word">Client</span>
-                <span class="title-word outline">Reviews</span>
-            </h2>
-            <p class="section-description">See what our customers have to say about their experience.</p>
+<!-- ═══ TESTIMONIALS ═══ -->
+<section id="testimonials" class="testimonials section">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="section-tag">TESTIMONIALS</span>
+            <h2 class="section-title">Trusted by<br><em>Server Owners</em></h2>
         </div>
-        <div class="testimonials-grid">
-
-            <div class="testimonial-card">
-                <div class="testimonial-rating">
-                    <span class="star">★</span><span class="star">★</span><span class="star">★</span>
-                    <span class="star">★</span><span class="star">★</span>
-                </div>
-                <p class="testimonial-text">"Absolutely amazing products! The Lucky Blocks datapack transformed our server completely. Highly recommended!"</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">SB</div>
-                    <div class="author-info">
-                        <h4>Shubham96</h4>
+        <div class="reviews-grid">
+            <div class="review-card reveal" data-delay="0">
+                <div class="review-stars">★★★★★</div>
+                <p>"Absolutely game-changing. The Lucky Blocks datapack gave our server a whole new life. Installation took 2 minutes flat."</p>
+                <div class="review-author">
+                    <div class="review-avatar">S</div>
+                    <div>
+                        <strong>Shubham96</strong>
                         <span>Server Owner</span>
                     </div>
                 </div>
             </div>
-
-            <div class="testimonial-card">
-                <div class="testimonial-rating">
-                    <span class="star">★</span><span class="star">★</span><span class="star">★</span>
-                    <span class="star">★</span><span class="star">★</span>
-                </div>
-                <p class="testimonial-text">"Best investment for our Minecraft server. The Stone Drops plugin works perfectly and support is exceptional."</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">DD</div>
-                    <div class="author-info">
-                        <h4>Deadliest Darkito</h4>
+            <div class="review-card reveal" data-delay="100">
+                <div class="review-stars">★★★★★</div>
+                <p>"Best investment for our server. Stone Drops works flawlessly, support replied within 10 minutes when I had a question."</p>
+                <div class="review-author">
+                    <div class="review-avatar">D</div>
+                    <div>
+                        <strong>Deadliest Darkito</strong>
                         <span>Community Manager</span>
                     </div>
                 </div>
             </div>
-
-            <div class="testimonial-card">
-                <div class="testimonial-rating">
-                    <span class="star">★</span><span class="star">★</span><span class="star">★</span>
-                    <span class="star">★</span><span class="star">★</span>
-                </div>
-                <p class="testimonial-text">"The Discord bot source code was well-documented and easy to customize. Perfect for our community!"</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">KQ</div>
-                    <div class="author-info">
-                        <h4>Krishna-qbhsihekyt_11</h4>
+            <div class="review-card reveal" data-delay="200">
+                <div class="review-stars">★★★★★</div>
+                <p>"The Discord bot source code is incredibly well-written and documented. Customised it fully in under an hour. Incredible value."</p>
+                <div class="review-author">
+                    <div class="review-avatar">K</div>
+                    <div>
+                        <strong>Krishna_qbh11</strong>
                         <span>Developer</span>
                     </div>
                 </div>
             </div>
-
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- ============ FAQ ============ -->
-    <section id="faq" class="faq-section">
-        <div class="section-header">
-            <div class="section-label">
-                <span class="label-line"></span>
-                <span class="label-text">FAQ</span>
-            </div>
-            <h2 class="section-title">
-                <span class="title-word">Frequently</span>
-                <span class="title-word outline">Asked</span>
-            </h2>
-            <p class="section-description">Got questions? We've got answers.</p>
+<!-- ═══ FAQ ═══ -->
+<section id="faq" class="faq section">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="section-tag">FAQ</span>
+            <h2 class="section-title">Got Questions?<br><em>We Have Answers.</em></h2>
         </div>
-        <div class="faq-container">
-
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>How do I receive my purchased products?</span>
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">After completing your purchase, you'll receive an email with download links instantly. You can also access all your purchases from your account dashboard.</div>
-                </div>
+        <div class="faq-list">
+            <div class="faq-item reveal">
+                <button class="faq-q"><span>How do I receive my purchased products?</span><span class="faq-icon">+</span></button>
+                <div class="faq-a"><div class="faq-a-inner">After completing your purchase, you'll receive an email with download links instantly. All purchases are also saved in your account dashboard for re-download anytime.</div></div>
             </div>
-
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>Do you offer refunds?</span>
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">Yes, we offer a 30-day money-back guarantee on all products. If you're not satisfied, contact our support team for a full refund.</div>
-                </div>
+            <div class="faq-item reveal">
+                <button class="faq-q"><span>Do you offer refunds?</span><span class="faq-icon">+</span></button>
+                <div class="faq-a"><div class="faq-a-inner">Yes — we offer a 30-day money-back guarantee on all products. If you're not satisfied for any reason, reach out to our support team for a full refund, no questions asked.</div></div>
             </div>
-
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>Are the products compatible with my server version?</span>
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">All our products are tested and compatible with Minecraft Java Edition 1.16.5 and above. Check individual product pages for specific version compatibility.</div>
-                </div>
+            <div class="faq-item reveal">
+                <button class="faq-q"><span>What Minecraft versions are supported?</span><span class="faq-icon">+</span></button>
+                <div class="faq-a"><div class="faq-a-inner">All datapacks are tested and compatible with Minecraft Java Edition 1.16.5 and above, including the latest versions. Specific version info is listed on each product page.</div></div>
             </div>
-
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>Do I need technical knowledge to use these products?</span>
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">Most products come with detailed installation guides. Basic products can be installed by anyone, while advanced products may require some technical knowledge.</div>
-                </div>
+            <div class="faq-item reveal">
+                <button class="faq-q"><span>Do I need technical knowledge to install these?</span><span class="faq-icon">+</span></button>
+                <div class="faq-a"><div class="faq-a-inner">Most products include a detailed step-by-step installation guide. Datapacks and resource packs require zero coding knowledge. Plugins and Discord bots may require basic server/Node.js familiarity.</div></div>
             </div>
-
+            <div class="faq-item reveal">
+                <button class="faq-q"><span>Can I use these on a public server?</span><span class="faq-icon">+</span></button>
+                <div class="faq-a"><div class="faq-a-inner">Yes! All products include a license for use on your own public or private servers. Redistribution or reselling the files themselves is not permitted.</div></div>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- ============ CONTACT ============ -->
-    <section id="contact" class="contact-section">
-        <div class="contact-container">
-            <div class="contact-info">
-                <h2>Get In Touch</h2>
-                <p>Have questions or need support? We're here to help you 24/7.</p>
+<!-- ═══ CONTACT ═══ -->
+<section id="contact" class="contact section">
+    <div class="container">
+        <div class="contact-wrap">
+            <div class="contact-left reveal">
+                <span class="section-tag">GET IN TOUCH</span>
+                <h2 class="section-title">We're Here<br><em>24/7 For You</em></h2>
+                <p>Have a question, a custom request, or just want to say hi? Our team is always available.</p>
                 <div class="contact-methods">
                     <div class="contact-method">
-                        <div class="method-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                                <polyline points="22,6 12,13 2,6"></polyline>
-                            </svg>
+                        <div class="cm-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                         </div>
-                        <div class="method-info">
-                            <h4>Email</h4>
+                        <div>
+                            <strong>Email</strong>
                             <span>support@rachnahub.com</span>
                         </div>
                     </div>
                     <div class="contact-method">
-                        <div class="method-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
+                        <div class="cm-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.369-.444.85-.608 1.23a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.23A.077.077 0 0 0 8.562 3c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026c.462-.62.874-1.275 1.226-1.963a.074.074 0 0 0-.041-.104 13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028z"/></svg>
                         </div>
-                        <div class="method-info">
-                            <h4>Location</h4>
-                            <span>Worldwide Support</span>
+                        <div>
+                            <strong>Discord</strong>
+                            <a href="https://discord.gg/8Hj8p8cvBz" target="_blank">discord.gg/8Hj8p8cvBz</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="contact-form-wrapper">
+            <div class="contact-right reveal">
                 <form class="contact-form" id="contactForm">
                     <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Name</label>
-                            <input type="text" class="form-input" placeholder="Your name" required>
+                        <div class="field">
+                            <label>Name</label>
+                            <input type="text" placeholder="Your name" required>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-input" placeholder="your@email.com" required>
+                        <div class="field">
+                            <label>Email</label>
+                            <input type="email" placeholder="your@email.com" required>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Subject</label>
-                        <input type="text" class="form-input" placeholder="How can we help?" required>
+                    <div class="field">
+                        <label>Subject</label>
+                        <input type="text" placeholder="What's this about?" required>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Message</label>
-                        <textarea class="form-textarea" placeholder="Your message..." required></textarea>
+                    <div class="field">
+                        <label>Message</label>
+                        <textarea placeholder="Tell us more..." rows="5" required></textarea>
                     </div>
-                    <button type="submit" class="submit-btn">
+                    <button type="submit" class="btn-primary w-full" id="submitBtn">
                         <span>Send Message</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
                     </button>
                 </form>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- ============ FOOTER ============ -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-logo">RACHNA.HUB</div>
-            <p>&copy; 2025 Rachna Hub. All Rights Reserved.</p>
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="logo-bracket">[</span><span class="logo-name">RACHNA</span><span class="logo-accent">HUB</span><span class="logo-bracket">]</span>
+                <p>Premium Minecraft assets crafted for servers that want to stand out from the crowd.</p>
+            </div>
             <div class="footer-links">
-                <a href="#">Terms</a>
-                <a href="#">Privacy</a>
-                <a href="#">Support</a>
+                <a href="#home">Home</a>
+                <a href="#products">Products</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact">Contact</a>
             </div>
-        </div>
-    </footer>
-
-    <!-- ============ PAYMENT MODAL ============ -->
-    <div class="modal-overlay" id="paymentModal">
-        <div class="modal-content">
-            <button class="close-modal" id="closeModal">×</button>
-            <div class="modal-header">
-                <h3 id="modal-title">Checkout</h3>
-                <p>Complete your purchase securely</p>
-            </div>
-            <!-- Payment Simulation (shown while processing) -->
-            <div class="payment-simulation" id="paymentSimulation">
-                <div class="spinner"></div>
-                <p class="payment-status" id="payment-status">Initializing payment...</p>
-            </div>
-            <!-- Success Content (shown after success) -->
-            <div class="success-content" id="successContent">
-                <div class="check-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
+            <div class="footer-legal">
+                <p>&copy; 2025 Rachna Hub. All rights reserved.</p>
+                <div class="legal-links">
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Support</a>
                 </div>
-                <h3>Payment Successful!</h3>
-                <p>Your download is ready</p>
-                <a href="#" class="btn-download" id="download-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    <span>Download File</span>
-                </a>
             </div>
         </div>
     </div>
+</footer>
 
-    <!-- ============ CART PANEL ============ -->
-    <div class="cart-panel" id="cartPanel">
-        <div class="cart-header">
-            <h3>Your Cart</h3>
-            <button class="close-cart" id="closeCart">×</button>
+<!-- ═══ CART PANEL ═══ -->
+<aside class="cart-panel" id="cartPanel">
+    <div class="cp-header">
+        <h3>Your Cart</h3>
+        <button class="cp-close" id="cartClose">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+    </div>
+    <div class="cp-items" id="cpItems"></div>
+    <div class="cp-footer">
+        <div class="cp-total">
+            <span>Total</span>
+            <strong>$<span id="cpTotal">0.00</span></strong>
         </div>
-        <div class="cart-items" id="cartItems">
-            <!-- Cart items injected by JS -->
-        </div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                Total: $<span id="cartTotal">0.00</span>
+        <button class="btn-primary w-full" id="checkoutBtn">
+            <span>Proceed to Checkout</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+    </div>
+</aside>
+<div class="cart-mask" id="cartMask"></div>
+
+<!-- ═══ CHECKOUT MODAL ═══ -->
+<div class="modal-wrap" id="modal">
+    <div class="modal-box">
+        <button class="modal-close" id="modalClose">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+
+        <!-- Step: Processing -->
+        <div class="modal-step" id="stepProcessing">
+            <div class="modal-spinner">
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring r2"></div>
             </div>
-            <button class="checkout-btn-main" id="checkoutBtn">Proceed to Checkout</button>
+            <h3 id="modalTitle">Processing Payment</h3>
+            <p class="modal-status" id="modalStatus">Connecting to payment gateway...</p>
+        </div>
+
+        <!-- Step: Success -->
+        <div class="modal-step hidden" id="stepSuccess">
+            <div class="success-ring">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3>Payment Successful!</h3>
+            <p>Your download is ready. Thank you for your purchase!</p>
+            <a href="#" class="btn-download" id="downloadLink">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download File
+            </a>
         </div>
     </div>
+</div>
 
-    <!-- Cart Overlay (closes cart on outside click) -->
-    <div class="cart-overlay" id="cartOverlay"></div>
+<!-- ═══ TOAST ═══ -->
+<div class="toast" id="toast">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    <span id="toastMsg">Added to cart!</span>
+</div>
 
-    <script src="script.js"></script>
 </body>
 </html>
